@@ -11,19 +11,16 @@ import javax.persistence.*;
 @Table(name = "recipe_ingredients")
 public class RecipeIngredientsEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer recipeIngredientsId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id")
     private RecipeEntity recipeEntity;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ingredient_id")
     private IngredientEntity ingredientEntity;
-
     private String quantity;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unit_dict_id")
     private DictionaryEntity unitDictEntity;

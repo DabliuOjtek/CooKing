@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Table(name = "recipe")
 public class RecipeEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer recipeId;
     private String name;
     private String description;
@@ -21,18 +21,14 @@ public class RecipeEntity {
     private String calories;
     private String servings;
     private String ingredientsAmount;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dictionary_id")
-    private DictionaryEntity cuisineType;
-    @ManyToOne
-    @JoinColumn(name = "dictionary_id")
-    private DictionaryEntity mealType;
-    @ManyToOne
-    @JoinColumn(name = "dictionary_id")
-    private DictionaryEntity prepareTime;
-    @ManyToOne
-    @JoinColumn(name = "dictionary_id")
-    private DictionaryEntity difficultyLevel;
+    @Column(name = "cuisine_dict_id")
+    private Integer cuisineType;
+    @Column(name = "meal_dict_id")
+    private Integer mealType;
+    @Column(name = "prepare_time_dict_id")
+    private Integer prepareTime;
+    @Column(name = "difficulty_level_dict_id")
+    private Integer difficultyLevel;
     private LocalDate createdAt;
     private LocalDate modifiedAt;
 
