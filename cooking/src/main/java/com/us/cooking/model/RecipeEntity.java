@@ -22,16 +22,16 @@ public class RecipeEntity {
     private String servings;
     private String ingredientsAmount;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dictionaryId")
+    @JoinColumn(name = "dictionary_id")
     private DictionaryEntity cuisineType;
     @ManyToOne
-    @JoinColumn(name = "dictionaryId")
+    @JoinColumn(name = "dictionary_id")
     private DictionaryEntity mealType;
     @ManyToOne
-    @JoinColumn(name = "dictionaryId")
+    @JoinColumn(name = "dictionary_id")
     private DictionaryEntity prepareTime;
     @ManyToOne
-    @JoinColumn(name = "dictionaryId")
+    @JoinColumn(name = "dictionary_id")
     private DictionaryEntity difficultyLevel;
     private LocalDate createdAt;
     private LocalDate modifiedAt;

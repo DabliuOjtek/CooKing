@@ -16,7 +16,7 @@ public class RecipeIngredientsEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id")
-    private RecipeEntity recipeId;
+    private RecipeEntity recipeEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ingredient_id")
