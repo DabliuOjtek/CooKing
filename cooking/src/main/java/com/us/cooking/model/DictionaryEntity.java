@@ -13,6 +13,7 @@ public class DictionaryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer dictionaryId;
+
     private String type;
     private String value;
 

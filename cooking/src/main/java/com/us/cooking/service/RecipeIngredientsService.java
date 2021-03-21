@@ -1,5 +1,6 @@
 package com.us.cooking.service;
 
+import com.us.cooking.repository.RecipeIngredientsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -7,5 +8,5 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RecipeIngredientsService {
 
-    private final RecipeIngredientsService recipeIngredientsService;
+    private final RecipeIngredientsRepository recipeIngredientsRepository;
 }

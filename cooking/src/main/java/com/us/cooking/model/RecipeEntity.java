@@ -15,9 +15,10 @@ public class RecipeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer recipeId;
+
     private String name;
     private String description;
-    private Byte[] image;
+    private byte[] image;
     private String rate;
     private String calories;
     private String servings;
@@ -33,7 +34,7 @@ public class RecipeEntity {
     private LocalDate createdAt;
     private LocalDate modifiedAt;
 
-    @OneToMany(mappedBy = "recipe_id")//sprawdzic
+    @OneToMany(mappedBy = "recipeEntity")//sprawdzic
     private List<RecipeIngredientsEntity> ingredients;
 
 }
