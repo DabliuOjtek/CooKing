@@ -1,5 +1,8 @@
 package com.us.cooking.service;
 
+import com.us.cooking.dto.FilterQuestionnaireDTO;
+import com.us.cooking.dto.RecipeDTO;
+import com.us.cooking.dto.ShortRecipeDTO;
 import com.us.cooking.model.RecipeEntity;
 import com.us.cooking.repository.DictionaryRepository;
 import com.us.cooking.repository.RecipeRepository;
@@ -7,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -40,4 +44,11 @@ public class RecipeService {
         recipeRepository.save(recipeEntity);
     }
 
+    public List<ShortRecipeDTO> getShortRecipes(FilterQuestionnaireDTO filter) {
+        return null;
+    }
+
+    public RecipeDTO getRecipe(Integer id) {
+        return null;
+    }
 }
