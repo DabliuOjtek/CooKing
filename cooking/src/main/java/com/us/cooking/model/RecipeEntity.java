@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -32,5 +33,7 @@ public class RecipeEntity {
     private LocalDate createdAt;
     private LocalDate modifiedAt;
 
+    @OneToMany(mappedBy = "recipe_id")//sprawdzic
+    private List<RecipeIngredientsEntity> ingredients;
 
 }
