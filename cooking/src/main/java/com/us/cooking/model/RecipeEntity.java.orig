@@ -34,7 +34,11 @@ public class RecipeEntity {
     private LocalDate createdAt;
     private LocalDate modifiedAt;
 
+<<<<<<< HEAD
+    @OneToMany(mappedBy = "recipeEntity")//sprawdzic
+=======
     @OneToMany(mappedBy = "recipeEntity", fetch = FetchType.LAZY)
+>>>>>>> f3df6e94022bd9f9ca056d16d81f5f5636bb3fc8
     private List<RecipeIngredientsEntity> ingredients;
 
 }

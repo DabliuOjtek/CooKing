@@ -2,7 +2,7 @@
 @include mat-core();
 
 
-$cooking-primary: mat-palette($mat-amber);
+$cooking-primary: mat-palette($mat-amber, A700);
 $cooking-accent: mat-palette($mat-blue);
 
 $cooking-theme: mat-light-theme($cooking-primary, $cooking-accent);

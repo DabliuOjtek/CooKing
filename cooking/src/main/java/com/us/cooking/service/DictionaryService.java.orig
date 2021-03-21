@@ -1,7 +1,10 @@
 package com.us.cooking.service;
 
 import com.us.cooking.dto.QuestionnaireDTO;
+<<<<<<< HEAD
+=======
 import com.us.cooking.mapper.DictionaryMapper;
+>>>>>>> f3df6e94022bd9f9ca056d16d81f5f5636bb3fc8
 import com.us.cooking.model.DictionaryEntity;
 import com.us.cooking.repository.DictionaryRepository;
 import lombok.RequiredArgsConstructor;
