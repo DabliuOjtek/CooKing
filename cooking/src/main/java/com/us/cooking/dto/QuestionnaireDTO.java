@@ -1,12 +1,13 @@
 package com.us.cooking.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@Builder
 public class QuestionnaireDTO {
-    private Integer dictionaryId;
     private String type;
     private List<String> values;
 }
