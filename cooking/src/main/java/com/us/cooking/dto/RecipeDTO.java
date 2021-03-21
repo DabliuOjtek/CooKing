@@ -1,16 +1,18 @@
 package com.us.cooking.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
+@Builder
 public class RecipeDTO {
     private Integer recipeId;
     private String name;
     private String description;
-    private Byte[] image;
+    private byte[] image;
     private String rate;
     private String calories;
     private String servings;

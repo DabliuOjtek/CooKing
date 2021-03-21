@@ -3,8 +3,8 @@ package com.us.cooking.service;
 import com.us.cooking.dto.FilterQuestionnaireDTO;
 import com.us.cooking.dto.RecipeDTO;
 import com.us.cooking.dto.ShortRecipeDTO;
+import com.us.cooking.mapper.RecipeMapper;
 import com.us.cooking.model.RecipeEntity;
-import com.us.cooking.model.RecipeIngredientsEntity;
 import com.us.cooking.repository.DictionaryRepository;
 import com.us.cooking.repository.IngredientRepository;
 import com.us.cooking.repository.RecipeIngredientsRepository;
@@ -12,13 +12,7 @@ import com.us.cooking.repository.RecipeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -29,6 +23,10 @@ public class RecipeService {
     private final DictionaryRepository dictionaryRepository;
     private final RecipeIngredientsRepository recipeIngredientsRepository;
     private final IngredientRepository ingredientRepository;
+
+    public List<ShortRecipeDTO> getShortRecipes(List<FilterQuestionnaireDTO> filter) {
+        return null;
+    }
 
 //    public void saveRecipe() throws IOException {
 //        RecipeEntity recipeEntity = new RecipeEntity();
@@ -67,7 +65,31 @@ public class RecipeService {
         return null;
     }
 
+    @Transactional
     public RecipeDTO getRecipe(Integer id) {
-        return null;
+        RecipeEntity recipeEntity = recipeRepository.findById(id).orElseThrow();
+        RecipeDTO recipeDTO = RecipeMapper.mapToRecipeDTO(recipeEntity);
+        recipeDTO.setCuisineTypeValue(
+                dictionaryRepository.findById(recipeEntity.getCuisineType())
+                .orElseThrow()
+                .getValue());
+        recipeDTO.setCuisineTypeValue(
+                dictionaryRepository.findById(recipeEntity.getCuisineType())
+                .orElseThrow()
+                .getValue());
+        recipeDTO.setMealTypeValue(
+                dictionaryRepository.findById(recipeEntity.getMealType())
+                .orElseThrow()
+                .getValue());
+        recipeDTO.setPrepareTimeValue(
+                dictionaryRepository.findById(recipeEntity.getPrepareTime())
+                .orElseThrow()
+                .getValue());
+        recipeDTO.setDifficultyLevelValue(
+                dictionaryRepository.findById(recipeEntity.getDifficultyLevel())
+                .orElseThrow()
+                .getValue());
+
+        return recipeDTO;
     }
 }
