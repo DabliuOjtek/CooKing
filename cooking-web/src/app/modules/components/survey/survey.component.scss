@@ -1,0 +1,67 @@
+:host ::ng-deep .mat-horizontal-stepper-header-container {
+  display: none !important;
+}
+
+.answer-card {
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  margin: 0 2vw 0 2vw;
+  border-radius: 2rem;
+  background-color: gray;
+}
+
+[appSliderItem] {
+  flex-shrink: 0;
+}
+
+
+// .answers-carousel {}
+
+// .answers-grid {
+//   background-color: red;
+// }
+
+// .answer-card {
+//   width: 30%;
+//   height: 200px;
+//   margin-right: 10px;
+//   background-color: #f9d8b1;
+//   counter-increment: answer-card;
+// }
+
+// .answer-card:before {
+//   display: block;
+//   text-align: center;
+//   content: counter(answer-card);
+//   line-height: 200px;
+//   font-size: 80px;
+//   color: white;
+// }
+
+
+
+// @mixin scalable-grid($height) {
+//   height: $height;
+//   width: 100%;
+
+//   display: grid;
+//   grid-gap: 1rem;
+//   grid-template-columns: repeat(auto-fit, minmax(1%, 1fr));
+// }
+
+// .answers-carousel {
+//   height: 10vw;
+//   display: flex;
+//   justify-content: center;
+//   width: 100%;
+// }
+
+// .answers-grid {
+//   $height: 10vw;
+//   @include scalable-grid($height);
+// }
+
+// .answer-card {
+//   background-color: #f9d8b1;
+// }

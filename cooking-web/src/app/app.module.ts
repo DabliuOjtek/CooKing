@@ -1,3 +1,5 @@
+import { SliderComponent } from './modules/components/slider/slider.component';
+import { SurveyComponent } from './modules/components/survey/survey.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -6,11 +8,16 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './modules/components/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookingModule } from './modules/cooking.module';
+import { SliderItemDirective } from './modules/components/slider/slider-item.directive';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    SurveyComponent,
+    SliderComponent,
+    SliderItemDirective
   ],
   imports: [
     BrowserModule,
