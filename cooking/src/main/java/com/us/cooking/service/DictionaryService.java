@@ -7,10 +7,7 @@ import com.us.cooking.repository.DictionaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,8 +17,9 @@ public class DictionaryService {
     private final DictionaryRepository dictionaryRepository;
 
     public List<QuestionnaireDTO> getAllValuesForQuestionnaire() {
-            return dictionaryRepository.findDistinctTypesForQuestionnaire().stream()
-                .map(t -> DictionaryMapper.mapToQuestionnaireDTO(t, dictionaryRepository.findValueByType(t)))
+
+        return Arrays.stream(DictionaryEntity.QuestionnaireTypes.values())
+                .map(t -> DictionaryMapper.mapToQuestionnaireDTO(t, dictionaryRepository.findValueByType(t.name())))
                 .collect(Collectors.toList());
     }
 
