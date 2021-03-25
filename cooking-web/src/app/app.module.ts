@@ -1,3 +1,5 @@
+import { SliderComponent } from './modules/components/slider/slider.component';
+import { SurveyComponent } from './modules/components/survey/survey.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -12,7 +14,10 @@ import { RecipeComponent } from './modules/pages/recipe/recipe.component';
   declarations: [
     AppComponent,
     NavbarComponent,
+    SurveyComponent,
     RecipeComponent
+    SliderComponent,
+    SliderItemDirective
   ],
   imports: [
     BrowserModule,

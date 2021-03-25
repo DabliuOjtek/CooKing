@@ -1,0 +1,91 @@
+<mat-horizontal-stepper #stepper>
+  <mat-step *ngFor="let question of questions">
+    <div class="question-text">
+      {{question.question}}
+    </div>
+
+    <app-slider>
+      <div appSliderItem *ngFor="let answer of question.answers">
+        <div class="answer-card">
+          {{answer}} </div>
+      </div>
+    </app-slider>
+
+    <div class="nav-buttons" *ngSwitch="questions">
+      <template [ngSwitchCase]="questions[0]">
+        <button class="nav-button" mat-raised-button matStepperNext>Next</button>
+      </template>
+      <template [ngSwitchCase]="">
+        <button class="nav-button" mat-raised-button matStepperPrevious>Back</button>
+        <button class="nav-button" mat-raised-button matStepperNext>Next</button>
+      </template>
+      <template [ngSwitchCase]="questions[questions.length-1]">
+        <button class="nav-button" mat-raised-button matStepperPrevious>Back</button>
+        <button class="nav-button" mat-raised-button matStepperNext>Submit</button>
+      </template>
+    </div>
+  </mat-step>
+
+
+  <!-- <mat-step>
+    <div class="question-text">
+      What type of a meal
+    </div>
+    <app-slider>
+      <div appSliderItem>
+        <div class="answer-card">
+          test </div>
+      </div>
+      <div appSliderItem>
+        <div class="answer-card">
+          test </div>
+      </div>
+      <div appSliderItem>
+        <div class="answer-card">
+          test </div>
+      </div>
+    </app-slider>
+    <div class="nav-buttons">
+      <button class="nav-button" mat-raised-button matStepperPrevious>Back</button>
+      <button class="nav-button" mat-raised-button matStepperNext>Next</button>
+    </div>
+  </mat-step> -->
+
+  <!-- <mat-step>
+    <div class="question-text">
+      What type of a meal
+    </div>
+    <app-slider>
+      <div appSliderItem>
+        <div class="answer-card">
+          test </div>
+      </div>
+      <div appSliderItem>
+        <div class="answer-card">
+          test </div>
+      </div>
+      <div appSliderItem>
+        <div class="answer-card">
+          test </div>
+      </div>
+    </app-slider>
+    <div class="nav-buttons">
+      <button class="nav-button" mat-raised-button matStepperPrevious>Back</button>
+      <button class="nav-button" mat-raised-button>Submit</button>
+    </div>
+  </mat-step> -->
+</mat-horizontal-stepper>
+
+<!-- <div class="mat-headline">test</div>
+<div class="mat-title">test</div>
+<div class="mat-subheading-2">test</div>
+<div class="mat-subheading-1">test</div>
+<div class="mat-body-1">test</div>
+<div class="mat-body-2">test</div>
+<div class="mat-caption">test</div>
+<div class="mat-button">test</div> -->
+
+<ul *ngFor="let question of questions">
+  <li *ngFor="let answer of question.answers">
+    {{answer}}</li>
+</ul>

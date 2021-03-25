@@ -1,0 +1,61 @@
+@import '../../../../assets/styles/cooking-style.scss';
+
+.slider-container,
+.slides-container,
+.slides,
+.controls {
+  display: flex;
+}
+
+.slider-container {
+  flex-direction: column;
+  position: relative;
+  align-content: center;
+}
+
+.slides-container {
+  align-items: center;
+  justify-content: center;
+  margin: 0 10vw 0 10vw;
+}
+
+.slides {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+}
+
+.controls {
+  width: 80vw;
+  position: absolute;
+  justify-content: space-between;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.slider-button {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.button-arrow {
+  border-left: 0.3rem solid mat-color($cooking-primary, 500);
+  border-bottom: 0.3rem solid mat-color($cooking-primary, 500);
+  width: 1rem;
+  height: 1rem;
+}
+
+.right {
+  transform: rotate(225deg);
+}
+
+.left {
+  transform: rotate(45deg);
+}

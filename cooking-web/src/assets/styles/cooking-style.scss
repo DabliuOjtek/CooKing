@@ -7,7 +7,4 @@ $cooking-accent: mat-palette($mat-blue);
 
 $cooking-theme: mat-light-theme($cooking-primary, $cooking-accent);
 
-// $cooking-theme: mat-light-theme((color: (primary: $cooking-primary,
-//       accent: $cooking-accent)));
-
 @include angular-material-theme($cooking-theme);
