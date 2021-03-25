@@ -16,7 +16,7 @@ public class RecipeDTO {
     private String rate;
     private String calories;
     private String servings;
-    private int ingredientsAmount;
+    private Integer ingredientsAmount;
     private String cuisineTypeValue;
     private String mealTypeValue;
     private String prepareTimeValue;

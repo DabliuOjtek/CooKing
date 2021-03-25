@@ -24,15 +24,15 @@ public class RecipeIngredientsService {
 //    public void saveRecipeIngredient() {
 //        RecipeIngredientsEntity recipeIngredientsEntity = new RecipeIngredientsEntity();
 //
-//        RecipeEntity recipeEntity = recipeRepository.findById(2).get();
+//        RecipeEntity recipeEntity = recipeRepository.findById(3).get();
 //        recipeIngredientsEntity.setRecipeEntity(recipeEntity);
 //
-//        IngredientEntity ingredientEntity = ingredientRepository.findById(1).get();
+//        IngredientEntity ingredientEntity = ingredientRepository.findById(10).get();
 //        recipeIngredientsEntity.setIngredientEntity(ingredientEntity);
 //
-//        recipeIngredientsEntity.setQuantity("1");
+//        recipeIngredientsEntity.setQuantity("5");
 //
-//        DictionaryEntity dictionaryEntity = dictionaryRepository.findById(19).get();
+//        DictionaryEntity dictionaryEntity = dictionaryRepository.findById(20).get();
 //        recipeIngredientsEntity.setUnitDictEntity(dictionaryEntity);
 //
 //        recipeIngredientsRepository.save(recipeIngredientsEntity);
