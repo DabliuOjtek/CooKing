@@ -23,13 +23,13 @@ public class RecipeEntity {
     private String calories;
     private String servings;
     @Column(name = "cuisine_dict_id")
-    private Integer cuisineType;
+    private Integer cuisineTypeId;
     @Column(name = "meal_dict_id")
-    private Integer mealType;
+    private Integer mealTypeId;
     @Column(name = "prepare_time_dict_id")
-    private Integer prepareTime;
+    private Integer prepareTimeId;
     @Column(name = "difficulty_level_dict_id")
-    private Integer difficultyLevel;
+    private Integer difficultyLevelId;
     private LocalDate createdAt;
     private LocalDate modifiedAt;
 

@@ -20,7 +20,7 @@ public class DictionaryService {
     private final DictionaryRepository dictionaryRepository;
 
     public List<QuestionnaireDTO> getAllValuesForQuestionnaire() {
-            return dictionaryRepository.findDistinctTypes().stream()
+            return dictionaryRepository.findDistinctTypesForQuestionnaire().stream()
                 .map(t -> DictionaryMapper.mapToQuestionnaireDTO(t, dictionaryRepository.findValueByType(t)))
                 .collect(Collectors.toList());
     }
