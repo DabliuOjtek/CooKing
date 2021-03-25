@@ -19,8 +19,8 @@ public class RecipeController {
     private final IngredientService ingredientService;
 
     @PostMapping("/recipe")
-    public List<ShortRecipeDTO> getShortRecipes(@RequestBody List<FilterQuestionnaireDTO> filter) {
-        return recipeService.getShortRecipes(filter);
+    public List<ShortRecipeDTO> getShortRecipes(@RequestBody List<FilterQuestionnaireDTO> filters) {
+        return recipeService.getShortRecipes(filters);
     }
 
     @GetMapping("/recipe/{id}")

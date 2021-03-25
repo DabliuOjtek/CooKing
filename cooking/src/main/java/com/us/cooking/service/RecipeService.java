@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,8 +25,45 @@ public class RecipeService {
     private final RecipeIngredientsRepository recipeIngredientsRepository;
     private final IngredientRepository ingredientRepository;
 
-    public List<ShortRecipeDTO> getShortRecipes(List<FilterQuestionnaireDTO> filter) {
-        return null;
+    public List<ShortRecipeDTO> getShortRecipes(List<FilterQuestionnaireDTO> filters) {
+        Integer cuisineTypeId = null;
+        Integer levelOfCookingSkillId = null;
+        Integer mealTypeId = null;
+        Integer preparationTimeId = null;
+
+        for (FilterQuestionnaireDTO filter : filters) {
+            switch (filter.getType()) {
+                case "CUISINE_TYPE" :
+                    cuisineTypeId = dictionaryRepository.findByTypeAndValue(filter.getType(), filter.getChosenValue())
+                            .orElseThrow()
+                            .getDictionaryId();
+                    break;
+                case "LEVEL_OF_COOKING_SKILL" :
+                    levelOfCookingSkillId = dictionaryRepository.findByTypeAndValue(filter.getType(), filter.getChosenValue())
+                            .orElseThrow()
+                            .getDictionaryId();
+                    break;
+                case "MEAL_TYPE" :
+                    mealTypeId = dictionaryRepository.findByTypeAndValue(filter.getType(), filter.getChosenValue())
+                            .orElseThrow()
+                            .getDictionaryId();
+                    break;
+                case "PREPARATION_TIME" :
+                    preparationTimeId = dictionaryRepository.findByTypeAndValue(filter.getType(), filter.getChosenValue())
+                            .orElseThrow()
+                            .getDictionaryId();
+                    break;
+            }
+        }
+
+        return recipeRepository.findByCuisineTypeIdAndDifficultyLevelIdAndMealTypeIdAndPrepareTimeId(
+                cuisineTypeId, levelOfCookingSkillId, mealTypeId, preparationTimeId
+        )
+            .orElseThrow()
+            .stream()
+            .map(RecipeMapper::mapToShortRecipeDTO)
+            .collect(Collectors.toList());
+
     }
 
 //    public void saveRecipe() throws IOException {
@@ -61,32 +99,24 @@ public class RecipeService {
 //        recipeRepository.save(recipeEntity);
 //    }
 
-    public List<ShortRecipeDTO> getShortRecipes(FilterQuestionnaireDTO filter) {
-        return null;
-    }
-
     @Transactional
     public RecipeDTO getRecipe(Integer id) {
         RecipeEntity recipeEntity = recipeRepository.findById(id).orElseThrow();
         RecipeDTO recipeDTO = RecipeMapper.mapToRecipeDTO(recipeEntity);
         recipeDTO.setCuisineTypeValue(
-                dictionaryRepository.findById(recipeEntity.getCuisineType())
-                .orElseThrow()
-                .getValue());
-        recipeDTO.setCuisineTypeValue(
-                dictionaryRepository.findById(recipeEntity.getCuisineType())
+                dictionaryRepository.findById(recipeEntity.getCuisineTypeId())
                 .orElseThrow()
                 .getValue());
         recipeDTO.setMealTypeValue(
-                dictionaryRepository.findById(recipeEntity.getMealType())
+                dictionaryRepository.findById(recipeEntity.getMealTypeId())
                 .orElseThrow()
                 .getValue());
         recipeDTO.setPrepareTimeValue(
-                dictionaryRepository.findById(recipeEntity.getPrepareTime())
+                dictionaryRepository.findById(recipeEntity.getPrepareTimeId())
                 .orElseThrow()
                 .getValue());
         recipeDTO.setDifficultyLevelValue(
-                dictionaryRepository.findById(recipeEntity.getDifficultyLevel())
+                dictionaryRepository.findById(recipeEntity.getDifficultyLevelId())
                 .orElseThrow()
                 .getValue());
 
