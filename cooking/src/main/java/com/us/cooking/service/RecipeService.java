@@ -4,6 +4,7 @@ import com.us.cooking.dto.FilterQuestionnaireDTO;
 import com.us.cooking.dto.RecipeDTO;
 import com.us.cooking.dto.ShortRecipeDTO;
 import com.us.cooking.mapper.RecipeMapper;
+import com.us.cooking.model.DictionaryEntity;
 import com.us.cooking.model.RecipeEntity;
 import com.us.cooking.repository.DictionaryRepository;
 import com.us.cooking.repository.RecipeRepository;
@@ -23,36 +24,24 @@ public class RecipeService {
     private final RecipeRepository recipeRepository;
     private final DictionaryRepository dictionaryRepository;
 
-    public List<ShortRecipeDTO> getShortRecipes(List<FilterQuestionnaireDTO> filters) {
-        Integer cuisineTypeId = null;
-        Integer levelOfCookingSkillId = null;
-        Integer mealTypeId = null;
-        Integer preparationTimeId = null;
+    public List<ShortRecipeDTO> getRandomizedShortRecipes(FilterQuestionnaireDTO filter) {
+        String cuisineType = DictionaryEntity.QuestionnaireTypes.CUISINE_TYPE.name();
+        String levelOfCookingSkill = DictionaryEntity.QuestionnaireTypes.LEVEL_OF_COOKING_SKILL.name();
+        String mealType = DictionaryEntity.QuestionnaireTypes.MEAL_TYPE.name();
+        String preparationTime = DictionaryEntity.QuestionnaireTypes.PREPARATION_TIME.name();
 
-        for (FilterQuestionnaireDTO filter : filters) {
-            switch (filter.getType()) {
-                case CUISINE_TYPE:
-                    cuisineTypeId = dictionaryRepository.findByTypeAndValue(filter.getType().name(), filter.getChosenValue())
-                            .orElseThrow()
-                            .getDictionaryId();
-                    break;
-                case LEVEL_OF_COOKING_SKILL:
-                    levelOfCookingSkillId = dictionaryRepository.findByTypeAndValue(filter.getType().name(), filter.getChosenValue())
-                            .orElseThrow()
-                            .getDictionaryId();
-                    break;
-                case MEAL_TYPE:
-                    mealTypeId = dictionaryRepository.findByTypeAndValue(filter.getType().name(), filter.getChosenValue())
-                            .orElseThrow()
-                            .getDictionaryId();
-                    break;
-                case PREPARATION_TIME:
-                    preparationTimeId = dictionaryRepository.findByTypeAndValue(filter.getType().name(), filter.getChosenValue())
-                            .orElseThrow()
-                            .getDictionaryId();
-                    break;
-            }
-        }
+        Integer cuisineTypeId = dictionaryRepository.findByTypeAndValue(cuisineType, filter.getCuisineTypeValue())
+                .orElseThrow()
+                .getDictionaryId();
+        Integer levelOfCookingSkillId = dictionaryRepository.findByTypeAndValue(levelOfCookingSkill, filter.getLevelOfCookingSkillValue())
+                .orElseThrow()
+                .getDictionaryId();
+        Integer mealTypeId = dictionaryRepository.findByTypeAndValue(mealType, filter.getMealTypeValue())
+                .orElseThrow()
+                .getDictionaryId();
+        Integer preparationTimeId = dictionaryRepository.findByTypeAndValue(preparationTime, filter.getPreparationTimeValue())
+                .orElseThrow()
+                .getDictionaryId();
 
         List<ShortRecipeDTO> shortRecipes = recipeRepository.findByCuisineTypeIdAndDifficultyLevelIdAndMealTypeIdAndPrepareTimeId(
                 cuisineTypeId, levelOfCookingSkillId, mealTypeId, preparationTimeId)
