@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,37 +31,39 @@ public class RecipeService {
 
         for (FilterQuestionnaireDTO filter : filters) {
             switch (filter.getType()) {
-                case "CUISINE_TYPE" :
-                    cuisineTypeId = dictionaryRepository.findByTypeAndValue(filter.getType(), filter.getChosenValue())
+                case CUISINE_TYPE:
+                    cuisineTypeId = dictionaryRepository.findByTypeAndValue(filter.getType().name(), filter.getChosenValue())
                             .orElseThrow()
                             .getDictionaryId();
                     break;
-                case "LEVEL_OF_COOKING_SKILL" :
-                    levelOfCookingSkillId = dictionaryRepository.findByTypeAndValue(filter.getType(), filter.getChosenValue())
+                case LEVEL_OF_COOKING_SKILL:
+                    levelOfCookingSkillId = dictionaryRepository.findByTypeAndValue(filter.getType().name(), filter.getChosenValue())
                             .orElseThrow()
                             .getDictionaryId();
                     break;
-                case "MEAL_TYPE" :
-                    mealTypeId = dictionaryRepository.findByTypeAndValue(filter.getType(), filter.getChosenValue())
+                case MEAL_TYPE:
+                    mealTypeId = dictionaryRepository.findByTypeAndValue(filter.getType().name(), filter.getChosenValue())
                             .orElseThrow()
                             .getDictionaryId();
                     break;
-                case "PREPARATION_TIME" :
-                    preparationTimeId = dictionaryRepository.findByTypeAndValue(filter.getType(), filter.getChosenValue())
+                case PREPARATION_TIME:
+                    preparationTimeId = dictionaryRepository.findByTypeAndValue(filter.getType().name(), filter.getChosenValue())
                             .orElseThrow()
                             .getDictionaryId();
                     break;
             }
         }
 
-        return recipeRepository.findByCuisineTypeIdAndDifficultyLevelIdAndMealTypeIdAndPrepareTimeId(
-                cuisineTypeId, levelOfCookingSkillId, mealTypeId, preparationTimeId
-        )
+        List<ShortRecipeDTO> shortRecipes = recipeRepository.findByCuisineTypeIdAndDifficultyLevelIdAndMealTypeIdAndPrepareTimeId(
+                cuisineTypeId, levelOfCookingSkillId, mealTypeId, preparationTimeId)
             .orElseThrow()
             .stream()
             .map(RecipeMapper::mapToShortRecipeDTO)
             .collect(Collectors.toList());
 
+        Collections.shuffle(shortRecipes);
+
+        return shortRecipes;
     }
 
 //    public void saveRecipe() {
