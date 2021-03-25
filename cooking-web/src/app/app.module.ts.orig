@@ -2,22 +2,29 @@ import { SliderComponent } from './modules/components/slider/slider.component';
 import { SurveyComponent } from './modules/components/survey/survey.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './modules/components/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookingModule } from './modules/cooking.module';
+<<<<<<< HEAD
 import { RecipeComponent } from './modules/pages/recipe/recipe.component';
+=======
 import { SliderItemDirective } from './modules/components/slider/slider-item.directive';
+>>>>>>> b5ad20e2a0d14bef1ad6a8fbd2af582c6581f6c0
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+<<<<<<< HEAD
+    RecipeComponent
+=======
     SurveyComponent,
-    RecipeComponent,
     SliderComponent,
     SliderItemDirective
+>>>>>>> b5ad20e2a0d14bef1ad6a8fbd2af582c6581f6c0
   ],
   imports: [
     BrowserModule,

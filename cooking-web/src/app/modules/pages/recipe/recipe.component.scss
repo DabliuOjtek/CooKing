@@ -1,12 +1,12 @@
 @import '../../../../assets/styles/cooking-style.scss';
 
   .container{
-    padding-left:  16vw;
-    padding-right:  16vw;
+    padding-left:  10vw;
+    padding-right:  10vw;
     padding-top: 5vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
     gap: 0.5vw 0.5vw;
     grid-template-areas:
       "section1 section2"
@@ -25,14 +25,14 @@
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
     gap: 0.5vw 0.5vw;
     grid-template-areas:
-      "Cusine_Name Cusine_Name Cusine_Name "
-      "Cusine_Name Cusine_Name Cusine_Name "
-      "Cusine_Name Cusine_Name Cusine_Name "
-      "Cusine Meal Difficulty "
-      "Cusine Meal Difficulty "
-      "Duration Calories Servings "
-      "Duration Calories Servings "
-      "Yellow_bar Yellow_bar Yellow_bar"
+      "cusine_Name cusine_Name cusine_Name "
+      "cusine_Name cusine_Name cusine_Name "
+      "cusine_Name cusine_Name cusine_Name "
+      "cusine meal difficulty "
+      "cusine meal difficulty "
+      "duration calories servings "
+      "duration calories servings "
+      "yellow_bar yellow_bar yellow_bar"
   }
 
   .grid-container div{
@@ -42,7 +42,7 @@
   .grid-container div:not(.gray_font,.bold_font,.cusine_title) {
     padding: 0.5vw;
   }
-  .Cusine_Name {grid-area: Cusine_Name;}
+  .cusine_Name {grid-area: cusine_Name;}
 
   .cusine_title{
     padding-top: 1vw;
@@ -51,12 +51,12 @@
     font-size: 4vw;
     font-weight: bold;
 
-  }.cusine_under_title{
+  }.rating_short{
     margin-top:1vw ;
     font-size: 0.8rem;
     color: #4f4d46;
   }
-  .cusine_under_title img{
+  .rating_short img{
     width: 0.8rem;
     height: 0.8rem;
     margin-right: 0.3vw;
@@ -73,19 +73,28 @@
     vertical-align: top;
   }
 
-  .Cusine { grid-area: Cusine; }
-  .Meal { grid-area: Meal; }
-  .Difficulty { grid-area: Difficulty; }
-  .Difficulty img{
-     width: 1rem;
+  .cusine { grid-area: cusine; }
+  .meal { grid-area: meal; }
+  .difficulty { grid-area: difficulty; }
+  .difficulty img{
+    width: 1rem;
     height: 1rem;
     padding: 0.2vw;  
   }
-  .Duration { grid-area: Duration; }
-  .Calories { grid-area: Calories; }
-  .Servings { grid-area: Servings; }
-  .Yellow_bar { grid-area: Yellow_bar; }
-  .Yellow_bar button{
+
+  .difficulty .gray_font ul {
+    padding: 0;
+  }
+
+  .difficulty .gray_font ul li{
+    display: inline;
+  }
+
+  .duration { grid-area: duration; }
+  .calories { grid-area: calories; }
+  .servings { grid-area: servings; }
+  .yellow_bar { grid-area: yellow_bar; }
+  .yellow_bar button{
     border: none;
     height: 0.5vw;
     width: 10vw;
@@ -93,22 +102,25 @@
     background-color: mat-color($cooking-primary, 500);
   }
 
-  .Chicken { grid-area: Chicken; }
-  .Chicken img{
+  .cusine_image { 
+    grid-area: Chicken;
+    text-align: right;
+  }
+  .cusine_image img{
     width:100%;
     height: 100%;
     max-width: 35rem;
     max-height: 35rem;
-    border-radius: 3rem;
+    border-radius: 1rem;
   }
 
-  .Ingredients { grid-area: Ingredients;}
-  .Ingredients ul{
+  .ingredients { grid-area: ingredients;}
+  .ingredients ul{
     font-size: 1rem;
     list-style: none;
   }
 
-  .Ingredients ul li::before{
+  .ingredients ul li::before{
     content: "\2022";
     color: mat-color($cooking-primary, 500);
     font-weight: bold;
@@ -118,32 +130,34 @@
     font-size: 1.4rem;
   }
 
-  .Instructions { grid-area: Instructions;}
+  .instructions { grid-area: instructions;}
 
-  .Instructions ol{
+  .instructions ol{
     font-size: 1rem;
     list-style: none;
     counter-reset: li;
   }
 
-  .Instructions ol li::before{
-    content: counter(li) ". ";
+  .instructions ol li::before{
+    content: "."counter(li);
     color: mat-color($cooking-primary, 500);
     display: inline-block; 
-    width: 1rem;
-    margin-left: -1em;
+    width: 1em;
+    margin-left: -1.5em;
+    margin-right: 0.5em;
+    text-align: right;
+    direction: rtl;
     font-size: 1.2rem;
   }
-
-  .Instructions ol li{
+  .instructions ol li{
     counter-increment: li;
     padding-bottom: 1vw;
   }
 
-@media(max-width: 800px){
+@media(max-width: 1000px){
   .container{  
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 4fr;
+    grid-template-rows: auto auto auto auto;
     gap: 0.5vw 0.5vw;
     grid-template-areas:
       "section2"
@@ -153,5 +167,7 @@
   }
   .Chicken img{
     border-radius: 1rem;
+    max-width: 35rem;
+    max-height: 35rem;
   }
 }

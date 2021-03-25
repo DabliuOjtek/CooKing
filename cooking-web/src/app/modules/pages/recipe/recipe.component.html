@@ -2,78 +2,65 @@
   <div class="section1">
 
     <div class="grid-container">
-      <div class="Cusine_Name">
-        <div class = cusine_title>Rice with</div>
-        <div class = cusine_title>chicken</div>
-        <div class="cusine_under_title"><img src = "./assets/star.png"/>4.5 (36 reviews)</div>
+      <div class="cusine_Name">
+        <div class ="cusine_title">{{recipe.cusine_title}}</div>
+        <div class="rating_short"><img src = "./assets/star.png"/>{{recipe.rating_short}}</div>
       </div>
 
-      <div class="Cusine">
-        <div class= bold_font>Cusine</div>
-        <div class = "gray_font">Asian</div>
+      <div class="cusine">
+        <div class= "bold_font">Cusine</div>
+        <div class = "gray_font">{{recipe.cusine_type}}</div>
       </div>
 
-      <div class="Meal">
-        <div class= bold_font >Meal</div>
-        <div class = "gray_font">Dinner</div>
+      <div class="meal">
+        <div class="bold_font">Meal</div>
+        <div class ="gray_font">{{recipe.meal_type}}</div>
       </div>
 
-      <div class="Difficulty">
-        <div class= bold_font >Difficulty</div>
+      <div class="difficulty">
+        <div class="bold_font">Difficulty</div>
         <div class="gray_font">
-          <img src = "./assets/chef.svg"/>
-          <img src = "./assets/chef.svg"/>
-          <img src = "./assets/chef.svg"/>
+          <ul>
+            <ng-container *ngFor="let i of [].constructor(recipe.difficulty)"><img src = "./assets/chef.svg"/></ng-container>
+          </ul>
         </div>
       </div>
 
-      <div class="Duration">
-        <div class= bold_font>Duration</div>
-        <div class = "gray_font">45min</div>
+      <div class="duration">
+        <div class="bold_font">Duration</div>
+        <div class ="gray_font">{{recipe.duration}}</div>
       </div>
 
-      <div class="Calories">
-        <div class= bold_font >Calories</div>
-        <div class = "gray_font">520</div>
+      <div class="calories">
+        <div class="bold_font">Calories</div>
+        <div class = "gray_font">{{recipe.calories}}</div>
       </div>
 
-      <div class="Servings">
-        <div class= bold_font>Servings</div>
-        <div class = "gray_font">6</div>
+      <div class="servings">
+        <div class="bold_font">Servings</div>
+        <div class ="gray_font">{{recipe.servings}}</div>
       </div>
 
-      <div class="Yellow_bar"><button disabled="disabled" ></button></div>
+      <div class="yellow_bar"><button disabled="disabled"></button></div>
 
     </div>
   </div>
   <div class="section2">
-    <div class="Chicken"><img src = "./assets/rice_chicken.jpg" class="meal_image2"></div>
+    <div class="cusine_image"><img src = "./assets/rice_chicken.jpg" class="meal_image2"></div>
   </div>
   <div class="section3">
-    <div class="Ingredients">
+    <div class="ingredients">
       <div class = bold_font>Ingredients:</div>
       <ul>
-          <li>240 grams</li>
-          <li>79 militers sour cream</li>
-          <li>2 teaspoons </li>
-          <li>2 teaspoons</li>
-          <li>1/2 teaspon</li>
-          <li>454 grams chicken</li>
-          <li>321 grams cauliflowe rice</li>
-          <li>113 grams shredded chedda cheese</li>
-          <li>34 grams black olives</li>
-          <li>1 tablespoon cilantro</li>
-        </ul> 
+        <li *ngFor="let ingredient of recipe.ingredients">{{ingredient}}</li>
+      </ul> 
     </div>
   </div>
   <div class="section4">
-  <div class="Instructions">
+  <div class="instructions">
     <div class = bold_font>Instructions:</div>
       <ol>
-        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dui risus, ullamcorper ut dolor eget, malesuada porta neque. Maecenas pharetra tristique nunc. Morbi lobortis imperdiet orci et ornare. Nulla sollicitudin in velit id mollis. Duis vehicula elit in justo blandit, ut congue magna tempor. Aliquam et ex augue. Duis quam lorem, fringilla at iaculis id, fringilla nec leo.</li>
-        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dui risus, ullamcorper ut dolor eget, malesuada porta neque. Maecenas pharetra tristique nunc. Morbi lobortis imperdiet orci et ornare. Nulla sollicitudin in velit id mollis. Duis vehicula elit in justo blandit, ut congue magna tempor. Aliquam et ex augue. Duis quam lorem, fringilla at iaculis id, fringilla nec leo.</li>
-        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dui risus, ullamcorper ut dolor eget, malesuada porta neque. Maecenas pharetra tristique nunc. Morbi lobortis imperdiet orci et ornare. Nulla sollicitudin in velit id mollis. Duis vehicula elit in justo blandit, ut congue magna tempor. Aliquam et ex augue. Duis quam lorem, fringilla at iaculis id, fringilla nec leo.</li>
-        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dui risus, ullamcorper ut dolor eget, malesuada porta neque. Maecenas pharetra tristique nunc. Morbi lobortis imperdiet orci et ornare. Nulla sollicitudin in velit id mollis. Duis vehicula elit in justo blandit, ut congue magna tempor. Aliquam et ex augue. Duis quam lorem, fringilla at iaculis id, fringilla nec leo.</li>
+        <li *ngFor="let step of recipe.steps">{{step}}</li>
       </ol>           
     </div>
   </div>
