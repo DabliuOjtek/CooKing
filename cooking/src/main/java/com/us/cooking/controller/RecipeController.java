@@ -4,6 +4,7 @@ import com.us.cooking.dto.FilterQuestionnaireDTO;
 import com.us.cooking.dto.RecipeDTO;
 import com.us.cooking.dto.ShortRecipeDTO;
 import com.us.cooking.service.IngredientService;
+import com.us.cooking.service.RecipeIngredientsService;
 import com.us.cooking.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class RecipeController {
 
     private final RecipeService recipeService;
     private final IngredientService ingredientService;
+    private final RecipeIngredientsService recipeIngredientsService;
 
     @PostMapping("/recipe")
     public List<ShortRecipeDTO> getShortRecipes(@RequestBody List<FilterQuestionnaireDTO> filter) {
@@ -33,8 +35,13 @@ public class RecipeController {
 //        ingredientService.saveIng();
 //    }
 //
-//    @GetMapping("/saveRecipe")
-//    public void saveRecipe() throws IOException {
+//    @PostMapping("/saveRecipe")
+//    public void saveRecipe() {
 //        recipeService.saveRecipe();
+//    }
+
+//    @PostMapping("/saveRecipeIngredient")
+//    public void saveRecipeIngredient() {
+//        recipeIngredientsService.saveRecipeIngredient();
 //    }
 }

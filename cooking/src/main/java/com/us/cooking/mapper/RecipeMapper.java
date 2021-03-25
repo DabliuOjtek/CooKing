@@ -16,7 +16,7 @@ public class RecipeMapper {
                 .rate(recipeEntity.getRate())
                 .calories(recipeEntity.getCalories())
                 .servings(recipeEntity.getServings())
-                .ingredientsAmount(recipeEntity.getIngredientsAmount())
+                .ingredientsAmount(recipeEntity.getIngredients().size())
                 .ingredients(
                         recipeEntity.getIngredients().stream()
                                 .map(RecipeIngredientsMapper::mapToRecipeIngredientsDTO)

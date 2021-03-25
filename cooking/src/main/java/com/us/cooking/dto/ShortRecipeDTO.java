@@ -6,6 +6,6 @@ import lombok.Data;
 public class ShortRecipeDTO {
     private Integer recipeId;
     private String name;
-    private Byte[] image;
+    private String image;
     private String rate;
 }

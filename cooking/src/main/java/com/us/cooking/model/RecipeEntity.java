@@ -18,11 +18,10 @@ public class RecipeEntity {
 
     private String name;
     private String description;
-    private byte[] image;
+    private String image;
     private String rate;
     private String calories;
     private String servings;
-    private String ingredientsAmount;
     @Column(name = "cuisine_dict_id")
     private Integer cuisineType;
     @Column(name = "meal_dict_id")

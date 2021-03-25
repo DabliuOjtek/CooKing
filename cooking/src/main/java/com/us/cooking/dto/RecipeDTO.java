@@ -12,11 +12,11 @@ public class RecipeDTO {
     private Integer recipeId;
     private String name;
     private String description;
-    private byte[] image;
+    private String image;
     private String rate;
     private String calories;
     private String servings;
-    private String ingredientsAmount;
+    private int ingredientsAmount;
     private String cuisineTypeValue;
     private String mealTypeValue;
     private String prepareTimeValue;
