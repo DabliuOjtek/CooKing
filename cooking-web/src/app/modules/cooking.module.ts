@@ -20,11 +20,10 @@ const MaterialComponents = [
 
 @NgModule({
   imports: [
-
+    MaterialComponents
   ],
   exports: [
-    MatStepperModule,
-    MatToolbarModule
+    MaterialComponents
   ],
 })
 export class CookingModule { }

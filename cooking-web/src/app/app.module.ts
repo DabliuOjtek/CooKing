@@ -10,7 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookingModule } from './modules/cooking.module';
 import { SliderItemDirective } from './modules/components/slider/slider-item.directive';
 
-
 @NgModule({
   declarations: [
     AppComponent,
