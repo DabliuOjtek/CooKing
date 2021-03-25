@@ -2,20 +2,19 @@ import { NgModule } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatGridListModule } from '@angular/material/grid-list';
 const MaterialComponents = [
   MatButtonModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatGridListModule
 ];
 
 @NgModule({
-  declarations: [],
   imports: [
-    MatButtonModule,
-    MatToolbarModule
+    MaterialComponents
   ],
   exports: [
-    MatButtonModule,
-    MatToolbarModule
+    MaterialComponents
   ]
 })
 export class CookingModule { }
