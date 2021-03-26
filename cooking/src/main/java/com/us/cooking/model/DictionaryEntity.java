@@ -18,9 +18,9 @@ public class DictionaryEntity {
     private String value;
 
     public enum QuestionnaireTypes {
-        CUISINE_TYPE,
-        LEVEL_OF_COOKING_SKILL,
         MEAL_TYPE,
-        PREPARATION_TIME
+        CUISINE_TYPE,
+        PREPARATION_TIME,
+        LEVEL_OF_COOKING_SKILL
     }
 }
