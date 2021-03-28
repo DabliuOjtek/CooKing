@@ -1,6 +1,8 @@
+import { Survey } from 'src/app/core/models/survey';
+import { SurveyService } from './../../../core/services/survey.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { MatChip } from '@angular/material/chips';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-survey',
@@ -8,30 +10,64 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./survey.component.scss']
 })
 export class SurveyComponent implements OnInit {
+  survey: Survey;
+  completedSurvey: Array<Survey> = [];
+  questionArrIndex = 0;
+  arrayOfTypes = [];
 
-
-  // question1 = ['Typ posiłku', 'Wybór kuchni', 'Czas przygotowania', 'Poziom umiejętności gotowania'];
-  // answer1 = ['Amerykańska', 'Włoska', 'Azjatycka', 'Polska', 'Meksykańska'];
-
-  questions = [
-    { 'question': 'Typ posiłku', 'answers': ['śniadanie', 'obiad', 'deser', 'kolacja'] },
-    { 'question': 'Wybór kuchni', 'answers': ['Amerykańska', 'Włoska', 'Azjatycka', 'Polska', 'Meksykańska'] },
-    { 'question': 'Czas przygotowania', 'answers': ['15', '30', '60', 'ponad 60'] },
-    { 'question': 'Poziom umiejętności gotowania', 'answers': ['1', '2', '3', '4', '5'] },
+  questionsArr = [
+    { 'question': 'What type of meal do you want to choose?' },
+    { 'question': 'What are your favorite cuisines?' },
+    { 'question': 'How much time do you have?' },
+    { 'question': 'How would you describe your cooking skills?' },
   ];
 
-  // firstFormGroup: FormGroup;
-  // secondFormGroup: FormGroup;
-
-  // constructor(private formBuilder: FormBuilder) { }
+  constructor(private surveyService: SurveyService) { }
 
   ngOnInit() {
-    // this.firstFormGroup = this.formBuilder.group({
-    //   firstCtrl: ['', Validators.required]
-    // });
-    // this.secondFormGroup = this.formBuilder.group({
-    //   secondCtrl: ['', Validators.required]
-    // });
+    this.surveyService.getQuestionnaire().subscribe((response: any) => {
+      if (response) {
+        this.survey = response;
+        this.copyTypesFromSurvey();
+      }
+    });
   }
 
+  previousQuestion(stepper: MatStepper) {
+    this.questionArrIndex--;
+    stepper.previous();
+  }
+
+  nextQuestion(stepper: MatStepper) {
+    this.questionArrIndex++;
+    stepper.next();
+  }
+
+  copyTypesFromSurvey() {
+    for (const index in this.survey) {
+      if (true) {
+        this.completedSurvey.push({
+          type: this.survey[index].type,
+          values: []
+        });
+      }
+    }
+  }
+
+  toggleSelection(chip: MatChip, sur: Survey) {
+    chip.toggleSelected();
+
+    this.arrayOfTypes = this.completedSurvey[this.questionArrIndex].values;
+
+    if (chip.selected) {
+      this.arrayOfTypes.push(chip.value);
+    } else {
+      const index: number = this.arrayOfTypes.indexOf(chip.value);
+      if (index !== -1) {
+        this.completedSurvey[this.questionArrIndex].values.splice(index, 1);
+      }
+    }
+
+    console.log(this.completedSurvey);
+  }
 }

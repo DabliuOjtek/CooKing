@@ -1,3 +1,4 @@
+import { MainComponent } from './modules/pages/main/main.component';
 import { SliderComponent } from './modules/components/slider/slider.component';
 import { SurveyComponent } from './modules/components/survey/survey.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,6 +11,7 @@ import { CookingModule } from './modules/cooking.module';
 import { RecipeComponent } from './modules/pages/recipe/recipe.component';
 import { SliderItemDirective } from './modules/components/slider/slider-item.directive';
 import { TileComponent } from './modules/pages/tile/tile.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -21,13 +23,15 @@ import { TileComponent } from './modules/pages/tile/tile.component';
     RecipeComponent,
     SliderComponent,
     SliderItemDirective,
+    MainComponent,
     TileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CookingModule
+    CookingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

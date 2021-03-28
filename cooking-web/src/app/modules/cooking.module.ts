@@ -6,7 +6,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
-
+import { MatChipsModule } from '@angular/material/chips';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -15,7 +15,8 @@ const MaterialComponents = [
   MatGridListModule,
   MatCardModule,
   MatCheckboxModule,
-  MatStepperModule
+  MatStepperModule,
+  MatChipsModule
 ];
 
 @NgModule({
@@ -25,5 +26,6 @@ const MaterialComponents = [
   exports: [
     MaterialComponents
   ],
+  declarations: [],
 })
 export class CookingModule { }
