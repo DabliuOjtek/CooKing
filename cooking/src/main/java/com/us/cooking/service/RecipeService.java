@@ -3,8 +3,8 @@ package com.us.cooking.service;
 import com.us.cooking.dto.FilterQuestionnaireDTO;
 import com.us.cooking.dto.RecipeDTO;
 import com.us.cooking.dto.ShortRecipeDTO;
+import com.us.cooking.exception.DefaultException;
 import com.us.cooking.mapper.RecipeMapper;
-import com.us.cooking.model.DictionaryEntity;
 import com.us.cooking.model.RecipeEntity;
 import com.us.cooking.repository.DictionaryRepository;
 import com.us.cooking.repository.RecipeRepository;
@@ -13,9 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collections;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -25,33 +24,17 @@ public class RecipeService {
     private final DictionaryRepository dictionaryRepository;
 
     public List<ShortRecipeDTO> getRandomizedShortRecipes(FilterQuestionnaireDTO filter) {
-        String cuisineType = DictionaryEntity.QuestionnaireTypes.CUISINE_TYPE.name();
-        String levelOfCookingSkill = DictionaryEntity.QuestionnaireTypes.LEVEL_OF_COOKING_SKILL.name();
-        String mealType = DictionaryEntity.QuestionnaireTypes.MEAL_TYPE.name();
-        String preparationTime = DictionaryEntity.QuestionnaireTypes.PREPARATION_TIME.name();
-
-        Integer cuisineTypeId = dictionaryRepository.findByTypeAndValue(cuisineType, filter.getCuisineTypeValue())
-                .orElseThrow()
-                .getDictionaryId();
-        Integer levelOfCookingSkillId = dictionaryRepository.findByTypeAndValue(levelOfCookingSkill, filter.getLevelOfCookingSkillValue())
-                .orElseThrow()
-                .getDictionaryId();
-        Integer mealTypeId = dictionaryRepository.findByTypeAndValue(mealType, filter.getMealTypeValue())
-                .orElseThrow()
-                .getDictionaryId();
-        Integer preparationTimeId = dictionaryRepository.findByTypeAndValue(preparationTime, filter.getPreparationTimeValue())
-                .orElseThrow()
-                .getDictionaryId();
-
-        List<ShortRecipeDTO> shortRecipes = recipeRepository.findByCuisineTypeIdAndDifficultyLevelIdAndMealTypeIdAndPrepareTimeId(
-                cuisineTypeId, levelOfCookingSkillId, mealTypeId, preparationTimeId)
-            .orElseThrow()
-            .stream()
-            .map(RecipeMapper::mapToShortRecipeDTO)
-            .collect(Collectors.toList());
-
+        ShortRecipeService shortRecipeService = new ShortRecipeService(dictionaryRepository, recipeRepository);
+        shortRecipeService.setFilter(filter);
+        shortRecipeService.setAllQuestionnaireValues();
+        List<String> errors = shortRecipeService.getErrors();
+        if (!errors.isEmpty())
+            throw new DefaultException(errors);
+        List<ShortRecipeDTO> shortRecipes = shortRecipeService.getShortRecipes();
         Collections.shuffle(shortRecipes);
-
+        if (shortRecipes.isEmpty())
+            throw new DefaultException("Cannot find any recipes from given filter");
+        //to jeszcze bardziej mozna zrefaktorowac
         return shortRecipes;
     }
 
@@ -95,25 +78,56 @@ public class RecipeService {
 
     @Transactional
     public RecipeDTO getRecipe(Integer id) {
-        RecipeEntity recipeEntity = recipeRepository.findById(id).orElseThrow();
+        RecipeEntity recipeEntity = new RecipeEntity();
+        try {
+            recipeEntity = getRecipeEntity(id);
+        } catch (NoSuchElementException e) {
+            throw new DefaultException(e.getMessage());
+        }
         RecipeDTO recipeDTO = RecipeMapper.mapToRecipeDTO(recipeEntity);
-        recipeDTO.setCuisineTypeValue(
-                dictionaryRepository.findById(recipeEntity.getCuisineTypeId())
-                .orElseThrow()
-                .getValue());
-        recipeDTO.setMealTypeValue(
-                dictionaryRepository.findById(recipeEntity.getMealTypeId())
-                .orElseThrow()
-                .getValue());
-        recipeDTO.setPrepareTimeValue(
-                dictionaryRepository.findById(recipeEntity.getPrepareTimeId())
-                .orElseThrow()
-                .getValue());
-        recipeDTO.setDifficultyLevelValue(
-                dictionaryRepository.findById(recipeEntity.getDifficultyLevelId())
-                .orElseThrow()
-                .getValue());
+
+        String cuisineTypeValue = getCuisineTypeValue(recipeEntity);
+        recipeDTO.setCuisineTypeValue(cuisineTypeValue);
+
+        String mealTypeValue = getMealTypeValue(recipeEntity);
+        recipeDTO.setMealTypeValue(mealTypeValue);
+
+        String prepareTimeValue = getPrepareTimeValue(recipeEntity);
+        recipeDTO.setPrepareTimeValue(prepareTimeValue);
+
+        String difficultyLevelValue = getDifficultyLevelValue(recipeEntity);
+        recipeDTO.setDifficultyLevelValue(difficultyLevelValue);
+        //nie wiem czy chcesz to wszystko oddzielnie try'owac tak jak jest w ShortRecipeService ale chyba tak trzeba
 
         return recipeDTO;
+    }
+
+    private RecipeEntity getRecipeEntity(Integer id) {
+        return recipeRepository.findById(id).
+                orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Cannot find any recipe from given id"));
+    }
+
+    private String getCuisineTypeValue(RecipeEntity recipeEntity) {
+        return dictionaryRepository.findById(recipeEntity.getCuisineTypeId())
+                .orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Invalid cuisine type in found recipe"))
+                .getValue();
+    }
+
+    private String getMealTypeValue(RecipeEntity recipeEntity) {
+        return dictionaryRepository.findById(recipeEntity.getMealTypeId())
+                .orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Invalid meal type in found recipe"))
+                .getValue();
+    }
+
+    private String getPrepareTimeValue(RecipeEntity recipeEntity) {
+        return dictionaryRepository.findById(recipeEntity.getPrepareTimeId())
+                .orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Invalid prepare time in found recipe"))
+                .getValue();
+    }
+
+    private String getDifficultyLevelValue(RecipeEntity recipeEntity) {
+        return dictionaryRepository.findById(recipeEntity.getDifficultyLevelId())
+                .orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Invalid difficulty level in found recipe"))
+                .getValue();
     }
 }
