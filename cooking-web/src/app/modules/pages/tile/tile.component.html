@@ -1,0 +1,18 @@
+<div class="under_header">
+    <div class="cusine_title">Rocemmendation</div>
+    <div class="yellow_bar"><button disabled="disabled"></button></div>
+</div>
+
+<div class="container">
+    <div class="grid-container">
+        <div *ngFor="let k = index let i of [].constructor(8)" class="'tile'+(k+1)" >
+            <img class="cusine_img" src="https://picsum.photos/id/13/600/600">
+                <div class ="cusine_title">Rice with chicken</div>
+                <div class="ready_time">Ready in 15 min</div>
+                <div class="ready_time">
+                    <img class src = "./assets/star.png"/>4.5(36 reviews)
+                    <img class="chef" src = "./assets/chef.svg"/>3/5
+                </div>
+                <div class="spacer"></div>
+        </div>
+</div>    

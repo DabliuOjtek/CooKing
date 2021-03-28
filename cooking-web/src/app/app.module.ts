@@ -9,6 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookingModule } from './modules/cooking.module';
 import { RecipeComponent } from './modules/pages/recipe/recipe.component';
 import { SliderItemDirective } from './modules/components/slider/slider-item.directive';
+import { TileComponent } from './modules/pages/tile/tile.component';
+
+
 
 @NgModule({
   declarations: [
@@ -17,7 +20,8 @@ import { SliderItemDirective } from './modules/components/slider/slider-item.dir
     SurveyComponent,
     RecipeComponent,
     SliderComponent,
-    SliderItemDirective
+    SliderItemDirective,
+    TileComponent
   ],
   imports: [
     BrowserModule,
