@@ -17,8 +17,4 @@ public class DefaultException extends RuntimeException {
     public DefaultException(List<String> errors) {
         this.errors = errors;
     }
-
-    public static NoSuchElementException throwExceptionWithProperMessage(String message) {
-        return new NoSuchElementException(message);
-    }
 }

@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -22,21 +23,7 @@ public class RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final DictionaryRepository dictionaryRepository;
-
-    public List<ShortRecipeDTO> getRandomizedShortRecipes(FilterQuestionnaireDTO filter) {
-        ShortRecipeService shortRecipeService = new ShortRecipeService(dictionaryRepository, recipeRepository);
-        shortRecipeService.setFilter(filter);
-        shortRecipeService.setAllQuestionnaireValues();
-        List<String> errors = shortRecipeService.getErrors();
-        if (!errors.isEmpty())
-            throw new DefaultException(errors);
-        List<ShortRecipeDTO> shortRecipes = shortRecipeService.getShortRecipes();
-        Collections.shuffle(shortRecipes);
-        if (shortRecipes.isEmpty())
-            throw new DefaultException("Cannot find any recipes from given filter");
-        //to jeszcze bardziej mozna zrefaktorowac
-        return shortRecipes;
-    }
+    private final List<String> errors = new ArrayList<>();
 
 //    public void saveRecipe() {
 //        RecipeEntity recipeEntity = new RecipeEntity();
@@ -104,30 +91,30 @@ public class RecipeService {
 
     private RecipeEntity getRecipeEntity(Integer id) {
         return recipeRepository.findById(id).
-                orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Cannot find any recipe from given id"));
+                orElseThrow(() -> new NoSuchElementException("Cannot find any recipe from given id"));
     }
 
     private String getCuisineTypeValue(RecipeEntity recipeEntity) {
         return dictionaryRepository.findById(recipeEntity.getCuisineTypeId())
-                .orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Invalid cuisine type in found recipe"))
+                .orElseThrow(() -> new NoSuchElementException("Invalid cuisine type in found recipe"))
                 .getValue();
     }
 
     private String getMealTypeValue(RecipeEntity recipeEntity) {
         return dictionaryRepository.findById(recipeEntity.getMealTypeId())
-                .orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Invalid meal type in found recipe"))
+                .orElseThrow(() -> new NoSuchElementException("Invalid meal type in found recipe"))
                 .getValue();
     }
 
     private String getPrepareTimeValue(RecipeEntity recipeEntity) {
         return dictionaryRepository.findById(recipeEntity.getPrepareTimeId())
-                .orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Invalid prepare time in found recipe"))
+                .orElseThrow(() -> new NoSuchElementException("Invalid prepare time in found recipe"))
                 .getValue();
     }
 
     private String getDifficultyLevelValue(RecipeEntity recipeEntity) {
         return dictionaryRepository.findById(recipeEntity.getDifficultyLevelId())
-                .orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Invalid difficulty level in found recipe"))
+                .orElseThrow(() -> new NoSuchElementException("Invalid difficulty level in found recipe"))
                 .getValue();
     }
 }

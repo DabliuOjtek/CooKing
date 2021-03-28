@@ -17,7 +17,6 @@ public class DictionaryService {
     private final DictionaryRepository dictionaryRepository;
 
     public List<QuestionnaireDTO> getAllValuesForQuestionnaire() {
-
         return Arrays.stream(DictionaryEntity.QuestionnaireTypes.values())
                 .map(t -> DictionaryMapper.mapToQuestionnaireDTO(t, dictionaryRepository.findValueByType(t.name())))
                 .collect(Collectors.toList());

@@ -6,6 +6,7 @@ import com.us.cooking.dto.ShortRecipeDTO;
 import com.us.cooking.service.IngredientService;
 import com.us.cooking.service.RecipeIngredientsService;
 import com.us.cooking.service.RecipeService;
+import com.us.cooking.service.ShortRecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,16 +14,16 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
 public class RecipeController {
 
     private final RecipeService recipeService;
+    private final ShortRecipeService shortRecipeService;
     private final IngredientService ingredientService;
     private final RecipeIngredientsService recipeIngredientsService;
 
     @PostMapping("/recipe")
     public List<ShortRecipeDTO> getShortRecipes(@RequestBody FilterQuestionnaireDTO filter) {
-        return recipeService.getRandomizedShortRecipes(filter);
+        return shortRecipeService.getRandomizedShortRecipes(filter);
     }
 
     @GetMapping("/recipe/{id}")

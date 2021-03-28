@@ -13,6 +13,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -32,6 +33,22 @@ public class ShortRecipeService {
     private Integer mealTypeId;
     private Integer preparationTimeId;
     private FilterQuestionnaireDTO filter;
+
+    public List<ShortRecipeDTO> getRandomizedShortRecipes(FilterQuestionnaireDTO filter) {
+        this.setFilter(filter);
+        this.setAllQuestionnaireValues();
+
+        List<String> errors = this.getErrors();
+        if (!errors.isEmpty())
+            throw new DefaultException(errors);
+
+        List<ShortRecipeDTO> shortRecipes = this.getShortRecipes();
+        if (shortRecipes.isEmpty())
+            throw new DefaultException("Cannot find any recipes from given filter");
+
+        Collections.shuffle(shortRecipes);
+        return shortRecipes;
+    }
 
     public void setAllQuestionnaireValues() {
         try {
@@ -59,7 +76,7 @@ public class ShortRecipeService {
     public List<ShortRecipeDTO> getShortRecipes() {
         return recipeRepository.findByCuisineTypeIdAndDifficultyLevelIdAndMealTypeIdAndPrepareTimeId(
                 this.cuisineTypeId, this.levelOfCookingSkillId, this.mealTypeId, this.preparationTimeId)
-                .orElseThrow(() -> new RuntimeException("test"))
+                .orElseThrow(() -> new NoSuchElementException("test"))
                 .stream()
                 .map(RecipeMapper::mapToShortRecipeDTO)
                 .collect(Collectors.toList());
@@ -69,7 +86,7 @@ public class ShortRecipeService {
         DictionaryEntity.QuestionnaireTypes questionnaireType = DictionaryEntity.QuestionnaireTypes.CUISINE_TYPE;
         String cuisineType = questionnaireType.name();
         return dictionaryRepository.findByTypeAndValue(cuisineType, filter.getCuisineTypeValue())
-                .orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Invalid cuisine type"))
+                .orElseThrow(() -> new NoSuchElementException("Invalid cuisine type"))
                 .getDictionaryId();
     }
 
@@ -77,7 +94,7 @@ public class ShortRecipeService {
         DictionaryEntity.QuestionnaireTypes questionnaireType = DictionaryEntity.QuestionnaireTypes.LEVEL_OF_COOKING_SKILL;
         String levelOfCookingSkill = questionnaireType.name();
         return dictionaryRepository.findByTypeAndValue(levelOfCookingSkill, filter.getLevelOfCookingSkillValue())
-                .orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Invalid level of cooking skill"))
+                .orElseThrow(() -> new NoSuchElementException("Invalid level of cooking skill"))
                 .getDictionaryId();
     }
 
@@ -85,7 +102,7 @@ public class ShortRecipeService {
         DictionaryEntity.QuestionnaireTypes questionnaireType = DictionaryEntity.QuestionnaireTypes.MEAL_TYPE;
         String mealType = questionnaireType.name();
         return dictionaryRepository.findByTypeAndValue(mealType, filter.getMealTypeValue())
-                .orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Invalid meal type"))
+                .orElseThrow(() -> new NoSuchElementException("Invalid meal type"))
                 .getDictionaryId();
     }
 
@@ -93,7 +110,7 @@ public class ShortRecipeService {
         DictionaryEntity.QuestionnaireTypes questionnaireType = DictionaryEntity.QuestionnaireTypes.PREPARATION_TIME;
         String preparationTime = questionnaireType.name();
         return dictionaryRepository.findByTypeAndValue(preparationTime, filter.getPreparationTimeValue())
-                .orElseThrow(() -> DefaultException.throwExceptionWithProperMessage("Invalid preparation time"))
+                .orElseThrow(() -> new NoSuchElementException("Invalid preparation time"))
                 .getDictionaryId();
     }
 }
