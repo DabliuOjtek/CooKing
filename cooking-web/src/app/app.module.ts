@@ -1,6 +1,6 @@
+import { QuestionnaireComponent } from './modules/components/questionnaire/questionnaire.component';
 import { MainComponent } from './modules/pages/main/main.component';
 import { SliderComponent } from './modules/components/slider/slider.component';
-import { SurveyComponent } from './modules/components/survey/survey.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,13 +13,11 @@ import { SliderItemDirective } from './modules/components/slider/slider-item.dir
 import { TileComponent } from './modules/pages/tile/tile.component';
 import { HttpClientModule } from '@angular/common/http';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    SurveyComponent,
+    QuestionnaireComponent,
     RecipeComponent,
     SliderComponent,
     SliderItemDirective,

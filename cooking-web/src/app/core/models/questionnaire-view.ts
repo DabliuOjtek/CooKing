@@ -1,4 +1,4 @@
-export class Survey {
+export class QuestionnaireVIEW {
   type: string;
   values: string[];
 }
