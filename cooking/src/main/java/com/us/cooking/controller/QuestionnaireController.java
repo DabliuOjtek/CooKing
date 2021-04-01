@@ -1,6 +1,7 @@
 package com.us.cooking.controller;
 
 import com.us.cooking.dto.QuestionnaireDTO;
+import com.us.cooking.dto.QuestionnaireQuestionDTO;
 import com.us.cooking.service.DictionaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,11 @@ public class QuestionnaireController {
     @GetMapping("/questionnaire")
     public List<QuestionnaireDTO> getQuestionnaire() {
         return dictionaryService.getAllValuesForQuestionnaire();
+    }
+
+    @GetMapping("/questions")
+    public List<QuestionnaireQuestionDTO> getAllQuestions() {
+        return dictionaryService.getAllQuestionsForQuestionnaire();
     }
 
 //    @PostMapping("/saveDictionary")

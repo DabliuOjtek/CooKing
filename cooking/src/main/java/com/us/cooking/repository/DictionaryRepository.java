@@ -10,9 +10,12 @@ import java.util.Optional;
 
 @Repository
 public interface DictionaryRepository extends JpaRepository<DictionaryEntity, Integer> {
+    String queryForValue = "select value from DictionaryEntity where type = ?1";
+    @Query(queryForValue)
+    List<String> findValuesByType(String type);
 
-    @Query("select value from DictionaryEntity where type = ?1")
-    List<String> findValueByType(String type);
+    @Query(queryForValue)
+    String findValueByType(String type);
 
     Optional<DictionaryEntity> findByTypeAndValue(String type, String value);
 }

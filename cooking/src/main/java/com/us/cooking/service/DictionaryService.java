@@ -1,6 +1,7 @@
 package com.us.cooking.service;
 
 import com.us.cooking.dto.QuestionnaireDTO;
+import com.us.cooking.dto.QuestionnaireQuestionDTO;
 import com.us.cooking.mapper.DictionaryMapper;
 import com.us.cooking.model.DictionaryEntity;
 import com.us.cooking.repository.DictionaryRepository;
@@ -18,7 +19,13 @@ public class DictionaryService {
 
     public List<QuestionnaireDTO> getAllValuesForQuestionnaire() {
         return Arrays.stream(DictionaryEntity.QuestionnaireTypes.values())
-                .map(t -> DictionaryMapper.mapToQuestionnaireDTO(t, dictionaryRepository.findValueByType(t.name())))
+                .map(t -> DictionaryMapper.mapToQuestionnaireDTO(t, dictionaryRepository.findValuesByType(t.name())))
+                .collect(Collectors.toList());
+    }
+
+    public List<QuestionnaireQuestionDTO> getAllQuestionsForQuestionnaire() {
+        return Arrays.stream(DictionaryEntity.QuestionnaireQuestionTypes.values())
+                .map(t -> DictionaryMapper.mapToQuestionnaireQuestionDTO(t, dictionaryRepository.findValueByType(t.name())))
                 .collect(Collectors.toList());
     }
 
