@@ -65,7 +65,7 @@ public class RecipeService {
 
     @Transactional
     public RecipeDTO getRecipe(Integer id) {
-        RecipeEntity recipeEntity = new RecipeEntity();
+        RecipeEntity recipeEntity;
         try {
             recipeEntity = getRecipeEntity(id);
         } catch (NoSuchElementException e) {

@@ -21,6 +21,10 @@ public class DictionaryEntity {
         MEAL_TYPE,
         CUISINE_TYPE,
         PREPARATION_TIME,
-        LEVEL_OF_COOKING_SKILL
+        LEVEL_OF_COOKING_SKILL,
+        MEAL_TYPE_QUESTION,
+        CUISINE_TYPE_QUESTION,
+        PREPARATION_TIME_QUESTION,
+        LEVEL_OF_COOKING_SKILL_QUESTION
     }
 }

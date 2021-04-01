@@ -53,4 +53,27 @@ public class DictionaryService {
 //
 //        dictionaryRepository.save(dictionaryEntity5);
 //    }
+
+//    public void saveQuestion() {
+//        DictionaryEntity dictionaryEntity = new DictionaryEntity();
+//        dictionaryEntity.setType("MEAL_TYPE_QUESTION");
+//        dictionaryEntity.setValue("What type of meal do you want to choose?");
+//
+//        DictionaryEntity dictionaryEntity1 = new DictionaryEntity();
+//        dictionaryEntity1.setType("CUISINE_TYPE_QUESTION");
+//        dictionaryEntity1.setValue("What are your favorite cuisines?");
+//
+//        DictionaryEntity dictionaryEntity2 = new DictionaryEntity();
+//        dictionaryEntity2.setType("PREPARATION_TIME_QUESTION");
+//        dictionaryEntity2.setValue("How much time do you have?");
+//
+//        DictionaryEntity dictionaryEntity3 = new DictionaryEntity();
+//        dictionaryEntity3.setType("LEVEL_OF_COOKING_SKILL_QUESTION");
+//        dictionaryEntity3.setValue("How would you describe your cooking skills?");
+//
+//        dictionaryRepository.save(dictionaryEntity);
+//        dictionaryRepository.save(dictionaryEntity1);
+//        dictionaryRepository.save(dictionaryEntity2);
+//        dictionaryRepository.save(dictionaryEntity3);
+//    }
 }
