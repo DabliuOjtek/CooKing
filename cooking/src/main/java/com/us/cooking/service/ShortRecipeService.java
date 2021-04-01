@@ -27,8 +27,7 @@ public class ShortRecipeService {
     private final DictionaryRepository dictionaryRepository;
     private final RecipeRepository recipeRepository;
 
-    private List<String> errors = new ArrayList<>();
-    private Integer cuisineTypeId;
+    private Integer cuisineTypeId; //TODO poczytac o tych polach i ich umiesczeiu
     private Integer levelOfCookingSkillId;
     private Integer mealTypeId;
     private Integer preparationTimeId;
@@ -36,9 +35,8 @@ public class ShortRecipeService {
 
     public List<ShortRecipeDTO> getRandomizedShortRecipes(FilterQuestionnaireDTO filter) {
         this.setFilter(filter);
-        this.setAllQuestionnaireValues();
+        List<String> errors = this.setAndCheckAllQuestionnaireValues();
 
-        List<String> errors = this.getErrors();
         if (!errors.isEmpty())
             throw new DefaultException(errors);
 
@@ -50,7 +48,9 @@ public class ShortRecipeService {
         return shortRecipes;
     }
 
-    public void setAllQuestionnaireValues() {
+    public List<String> setAndCheckAllQuestionnaireValues() {
+        List<String> errors = new ArrayList<>();
+
         try {
             this.cuisineTypeId = setCuisineType();
         } catch (NoSuchElementException e) {
@@ -71,15 +71,15 @@ public class ShortRecipeService {
         } catch (NoSuchElementException e) {
             errors.add(e.getMessage());
         }
+
+        return errors;
     }
 
     public List<ShortRecipeDTO> getShortRecipes() {
         return recipeRepository.findByCuisineTypeIdAndDifficultyLevelIdAndMealTypeIdAndPrepareTimeId(
-                this.cuisineTypeId, this.levelOfCookingSkillId, this.mealTypeId, this.preparationTimeId)
-                .orElseThrow(() -> new NoSuchElementException("test"))
-                .stream()
-                .map(RecipeMapper::mapToShortRecipeDTO)
-                .collect(Collectors.toList());
+                this.cuisineTypeId, this.levelOfCookingSkillId, this.mealTypeId, this.preparationTimeId).stream()
+                    .map(RecipeMapper::mapToShortRecipeDTO)
+                    .collect(Collectors.toList());
     }
 
     private Integer setCuisineType() {

@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface RecipeRepository extends JpaRepository<RecipeEntity, Integer> {
 
-    Optional<List<RecipeEntity>> findByCuisineTypeIdAndDifficultyLevelIdAndMealTypeIdAndPrepareTimeId(
+    List<RecipeEntity> findByCuisineTypeIdAndDifficultyLevelIdAndMealTypeIdAndPrepareTimeId(
             Integer cuisineTypeId, Integer difficultyLevelId, Integer mealTypeId, Integer prepareTimeId
     );
 }

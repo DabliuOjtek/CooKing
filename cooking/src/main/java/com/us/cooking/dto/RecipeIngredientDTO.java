@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class RecipeIngredientDTO {
-    private Integer ingredientId; //Mozliwe IngredientDTO
+    private Integer ingredientId;
     private String name;
     private String quantity;
     private String unitDictEntityValue;

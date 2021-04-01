@@ -1,8 +1,6 @@
 package com.us.cooking.service;
 
-import com.us.cooking.dto.FilterQuestionnaireDTO;
 import com.us.cooking.dto.RecipeDTO;
-import com.us.cooking.dto.ShortRecipeDTO;
 import com.us.cooking.exception.DefaultException;
 import com.us.cooking.mapper.RecipeMapper;
 import com.us.cooking.model.RecipeEntity;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -23,7 +20,6 @@ public class RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final DictionaryRepository dictionaryRepository;
-    private final List<String> errors = new ArrayList<>();
 
 //    public void saveRecipe() {
 //        RecipeEntity recipeEntity = new RecipeEntity();
@@ -63,7 +59,6 @@ public class RecipeService {
 //        recipeRepository.save(recipeEntity1);
 //    }
 
-    @Transactional
     public RecipeDTO getRecipe(Integer id) {
         RecipeEntity recipeEntity;
         try {
@@ -71,20 +66,23 @@ public class RecipeService {
         } catch (NoSuchElementException e) {
             throw new DefaultException(e.getMessage());
         }
+
         RecipeDTO recipeDTO = RecipeMapper.mapToRecipeDTO(recipeEntity);
+        try {
+            String cuisineTypeValue = getCuisineTypeValue(recipeEntity);
+            recipeDTO.setCuisineTypeValue(cuisineTypeValue);
 
-        String cuisineTypeValue = getCuisineTypeValue(recipeEntity);
-        recipeDTO.setCuisineTypeValue(cuisineTypeValue);
+            String mealTypeValue = getMealTypeValue(recipeEntity);
+            recipeDTO.setMealTypeValue(mealTypeValue);
 
-        String mealTypeValue = getMealTypeValue(recipeEntity);
-        recipeDTO.setMealTypeValue(mealTypeValue);
+            String prepareTimeValue = getPrepareTimeValue(recipeEntity);
+            recipeDTO.setPrepareTimeValue(prepareTimeValue);
 
-        String prepareTimeValue = getPrepareTimeValue(recipeEntity);
-        recipeDTO.setPrepareTimeValue(prepareTimeValue);
-
-        String difficultyLevelValue = getDifficultyLevelValue(recipeEntity);
-        recipeDTO.setDifficultyLevelValue(difficultyLevelValue);
-        //nie wiem czy chcesz to wszystko oddzielnie try'owac tak jak jest w ShortRecipeService ale chyba tak trzeba
+            String difficultyLevelValue = getDifficultyLevelValue(recipeEntity);
+            recipeDTO.setDifficultyLevelValue(difficultyLevelValue);
+        } catch (NoSuchElementException e) {
+            throw new DefaultException("Something went wrong with getting recipe from database");
+        }
 
         return recipeDTO;
     }
@@ -96,25 +94,25 @@ public class RecipeService {
 
     private String getCuisineTypeValue(RecipeEntity recipeEntity) {
         return dictionaryRepository.findById(recipeEntity.getCuisineTypeId())
-                .orElseThrow(() -> new NoSuchElementException("Invalid cuisine type in found recipe"))
+                .orElseThrow(NoSuchElementException::new)
                 .getValue();
     }
 
     private String getMealTypeValue(RecipeEntity recipeEntity) {
         return dictionaryRepository.findById(recipeEntity.getMealTypeId())
-                .orElseThrow(() -> new NoSuchElementException("Invalid meal type in found recipe"))
+                .orElseThrow(NoSuchElementException::new)
                 .getValue();
     }
 
     private String getPrepareTimeValue(RecipeEntity recipeEntity) {
         return dictionaryRepository.findById(recipeEntity.getPrepareTimeId())
-                .orElseThrow(() -> new NoSuchElementException("Invalid prepare time in found recipe"))
+                .orElseThrow(NoSuchElementException::new)
                 .getValue();
     }
 
     private String getDifficultyLevelValue(RecipeEntity recipeEntity) {
         return dictionaryRepository.findById(recipeEntity.getDifficultyLevelId())
-                .orElseThrow(() -> new NoSuchElementException("Invalid difficulty level in found recipe"))
+                .orElseThrow(NoSuchElementException::new)
                 .getValue();
     }
 }

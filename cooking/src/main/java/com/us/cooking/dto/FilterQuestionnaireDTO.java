@@ -7,16 +7,16 @@ import javax.validation.constraints.Size;
 
 @Data
 public class FilterQuestionnaireDTO {
-    @NotBlank()
-    @Size(max = 100)
+    @NotBlank(message = "Cannot be null")
+    @Size(max = 100, message = "Too many character [max 100]")
     private String cuisineTypeValue;
-    @NotBlank()
-    @Size(max = 100)
+    @NotBlank(message = "Cannot be null")
+    @Size(max = 100, message = "Too many character [max 100]")
     private String levelOfCookingSkillValue;
-    @NotBlank()
-    @Size(max = 100)
+    @NotBlank(message = "Cannot be null")
+    @Size(max = 100, message = "Too many character [max 100]")
     private String mealTypeValue;
-    @NotBlank()
-    @Size(max = 100)
+    @NotBlank(message = "Cannot be null")
+    @Size(max = 100, message = "Too many character [max 100]")
     private String preparationTimeValue;
 }
