@@ -1,0 +1,31 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.error-title {
+  line-height: calc(5rem + 10vw);
+  font-size: calc(5rem + 10vw);
+  margin: 0 5vw;
+}
+
+.description {
+  line-height: calc(1rem + 1vw);
+  font-size: calc(1rem + 1vw);
+  font-weight: 500;
+  margin-bottom: calc(1rem + 1vw);
+}
+
+.mat-raised-button {
+  text-transform: uppercase;
+  border-radius: 2rem;
+  font-size: calc(0.5rem + 0.5vw);
+  padding: 0.5em calc(0.5rem + 2vw);
+}
+
+.mat-button-wrapper {
+  padding: 2rem;
+}

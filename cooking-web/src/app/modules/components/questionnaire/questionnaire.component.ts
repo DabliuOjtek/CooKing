@@ -5,10 +5,9 @@ import { RecipeService } from './../../../core/services/recipe.service';
 import { FilterQuestionnaireVIEW } from './../../../core/models/filter-questionnaire-view';
 import { QuestionnaireVIEW } from './../../../core/models/questionnaire-view';
 import { QuestionnaireService } from '../../../core/services/questionnaire.service';
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatChip } from '@angular/material/chips';
 import { MatStepper } from '@angular/material/stepper';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-questionnaire',
@@ -48,7 +47,7 @@ export class QuestionnaireComponent implements OnInit {
       }
     }, err => console.log('HTTP Error', err.error),
       () => {
-        console.log('HTTP Questions request completed.')
+        console.log('HTTP Questions request completed.');
         this.lengthOfQuestions = Object.keys(this.questions).length;
       }
     );
@@ -66,7 +65,6 @@ export class QuestionnaireComponent implements OnInit {
 
   onGetShortRecipes() {
     this.recipeService.getShortRecipes(this.filterQuestionnaire);
-    console.log(this.filterQuestionnaire);
   }
 
   onGetSelectedChip(chip: MatChip) {

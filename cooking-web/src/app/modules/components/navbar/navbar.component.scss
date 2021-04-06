@@ -1,9 +1,15 @@
-.space {
-  flex: 1 1 auto;
-}
+@import '../../../../assets/styles/cooking-style.scss';
 
-.space2 {
-  width: 1em;
+// .space {
+//   flex: 1 1 auto;
+// }
+
+// .space2 {
+//   width: 1em;
+// }
+
+.nav-title {
+  margin: 0 0 0 2vw;
 }
 
 .mat-toolbar {
@@ -15,6 +21,12 @@
   border-radius: 2rem;
 }
 
-.mat-subheading-1 {
-  margin: 0;
+// .mat-subheading-1 {
+//   margin: 0;
+// }
+
+.nav-link {
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
 }

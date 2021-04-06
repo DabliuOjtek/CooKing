@@ -4,7 +4,7 @@
       {{questions[questionArrIndex].value}}
     </div>
     <app-slider>
-      <mat-chip-list class="test" appSliderItem selectable>
+      <mat-chip-list appSliderItem selectable>
         <mat-chip class="answer-card" #chip="matChip" *ngFor="let answer of question.values" [value]="answer"
           (click)="onGetSelectedChip(chip)">
           {{answer}}

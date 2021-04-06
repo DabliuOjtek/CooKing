@@ -42,14 +42,19 @@
 
 .question-title,
 .main-title {
-  margin: 3rem 10vw;
+  margin: 2vw 10vw;
+}
+
+.question-title {
+  line-height: calc(1rem + 2vw);
+  font-size: calc(1rem + 2vw);
 }
 
 .main-title {
   display: flex;
   justify-content: center;
   text-align: center;
-  margin: 3rem 10vw 0 10vw;
+  margin: 2rem 10vw 0 10vw;
 }
 
 img {
@@ -58,53 +63,3 @@ img {
   object-fit: cover;
   overflow: hidden;
 }
-
-// .answers-carousel {}
-
-// .answers-grid {
-//   background-color: red;
-// }
-
-// .answer-card {
-//   width: 30%;
-//   height: 200px;
-//   margin-right: 10px;
-//   background-color: #f9d8b1;
-//   counter-increment: answer-card;
-// }
-
-// .answer-card:before {
-//   display: block;
-//   text-align: center;
-//   content: counter(answer-card);
-//   line-height: 200px;
-//   font-size: 80px;
-//   color: white;
-// }
-
-
-
-// @mixin scalable-grid($height) {
-//   height: $height;
-//   width: 100%;
-
-//   display: grid;
-//   grid-gap: 1rem;
-//   grid-template-columns: repeat(auto-fit, minmax(1%, 1fr));
-// }
-
-// .answers-carousel {
-//   height: 10vw;
-//   display: flex;
-//   justify-content: center;
-//   width: 100%;
-// }
-
-// .answers-grid {
-//   $height: 10vw;
-//   @include scalable-grid($height);
-// }
-
-// .answer-card {
-//   background-color: #f9d8b1;
-// }
