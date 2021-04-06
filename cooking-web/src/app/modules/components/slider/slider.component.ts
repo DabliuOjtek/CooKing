@@ -1,4 +1,4 @@
-import { Component, ContentChildren, ViewChild, QueryList, ElementRef } from '@angular/core';
+import { Component, ContentChildren, ViewChild, QueryList, ElementRef, ViewChildren } from '@angular/core';
 import { SliderItemDirective } from './slider-item.directive';
 
 @Component({
@@ -7,31 +7,52 @@ import { SliderItemDirective } from './slider-item.directive';
   styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent {
-
-  @ContentChildren(SliderItemDirective, { read: ElementRef }) items
-    : QueryList<ElementRef<HTMLDivElement>>;
   @ViewChild('slides') slidesContainer: ElementRef<HTMLDivElement>;
 
-  private slidesIndex = 0;
-
-  get currentItem(): ElementRef<HTMLDivElement> {
-    return this.items.find((item, index) => index === this.slidesIndex);
-  }
-
   onClickLeft() {
-    this.slidesContainer.nativeElement.scrollLeft -= this.currentItem.nativeElement.offsetWidth;
-    console.log(this.currentItem.nativeElement.offsetWidth);
-    if (this.slidesIndex > 0) {
-      this.slidesIndex--;
-    }
+    this.slidesContainer.nativeElement.scrollLeft -= 200;
   }
 
   onClickRight() {
-    this.slidesContainer.nativeElement.scrollLeft += this.currentItem.nativeElement.offsetWidth;
-    console.log(this.currentItem.nativeElement.offsetWidth);
-    if (this.slidesIndex < this.items.length - 1) {
-      this.slidesIndex++;
-    }
+    this.slidesContainer.nativeElement.scrollLeft += 200;
   }
 
+  // onClickLeft() {
+  //   this.slidesContainer.nativeElement.scrollLeft -= this.slidesContainer.nativeElement.offsetWidth;
+  // }
+
+  // onClickRight() {
+  //   this.slidesContainer.nativeElement.scrollLeft += this.slidesContainer.nativeElement.offsetWidth;
+  // }
+
+
+  // onClickLeft() {
+  //   console.log('-----------------------------------------------------');
+  //   console.log('scrollLeft ' + this.slidesContainer.nativeElement.scrollLeft);
+  //   console.log('currentItem offsetWidth ' + this.currentItem.nativeElement.offsetWidth);
+  //   this.slidesContainer.nativeElement.scrollLeft -= this.currentItem.nativeElement.offsetWidth;
+  //   console.log('currentItem offsetWidth  ' + this.currentItem.nativeElement.offsetWidth);
+  //   console.log('slider ' + this.slidesIndex);
+  //   if (this.slidesIndex > 0) {
+  //     this.slidesIndex--;
+  //     console.log(this.slidesIndex);
+  //   }
+  // }
+
+  // onClickRight() {
+  //   console.log('-----------------------------------------------------')
+  //   console.log('scrollRight ' + this.slidesContainer.nativeElement.scrollLeft);
+  //   console.log('currentItem offsetWidth ' + this.currentItem.nativeElement.offsetWidth);
+  //   this.slidesContainer.nativeElement.scrollLeft += this.currentItem.nativeElement.offsetWidth;
+  //   console.log('currentItem offsetWidth  ' + this.currentItem.nativeElement.offsetWidth);
+  //   console.log('slider ' + this.slidesIndex);
+  //   console.log(this.currentItem.nativeElement.offsetWidth);
+  //   if (this.slidesIndex < this.items.length - 1) {
+  //     this.slidesIndex++;
+  //   }
+  // }
+
 }
+
+
+

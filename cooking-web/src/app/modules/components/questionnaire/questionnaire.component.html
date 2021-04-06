@@ -1,0 +1,32 @@
+<mat-horizontal-stepper #stepper>
+  <mat-step *ngFor="let question of questionnaire">
+    <div class="question-title mat-subheading-2" *ngIf="questions">
+      {{questions[questionArrIndex].value}}
+    </div>
+    <app-slider>
+      <mat-chip-list class="test" appSliderItem selectable>
+        <mat-chip class="answer-card" #chip="matChip" *ngFor="let answer of question.values" [value]="answer"
+          (click)="onGetSelectedChip(chip)">
+          {{answer}}
+        </mat-chip>
+      </mat-chip-list>
+    </app-slider>
+
+  </mat-step>
+</mat-horizontal-stepper>
+
+<div class="nav-buttons" [ngSwitch]="questionArrIndex">
+  <ng-container *ngSwitchCase="0">
+    <button class="nav-button" mat-raised-button (click)="onNextQuestion(stepper)">Next</button>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="lengthOfQuestions-1">
+    <button class="nav-button" mat-raised-button (click)="onPreviousQuestion(stepper)">Back</button>
+    <button class="nav-button" mat-raised-button (click)="onGetShortRecipes()">Submit</button>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <button class="nav-button" mat-raised-button (click)="onPreviousQuestion(stepper)">Back</button>
+    <button class="nav-button" mat-raised-button (click)="onNextQuestion(stepper)">Next</button>
+  </ng-container>
+</div>
