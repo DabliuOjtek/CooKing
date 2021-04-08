@@ -1,0 +1,15 @@
+version: '3'
+services:
+  cooking:
+    build: ./cooking
+    container_name: cooking
+    ports:
+      - 8080:8080
+
+  cooking-web:
+    build: ./cooking-web
+    container_name: cooking-web
+    ports:
+      - 4200:80
+    links:
+      - cooking
