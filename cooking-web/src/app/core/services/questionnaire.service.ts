@@ -6,14 +6,12 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class QuestionnaireService {
-
   baseUrl = environment.baseUrl;
-  readonly iconsUrl = 'https://cookingstorage.blob.core.windows.net/images/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getQuestionnaire(): Observable<QuestionnaireVIEW> {
     return this.http.get<QuestionnaireVIEW>(this.baseUrl + 'questionnaire');
@@ -22,5 +20,4 @@ export class QuestionnaireService {
   getQuestions(): Observable<QuestionnaireQuestionVIEW> {
     return this.http.get<QuestionnaireQuestionVIEW>(this.baseUrl + 'questions');
   }
-
 }

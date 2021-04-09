@@ -17,16 +17,16 @@ import { HttpClientModule } from '@angular/common/http';
     QuestionnaireComponent,
     SliderComponent,
     SliderItemDirective,
-    routingComponents
+    routingComponents,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     CookingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -16,16 +16,11 @@ const MaterialComponents = [
   MatCardModule,
   MatCheckboxModule,
   MatStepperModule,
-  MatChipsModule
+  MatChipsModule,
 ];
 
 @NgModule({
-  imports: [
-    MaterialComponents
-  ],
-  exports: [
-    MaterialComponents
-  ],
-  declarations: [],
+  imports: [MaterialComponents],
+  exports: [MaterialComponents],
 })
-export class CookingModule { }
+export class CookingModule {}
