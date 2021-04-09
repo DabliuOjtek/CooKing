@@ -7,11 +7,11 @@
       <mat-chip-list appSliderItem selectable>
         <mat-chip class="answer-card" #chip="matChip" *ngFor="let answer of question.values" [value]="answer"
           (click)="onGetSelectedChip(chip)">
+          <img src="https://cookingstorage.blob.core.windows.net/icons/{{answer}}.svg">
           {{answer}}
         </mat-chip>
       </mat-chip-list>
     </app-slider>
-
   </mat-step>
 </mat-horizontal-stepper>
 
@@ -22,7 +22,7 @@
 
   <ng-container *ngSwitchCase="lengthOfQuestions-1">
     <button class="nav-button" mat-raised-button (click)="onPreviousQuestion(stepper)">Back</button>
-    <button class="nav-button" mat-raised-button (click)="onGetShortRecipes()">Submit</button>
+    <button class="nav-button" mat-raised-button (click)="onSubmitQuestionnaire()">Submit</button>
   </ng-container>
 
   <ng-container *ngSwitchDefault>

@@ -8,11 +8,12 @@ import { QuestionnaireService } from '../../../core/services/questionnaire.servi
 import { Component, OnInit } from '@angular/core';
 import { MatChip } from '@angular/material/chips';
 import { MatStepper } from '@angular/material/stepper';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-questionnaire',
   templateUrl: './questionnaire.component.html',
-  styleUrls: ['./questionnaire.component.scss']
+  styleUrls: ['./questionnaire.component.scss'],
 })
 export class QuestionnaireComponent implements OnInit {
   filterQuestionnaire = new FilterQuestionnaireVIEW();
@@ -21,7 +22,11 @@ export class QuestionnaireComponent implements OnInit {
   questionArrIndex = 0;
   lengthOfQuestions;
 
-  constructor(private questionnaireService: QuestionnaireService, private recipeService: RecipeService) { }
+  constructor(
+    private questionnaireService: QuestionnaireService,
+    private recipeService: RecipeService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.getQuestionnaire();
@@ -29,23 +34,33 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   getQuestionnaire() {
-    this.questionnaireService.getQuestionnaire().subscribe((response: any) => {
-      this.questionnaire = response;
-      if (response) {
-        this.questionnaire.sort((a, b) => QuestionnaireTypes[a.type] - QuestionnaireTypes[b.type]);
-      }
-    }, err => console.log('HTTP Error', err.error),
+    this.questionnaireService.getQuestionnaire().subscribe(
+      (response: any) => {
+        this.questionnaire = response;
+        if (response) {
+          this.questionnaire.sort(
+            (a, b) => QuestionnaireTypes[a.type] - QuestionnaireTypes[b.type]
+          );
+        }
+      },
+      (err) => console.log('HTTP Error', err.error),
       () => console.log('HTTP Questionnaire request completed.')
     );
   }
 
   getQuestions() {
-    this.questionnaireService.getQuestions().subscribe((response: any) => {
-      this.questions = response;
-      if (response) {
-        this.questions.sort((a, b) => QuestionnaireQuestionTypes[a.type] - QuestionnaireQuestionTypes[b.type]);
-      }
-    }, err => console.log('HTTP Error', err.error),
+    this.questionnaireService.getQuestions().subscribe(
+      (response: any) => {
+        this.questions = response;
+        if (response) {
+          this.questions.sort(
+            (a, b) =>
+              QuestionnaireQuestionTypes[a.type] -
+              QuestionnaireQuestionTypes[b.type]
+          );
+        }
+      },
+      (err) => console.log('HTTP Error', err.error),
       () => {
         console.log('HTTP Questions request completed.');
         this.lengthOfQuestions = Object.keys(this.questions).length;
@@ -63,8 +78,15 @@ export class QuestionnaireComponent implements OnInit {
     stepper.next();
   }
 
-  onGetShortRecipes() {
-    this.recipeService.getShortRecipes(this.filterQuestionnaire);
+  onSubmitQuestionnaire() {
+    //tutaj zrobić sprawdzenie czy wszystkie pytania są zaznaczone
+
+    this.recipeService.setFilter(this.filterQuestionnaire);
+    this.router.navigate(['/recipe']);
+
+    // if (this.router.navigate(['/recipe'])) {
+    //   this.recipeService.setShortRecpie(this.filterQuestionnaire);
+    // }
   }
 
   onGetSelectedChip(chip: MatChip) {
@@ -72,17 +94,12 @@ export class QuestionnaireComponent implements OnInit {
 
     if (this.questionArrIndex === 0) {
       this.filterQuestionnaire.mealTypeValue = chip.value;
-    }
-    else if (this.questionArrIndex === 1) {
+    } else if (this.questionArrIndex === 1) {
       this.filterQuestionnaire.cuisineTypeValue = chip.value;
-    }
-    else if (this.questionArrIndex === 2) {
+    } else if (this.questionArrIndex === 2) {
       this.filterQuestionnaire.preparationTimeValue = chip.value;
-    }
-    else if (this.questionArrIndex === 3) {
+    } else if (this.questionArrIndex === 3) {
       this.filterQuestionnaire.levelOfCookingSkillValue = chip.value;
     }
-
   }
-
 }

@@ -1,10 +1,10 @@
-import { Component, ContentChildren, ViewChild, QueryList, ElementRef, ViewChildren } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { SliderItemDirective } from './slider-item.directive';
 
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+  styleUrls: ['./slider.component.scss'],
 })
 export class SliderComponent {
   @ViewChild('slides') slidesContainer: ElementRef<HTMLDivElement>;
@@ -24,7 +24,6 @@ export class SliderComponent {
   // onClickRight() {
   //   this.slidesContainer.nativeElement.scrollLeft += this.slidesContainer.nativeElement.offsetWidth;
   // }
-
 
   // onClickLeft() {
   //   console.log('-----------------------------------------------------');
@@ -51,8 +50,4 @@ export class SliderComponent {
   //     this.slidesIndex++;
   //   }
   // }
-
 }
-
-
-
