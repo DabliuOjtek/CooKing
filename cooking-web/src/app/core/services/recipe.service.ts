@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { RecipeVIEW } from '../models/recipe-view';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class RecipeService {
   baseUrl = environment.baseUrl;
   filter: FilterQuestionnaireVIEW;
+  id = 1;
 
   constructor(private http: HttpClient) {}
 
@@ -23,5 +25,9 @@ export class RecipeService {
       this.baseUrl + 'recipe',
       this.filter
     );
+  }
+
+  getRecipe(): Observable<RecipeVIEW> {
+    return this.http.get<RecipeVIEW>(this.baseUrl + 'recipe/' + this.id);
   }
 }

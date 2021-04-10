@@ -1,17 +1,15 @@
 <div class="under_header">
-    <div class="cusine_title">Rocemmendation</div>
+    <div class="cusine_title">Recommendation</div>
     <div class="yellow_bar"><button disabled="disabled"></button></div>
 </div>
 
 <div class="container">
-    <div class="grid-container">
-        <div *ngFor="let k = index let i of [].constructor(8)" class="'tile'+(k+1)" >
-            <img class="cusine_img" src="https://picsum.photos/id/13/600/600">
-                <div class ="cusine_title">Rice with chicken</div>
-                <div class="ready_time">Ready in 15 min</div>
+    <div *ngIf="generateComponents" class="grid-container">
+        <div *ngFor="let k = index let i of [].constructor(generateComponents)" class="'tile'+(k+1)" (click)="onTileClick(k)">
+            <img class="cusine_img" src={{shortRecipes[k].image}}>
+                <div class ="cusine_title">  {{shortRecipes[k].name}}</div>
                 <div class="ready_time">
-                    <img class src = "./assets/star.png"/>4.5(36 reviews)
-                    <img class="chef" src = "./assets/chef.svg"/>3/5
+                    <ng-container *ngFor="let i of [].constructor(recipesData[k])"><img src = "https://cookingstorage.blob.core.windows.net/icons/star.png"/></ng-container>
                 </div>
                 <div class="spacer"></div>
         </div>

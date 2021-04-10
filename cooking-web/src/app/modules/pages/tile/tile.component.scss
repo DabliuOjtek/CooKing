@@ -16,8 +16,8 @@
     }
 
 .container{
-    padding-left: 15vw;
-    padding-right: 15vw;
+    padding-left: 12vw;
+    padding-right:12vw;
     padding-top: 2vw;
   }
 
@@ -25,13 +25,9 @@
   .grid-container {
     display: grid;
     width: auto;
-    grid-template-columns: minmax(15vw, 15vw)1fr repeat(4) ;
-    grid-template-rows: auto auto;
-    gap: 3vw 5vw;
-    grid-template-areas:
-      "tile1 tile2 tile3 tile4"
-      "tile5 tile6 tile7 tile8";
-  
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3vw 3vw;
+
   }
   .grid-container .cusine_img{
     width: 100%;
@@ -39,14 +35,7 @@
     border-radius: 1.85rem;
     height: auto;
 }
-  .tile1 { grid-area: tile1; }
-  .tile2 { grid-area: tile2; }
-  .tile3 { grid-area: tile3; }
-  .tile4 { grid-area: tile4; }
-  .tile5 { grid-area: tile5; }
-  .tile6 { grid-area: tile6; }
-  .tile7 { grid-area: tile7; }
-  .tile8 { grid-area: tile8; }
+
 
   .cusine_title{
     
@@ -90,6 +79,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
     margin: 5px;
     margin-bottom: 1vw;
+    min-width: 15vw;
 
   }
 
@@ -102,63 +92,3 @@
     cursor: pointer;
   }
   
-
-
-  @media(max-width: 1100px){
-    .grid-container{  
-        grid-template-columns: minmax(15vw, 15vw)1fr repeat(2) ;
-        grid-template-rows: auto auto auto auto ;
-        gap: 3vw 5vw;
-        grid-template-areas:
-          "tile1 tile2"
-          "tile3 tile4"
-          "tile5 tile6"
-          "tile7 tile8";
-        }
-        .cusine_title{
-          padding-left: 1vw;
-        }
-        .ready_time{
-          padding-left: 1vw;
-        }
-        .spacer{
-          height: 2vw;
-        }
-        div[class*='tile']{
-          max-width: 15rem;
-          }
-    }
-
-    @media(max-width: 700px){
-        .grid-container{ 
-            grid-template-columns: auto ;
-            grid-template-rows: auto auto auto auto auto auto auto auto ;
-            gap: 3vw 3vw;
-            grid-template-areas:
-                "tile1"
-                "tile2"
-                "tile3"
-                "tile4"
-                "tile5"
-                "tile6"
-                "tile7"     
-                "tile8";
-            
-
-                justify-content: center;
-                align-items: center;    
-            }
-            .cusine_title{
-              padding-left: 1vw;
-            }
-            .ready_time{
-              padding-left: 1vw;
-            }            
-            .spacer{
-              height: 4vw;
-          }
-            div[class*='tile']{
-            max-width: 15rem;
-            }
-               
-        }

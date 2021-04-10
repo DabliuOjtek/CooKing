@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RecipeService } from './../../../core/services/recipe.service';
+import { RecipeVIEW } from './../../../core/models/recipe-view';
 
 @Component({
   selector: 'app-recipe',
@@ -8,8 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class RecipeComponent implements OnInit {
 
   recipe: any;
+  recipe1: RecipeVIEW;
+  difficultyLevel: number;
+  rate: number;
 
-  constructor() { 
+  constructor(private recipeService: RecipeService) { 
 
     this.recipe = {
       cusine_title: "Rice with chicken",
@@ -44,7 +49,22 @@ export class RecipeComponent implements OnInit {
   }
 
   ngOnInit(): void { 
-    
+    this.getRecipe();
+  }
+
+  getRecipe() {
+    this.recipeService.getRecipe().subscribe((response: any) => {
+      this.recipe1 = response;
+      if (response) {
+        var x: number = +this.recipe1.rate;
+        this.rate = x;
+
+        var y: number = +this.recipe1.difficultyLevelValue;
+        this.difficultyLevel = y;
+       }
+    }, err => console.log('HTTP Error', err.error),
+      () => console.log('HTTP Recipe details request completed.')
+    );
   }
 
 }
