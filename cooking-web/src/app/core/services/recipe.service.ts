@@ -10,7 +10,7 @@ import { RecipeVIEW } from '../models/recipe-view';
   providedIn: 'root',
 })
 export class RecipeService {
-  baseUrl = environment.baseUrl;
+  baseUrl = environment.apiUrl;
   filter: FilterQuestionnaireVIEW;
   id = 1;
 

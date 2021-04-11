@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class QuestionnaireService {
-  baseUrl = environment.baseUrl;
+  baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 

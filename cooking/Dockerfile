@@ -5,4 +5,4 @@ RUN gradle build
 
 FROM openjdk:11-jre-slim
 COPY --from=builder app/build/libs/*.jar cooking.jar
-CMD ["java", "-jar", "cooking.jar"]
+CMD ["java", "-jar", "-Dspring.profiles.active=dev", "cooking.jar"]
