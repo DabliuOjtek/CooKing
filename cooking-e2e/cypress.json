@@ -1,0 +1,14 @@
+{
+  "baseUrl": "http://localhost:4200/",
+  "chromeWebSecurity": false,
+  "defaultCommandTimeout": 30000,
+  "projectId": "cooking-e2e",
+  "retries": {
+    "runMode": 2,
+    "openMode": 2
+  },
+  "requestTimeout": 15000,
+  "video": true,
+  "videoCompression": false,
+  "watchForFileChanges": true
+}
