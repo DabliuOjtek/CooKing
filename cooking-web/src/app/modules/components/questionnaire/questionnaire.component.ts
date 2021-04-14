@@ -1,3 +1,6 @@
+import { QuestionnaireDialogComponent } from './../questionnaire-dialog/questionnaire-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatStepper } from '@angular/material/stepper';
 import { QuestionnaireQuestionTypes } from './../../../core/models/questionnaire-question-types.enum';
 import { QuestionnaireTypes } from './../../../core/models/questionnaire-types.enum';
 import { QuestionnaireQuestionVIEW } from './../../../core/models/questionnaire-question-view';
@@ -6,9 +9,8 @@ import { FilterQuestionnaireVIEW } from './../../../core/models/filter-questionn
 import { QuestionnaireVIEW } from './../../../core/models/questionnaire-view';
 import { QuestionnaireService } from '../../../core/services/questionnaire.service';
 import { Component, OnInit } from '@angular/core';
-import { MatChip } from '@angular/material/chips';
-import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
+import { MatChip } from '@angular/material/chips';
 
 @Component({
   selector: 'app-questionnaire',
@@ -16,7 +18,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./questionnaire.component.scss'],
 })
 export class QuestionnaireComponent implements OnInit {
-  filterQuestionnaire = new FilterQuestionnaireVIEW();
+  private filterQuestionnaire = new FilterQuestionnaireVIEW();
+  private checkIfSelected = false;
   questionnaire: QuestionnaireVIEW[];
   questions: QuestionnaireQuestionVIEW[];
   questionArrIndex = 0;
@@ -25,7 +28,8 @@ export class QuestionnaireComponent implements OnInit {
   constructor(
     private questionnaireService: QuestionnaireService,
     private recipeService: RecipeService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -38,9 +42,7 @@ export class QuestionnaireComponent implements OnInit {
       (response: any) => {
         this.questionnaire = response;
         if (response) {
-          this.questionnaire.sort(
-            (a, b) => QuestionnaireTypes[a.type] - QuestionnaireTypes[b.type]
-          );
+          this.questionnaire.sort((a, b) => QuestionnaireTypes[a.type] - QuestionnaireTypes[b.type]);
         }
       },
       (err) => console.log('HTTP Error', err.error),
@@ -53,11 +55,7 @@ export class QuestionnaireComponent implements OnInit {
       (response: any) => {
         this.questions = response;
         if (response) {
-          this.questions.sort(
-            (a, b) =>
-              QuestionnaireQuestionTypes[a.type] -
-              QuestionnaireQuestionTypes[b.type]
-          );
+          this.questions.sort((a, b) => QuestionnaireQuestionTypes[a.type] - QuestionnaireQuestionTypes[b.type]);
         }
       },
       (err) => console.log('HTTP Error', err.error),
@@ -74,23 +72,22 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   onNextQuestion(stepper: MatStepper) {
-    this.questionArrIndex++;
-    stepper.next();
+    if (this.checkIfSelected) {
+      this.questionArrIndex++;
+      stepper.next();
+    } else {
+      this.dialog.open(QuestionnaireDialogComponent);
+    }
   }
 
   onSubmitQuestionnaire() {
-    //tutaj zrobić sprawdzenie czy wszystkie pytania są zaznaczone
-
     this.recipeService.setFilter(this.filterQuestionnaire);
     this.router.navigate(['/recipe']);
-
-    // if (this.router.navigate(['/recipe'])) {
-    //   this.recipeService.setShortRecpie(this.filterQuestionnaire);
-    // }
   }
 
-  onGetSelectedChip(chip: MatChip) {
+  onSetAnswer(chip: MatChip) {
     chip.toggleSelected();
+    this.checkIfSelected = chip.selected;
 
     if (this.questionArrIndex === 0) {
       this.filterQuestionnaire.mealTypeValue = chip.value;

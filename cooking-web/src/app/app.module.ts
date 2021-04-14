@@ -1,3 +1,4 @@
+import { QuestionnaireDialogComponent } from './modules/components/questionnaire-dialog/questionnaire-dialog.component';
 import { QuestionnaireComponent } from './modules/components/questionnaire/questionnaire.component';
 import { SliderComponent } from './modules/components/slider/slider.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     QuestionnaireComponent,
     SliderComponent,
     SliderItemDirective,
+    QuestionnaireDialogComponent,
     routingComponents,
   ],
   imports: [

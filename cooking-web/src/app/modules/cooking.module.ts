@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,6 +18,9 @@ const MaterialComponents = [
   MatCheckboxModule,
   MatStepperModule,
   MatChipsModule,
+  MatDialogModule,
+  MatChipsModule,
+  MatStepperModule,
 ];
 
 @NgModule({

@@ -1,15 +1,15 @@
-<div class="slider-container">
+<div class="slider-container" data-cy="slider-container">
   <div class="slides-container">
-    <div class="slides" #slides>
+    <div class="slides" #slides data-cy="slides">
       <ng-content select="[appSliderItem]" #sliderItem></ng-content>
     </div>
-    <div class="controls">
+    <div class="controls" data-cy="slider-controls">
       <button class="slider-button" (click)="onClickLeft()">
-        <div class="button-arrow left"></div>
+        <div class="button-arrow left" data-cy="slider-button-left"></div>
       </button>
 
       <button class="slider-button" (click)="onClickRight()">
-        <div class="button-arrow right"></div>
+        <div class="button-arrow right" data-cy="slider-button-right"></div>
       </button>
     </div>
   </div>
