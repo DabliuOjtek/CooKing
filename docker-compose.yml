@@ -2,13 +2,13 @@ version: '3'
 services:
   cooking:
     build: ./cooking
-    container_name: cooking
+    container_name: cooking-test
     ports:
       - 8080:8080
 
   cooking-web:
     build: ./cooking-web
-    container_name: cooking-web
+    container_name: cooking-web-test
     ports:
       - 4200:80
     links:
