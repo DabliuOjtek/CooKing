@@ -7,8 +7,8 @@ import { TileComponent } from './modules/pages/tile/tile.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
-  { path: 'recipe', component: TileComponent },
-  { path: 'recipeId', component: RecipeComponent },
+  { path: 'recipe', component: TileComponent,},
+  { path: 'recipe/:id', component: RecipeComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

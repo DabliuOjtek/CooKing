@@ -46,7 +46,7 @@ export class TileComponent implements OnInit {
   }
 
   onTileClick(index :any){
-    this.router.navigate(['/recipeId']);
+    this.router.navigate(['/recipe',this.shortRecipes[index].recipeId]);
     this.recpieService.id = this.shortRecipes[index].recipeId
   }
 

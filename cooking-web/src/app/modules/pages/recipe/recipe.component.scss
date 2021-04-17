@@ -67,6 +67,10 @@
     font-size: 1.2rem;
     font-weight: bold;
   }
+  
+  .instructions div{
+    padding-top: 1vw;
+  }
   .gray_font{
     font-size: 0.8rem;
     color: #4f4d46;
@@ -96,9 +100,9 @@
   .yellow_bar { grid-area: yellow_bar; }
   .yellow_bar button{
     border: none;
-    height: 0.5vw;
-    width: 10vw;
-    border-radius: 0.3vw;
+    height: 0.4rem;
+    width: calc(6rem + 5vw);
+    border-radius: 0.4rem;
     background-color: mat-color($cooking-primary, 500);
   }
 

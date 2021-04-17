@@ -1,52 +1,47 @@
 @import '../../../../assets/styles/cooking-style.scss';
 
 .under_header{
-    padding-top: 3vw;
-    padding-left:  10vw;
-    padding-right:  10vw;
+    padding: 3vw 10vw 5vw 10vw;
+ 
+}
+
+.under_header div{
+  font-size: calc(1rem + 1vw);
+  font-weight: bold;
 }
 
 .yellow_bar { grid-area: yellow_bar; }
     .yellow_bar button{
     border: none;
-    height: 0.5vw;
-    width: 10vw;
-    border-radius: 0.3vw;
+    height: 0.4rem;
+    width: calc(6rem + 5vw);
+    border-radius: 0.4rem;
     background-color: mat-color($cooking-primary, 500);
     }
-
-.container{
-    padding-left: 12vw;
-    padding-right:12vw;
-    padding-top: 2vw;
-  }
 
 
   .grid-container {
     display: grid;
     width: auto;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit,17rem);
     gap: 3vw 3vw;
-
+    margin:2vw 12vw 0vw 12vw 
   }
+
   .grid-container .cusine_img{
-    width: 100%;
-    max-height: 15rem;
     border-radius: 1.85rem;
-    height: auto;
+    width: 15rem;
+    height: 15rem;
 }
 
-
-  .cusine_title{
-    
+  .cusine_title{ 
     padding-top: 1vw;
     margin-bottom: 0.5vw;
     padding-left: 0.3vw;
     font-size: 1.5rem;
     font-weight: bold;
   }
-
-  
 
   .ready_time{ 
     font-size: 1rem;
@@ -62,13 +57,8 @@
   .ready_time .chef{
     padding-left: 0.7vw;
   }
-  .test{
-      background-image: "https://picsum.photos/id/13/600/600";
-      width: 100%;
-      height: 100%;
-  }
   .spacer{
-      height: 1vw;
+      height: 1rem;
   }
   .padder{
       margin-left: 1vw;
@@ -76,11 +66,10 @@
   
   div[class*='tile']{
     border-radius: 2rem;
+    width: 15rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
     margin: 5px;
     margin-bottom: 1vw;
-    min-width: 15vw;
-
   }
 
   div[class*='tile']:hover{
@@ -91,4 +80,4 @@
     margin-bottom: 1vw;
     cursor: pointer;
   }
-  
+
