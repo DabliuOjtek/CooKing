@@ -1,6 +1,10 @@
 context('Main page', () => {
   const baseUrl = Cypress.config('baseUrl');
-  beforeEach(() => {});
+
+  beforeEach(() => {
+    cy.createPostRequestsAliases();
+    cy.createGetRequestsAliases();
+  });
 
   afterEach(() => {});
 
@@ -41,8 +45,9 @@ context('Main page', () => {
       { question: 'How much time do you have?' },
       { question: 'How would you describe your cooking skills?' },
     ];
-    //=========================== pytanie 1 ===========================
+    //=========================== Question 1 ===========================
     cy.visit(`${baseUrl}`);
+    cy.wait(['@questionnaire', '@questions']);
 
     cy.get('[data-cy=main-page-title]')
       .should('be.visible')
@@ -60,7 +65,7 @@ context('Main page', () => {
 
     cy.checkDialog();
 
-    cy.checkCardsData(questionnaireFirstQuestionCardsData, 0);
+    cy.checkCardDetails(questionnaireFirstQuestionCardsData, 0);
 
     cy.checkCardSelection(0, 0);
 
@@ -68,10 +73,10 @@ context('Main page', () => {
 
     cy.nextQuestion();
 
-    cy.checkBeforeCardIsSelected(0);
+    cy.checkPreviousQuestionCardIsSelected(0);
     cy.nextQuestion();
 
-    //=========================== pytanie 2 ===========================
+    //=========================== Question 2 ===========================
 
     cy.get('[data-cy=questionnaire-question]')
       .should('be.visible')
@@ -85,7 +90,7 @@ context('Main page', () => {
 
     cy.checkDialog();
 
-    cy.checkCardsData(questionnaireSecondQuestionCardsData, 1);
+    cy.checkCardDetails(questionnaireSecondQuestionCardsData, 1);
 
     cy.checkCardSelection(1, 0);
 
@@ -93,10 +98,10 @@ context('Main page', () => {
 
     cy.nextQuestion();
 
-    cy.checkBeforeCardIsSelected(0);
+    cy.checkPreviousQuestionCardIsSelected(0);
     cy.nextQuestion();
 
-    //=========================== pytanie 3 ===========================
+    //=========================== Question 3 ===========================
 
     cy.get('[data-cy=questionnaire-question]')
       .should('be.visible')
@@ -110,7 +115,7 @@ context('Main page', () => {
 
     cy.checkDialog();
 
-    cy.checkCardsData(questionnaireThirdQuestionCardsData, 2);
+    cy.checkCardDetails(questionnaireThirdQuestionCardsData, 2);
 
     cy.checkCardSelection(2, 0);
 
@@ -118,10 +123,10 @@ context('Main page', () => {
 
     cy.nextQuestion();
 
-    cy.checkBeforeCardIsSelected(0);
+    cy.checkPreviousQuestionCardIsSelected(0);
     cy.nextQuestion();
 
-    //=========================== pytanie 4 ===========================
+    //=========================== Question 4 ===========================
 
     cy.get('[data-cy=questionnaire-question]')
       .should('be.visible')
@@ -135,16 +140,20 @@ context('Main page', () => {
 
     cy.checkDialog();
 
-    cy.checkCardsData(questionnaireFourthQuestionCardsData, 3);
+    cy.checkCardDetails(questionnaireFourthQuestionCardsData, 3);
 
     cy.checkCardSelection(3, 0);
 
     cy.checkAmountOfNavButtons(2);
 
-    cy.checkBeforeCardIsSelected(0);
+    cy.checkPreviousQuestionCardIsSelected(0);
     cy.nextQuestion();
 
     cy.submitQuestionnaire();
-    //cy.wait('@recipe');
+    cy.wait('@recipe');
+
+    cy.get('[data-cy=recommendation-title]')
+      .should('be.visible')
+      .contains('recommendation', { matchCase: false });
   });
 });

@@ -2,6 +2,9 @@
   "baseUrl": "http://localhost:4200",
   "chromeWebSecurity": false,
   "defaultCommandTimeout": 30000,
+  "env": {
+    "requestUrl": "http://localhost:8080"
+  },
   "projectId": "cooking-e2e",
   "retries": {
     "runMode": 2,

@@ -73,7 +73,7 @@ Cypress.Commands.add('checkCardSelection', (questionIndex, cardIndex) => {
   });
 });
 
-Cypress.Commands.add('checkBeforeCardIsSelected', (cardIndex) => {
+Cypress.Commands.add('checkPreviousQuestionCardIsSelected', (cardIndex) => {
   cy.checkAmountOfNavButtons(2);
 
   cy.previousQuestion();
@@ -83,7 +83,7 @@ Cypress.Commands.add('checkBeforeCardIsSelected', (cardIndex) => {
     .should('have.css', 'background-color', 'rgb(255, 171, 0)');
 });
 
-Cypress.Commands.add('checkCardsData', (array, questionIndex) => {
+Cypress.Commands.add('checkCardDetails', (array, questionIndex) => {
   array.forEach((element: any, index: number) => {
     cy.get('[data-cy=chip-list-' + questionIndex + ']').within(() => {
       cy.get('[data-cy=questionnaire-answer-card-' + index + ']')

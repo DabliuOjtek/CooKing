@@ -23,21 +23,24 @@ declare namespace Cypress {
     /* Kliknięcie lewego przycisku slidera*/
     clickLeftSilderButton(): void;
 
-    /* Sprawdzenie wyskakującego dialogu w przypadku niezaznaczenia odpowiedzi na karuzeli */
+    /* Sprawdzenie wyskakującego dialogu w przypadku niezaznaczenia karty na ankiecie */
     checkDialog(): void;
 
     /* Sprawdzenie mechanizmu zaznaczania karty */
     checkCardSelection(questionIndex: number, cardIndex: number): void;
 
     /* Sprawdzenie czy karta została zaznaczona */
-    checkBeforeCardIsSelected(cardIndex: number): void;
+    checkPreviousQuestionCardIsSelected(cardIndex: number): void;
 
     /* Sprawdzenie odpowiedzi i ikon na kartach */
-    checkCardsData(array: any, questionIndex: number): void;
+    checkCardDetails(arrayOfAnswers: any, questionIndex: number): void;
 
     /* ================= commands.ts ================= */
 
-    /* Dodanie aliasów na zapytania do serwera */
-    createPostRequests(): Chainable<Element>;
+    /* Dodanie aliasów na obsługę żądań typu POST */
+    createPostRequestsAliases(): Chainable<Element>;
+
+    /* Dodanie aliasów na obsługę żądań typu GET */
+    createGetRequestsAliases(): Chainable<Element>;
   }
 }
