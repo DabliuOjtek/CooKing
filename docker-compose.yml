@@ -1,7 +1,10 @@
 version: '3'
 services:
   server:
-    build: ./cooking
+    build:
+      context: ./cooking
+      args:
+        ENV: ${ENV}
     container_name: cooking
     environment:
       - ENV=${ENV}
