@@ -33,7 +33,7 @@ dependencies {
 }
 
 test {
-	systemProperty("spring.profiles.active", project.properties.get("springProfiles"))
+	systemProperty("spring.profiles.active", project.properties.get("spring.profiles.active"))
 	//do testow potrzebna dalsza konfiguracja -> projekt 18.04 13:47
 	useJUnitPlatform()
 }
