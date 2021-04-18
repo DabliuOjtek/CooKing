@@ -8,9 +8,11 @@ import { RecipeService } from './../../../core/services/recipe.service';
 import { FilterQuestionnaireVIEW } from './../../../core/models/filter-questionnaire-view';
 import { QuestionnaireVIEW } from './../../../core/models/questionnaire-view';
 import { QuestionnaireService } from '../../../core/services/questionnaire.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatChip } from '@angular/material/chips';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-questionnaire',
@@ -19,11 +21,13 @@ import { MatChip } from '@angular/material/chips';
 })
 export class QuestionnaireComponent implements OnInit {
   private filterQuestionnaire = new FilterQuestionnaireVIEW();
-  private checkIfSelected = false;
   questionnaire: QuestionnaireVIEW[];
   questions: QuestionnaireQuestionVIEW[];
   questionArrIndex = 0;
   lengthOfQuestions;
+
+  matChipList: QueryList<MatChip>;
+  chipLists = [];
 
   constructor(
     private questionnaireService: QuestionnaireService,
@@ -35,6 +39,60 @@ export class QuestionnaireComponent implements OnInit {
   ngOnInit() {
     this.getQuestionnaire();
     this.getQuestions();
+  }
+
+  isSelected(chipList: QueryList<MatChip>): boolean {
+    let result = false;
+    chipList.toArray().forEach((item) => {
+      if (item.selected) {
+        result = true;
+      }
+    });
+    return result;
+  }
+
+  stepperCheck(): boolean {
+    let result = false;
+    if (this.matChipList === undefined) {
+      return result;
+    }
+    this.matChipList.toArray().forEach((item) => {
+      if (item.selected) {
+        result = true;
+      }
+    });
+    return result;
+  }
+
+  getChipList(index: number) {
+    return this.chipLists[index];
+  }
+
+  setChipList(chipList) {
+    let isExists = false;
+    this.chipLists.forEach((item) => {
+      if (item === chipList) {
+        isExists = true;
+      }
+    });
+    if (isExists === false && chipList !== undefined) {
+      this.chipLists.push(chipList);
+    }
+  }
+
+  onSetAnswer(matChipList, chip: MatChip) {
+    chip.toggleSelected();
+    this.matChipList = matChipList;
+
+    if (this.questionArrIndex === 0) {
+      this.filterQuestionnaire.mealTypeValue = chip.value;
+    } else if (this.questionArrIndex === 1) {
+      this.filterQuestionnaire.cuisineTypeValue = chip.value;
+    } else if (this.questionArrIndex === 2) {
+      this.filterQuestionnaire.preparationTimeValue = chip.value;
+    } else if (this.questionArrIndex === 3) {
+      this.filterQuestionnaire.levelOfCookingSkillValue = chip.value;
+    }
   }
 
   getQuestionnaire() {
@@ -68,12 +126,16 @@ export class QuestionnaireComponent implements OnInit {
 
   onPreviousQuestion(stepper: MatStepper) {
     this.questionArrIndex--;
+    this.setChipList(this.matChipList);
+    this.matChipList = this.getChipList(this.questionArrIndex);
     stepper.previous();
   }
 
   onNextQuestion(stepper: MatStepper) {
-    if (this.checkIfSelected) {
+    if (this.stepperCheck()) {
+      this.setChipList(this.matChipList);
       this.questionArrIndex++;
+      this.matChipList = this.getChipList(this.questionArrIndex);
       stepper.next();
     } else {
       this.dialog.open(QuestionnaireDialogComponent);
@@ -81,22 +143,11 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   onSubmitQuestionnaire() {
-    this.recipeService.setFilter(this.filterQuestionnaire);
-    this.router.navigate(['/recipe']);
-  }
-
-  onSetAnswer(chip: MatChip) {
-    chip.toggleSelected();
-    this.checkIfSelected = chip.selected;
-
-    if (this.questionArrIndex === 0) {
-      this.filterQuestionnaire.mealTypeValue = chip.value;
-    } else if (this.questionArrIndex === 1) {
-      this.filterQuestionnaire.cuisineTypeValue = chip.value;
-    } else if (this.questionArrIndex === 2) {
-      this.filterQuestionnaire.preparationTimeValue = chip.value;
-    } else if (this.questionArrIndex === 3) {
-      this.filterQuestionnaire.levelOfCookingSkillValue = chip.value;
+    if (this.stepperCheck()) {
+      this.recipeService.setFilter(this.filterQuestionnaire);
+      this.router.navigate(['/recipe']);
+    } else {
+      this.dialog.open(QuestionnaireDialogComponent);
     }
   }
 }
