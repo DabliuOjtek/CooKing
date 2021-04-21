@@ -52,17 +52,16 @@
     <div class="ingredients">
       <div class = bold_font>Ingredients:</div>
       <ul>
-        <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} {{ingredient.name}}</li>
+        <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}}  {{ingredient.unitDictEntityValue}}  {{ingredient.name}}</li>
       </ul> 
     </div>
   </div>
   <div class="section4">
   <div class="instructions">
     <div class = bold_font>Instructions:</div>
-      <div>{{recipe.description}}</div>
-      <!-- <ol>
-        <li *ngFor="let step of recipe.steps">{{step}}</li>
-      </ol> -->
+      <ol>
+        <li *ngFor="let step of recipe_steps">{{step}}</li>
+      </ol>
     </div>
   </div>
 </div>

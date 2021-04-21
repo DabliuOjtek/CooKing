@@ -9,8 +9,8 @@ import { RecipeVIEW } from './../../../core/models/recipe-view';
 })
 export class RecipeComponent implements OnInit {
 
-  recipe: any;
-  recipe1: RecipeVIEW;
+  recipe: RecipeVIEW;
+  recipe_steps: any;
   difficultyLevel: number;
   rate: number;
 
@@ -29,6 +29,8 @@ export class RecipeComponent implements OnInit {
 
         var y: number = +this.recipe.difficultyLevelValue;
         this.difficultyLevel = y;
+
+        this.recipe_steps = this.recipe.description.split('@')
        }
     }, err => console.log('HTTP Error', err.error),
       () => console.log('HTTP Recipe details request completed.')
