@@ -11,8 +11,6 @@ import { QuestionnaireService } from '../../../core/services/questionnaire.servi
 import { Component, OnInit, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatChip } from '@angular/material/chips';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-questionnaire',
@@ -29,12 +27,7 @@ export class QuestionnaireComponent implements OnInit {
   matChipList: QueryList<MatChip>;
   chipLists = [];
 
-  constructor(
-    private questionnaireService: QuestionnaireService,
-    private recipeService: RecipeService,
-    private router: Router,
-    private dialog: MatDialog
-  ) {}
+  constructor(private questionnaireService: QuestionnaireService, private recipeService: RecipeService, private router: Router, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.getQuestionnaire();

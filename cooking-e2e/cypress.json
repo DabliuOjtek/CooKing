@@ -10,7 +10,8 @@
     "runMode": 2,
     "openMode": 2
   },
-  "requestTimeout": 15000,
+  "requestTimeout": 60000,
+  "responseTimeout": 60000,
   "video": true,
   "videoCompression": false,
   "viewportWidth": 1024,
