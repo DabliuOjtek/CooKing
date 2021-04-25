@@ -7,4 +7,3 @@ COPY cypress.json cypress.json
 COPY package.json package.json
 
 RUN npm install
-# RUN npm run e2e:run
