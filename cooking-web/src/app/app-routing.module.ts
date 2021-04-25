@@ -3,11 +3,11 @@ import { MainComponent } from './modules/pages/main/main.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RecipeComponent } from './modules/pages/recipe/recipe.component';
-import { TileComponent } from './modules/pages/tile/tile.component';
+import { RecommendationComponent } from './modules/pages/recommendation/recommendation.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
-  { path: 'recipe', component: TileComponent,},
+  { path: 'recipe', component: RecommendationComponent,},
   { path: 'recipe/:id', component: RecipeComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
@@ -17,4 +17,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
-export const routingComponents = [MainComponent, RecipeComponent, TileComponent, PageNotFoundComponent];
+export const routingComponents = [MainComponent, RecipeComponent, RecommendationComponent, PageNotFoundComponent];

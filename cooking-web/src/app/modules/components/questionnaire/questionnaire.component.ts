@@ -18,14 +18,14 @@ import { MatChip } from '@angular/material/chips';
   styleUrls: ['./questionnaire.component.scss'],
 })
 export class QuestionnaireComponent implements OnInit {
-  private filterQuestionnaire = new FilterQuestionnaireVIEW();
   questionnaire: QuestionnaireVIEW[];
   questions: QuestionnaireQuestionVIEW[];
   questionArrIndex = 0;
   lengthOfQuestions;
 
-  matChipList: QueryList<MatChip>;
-  chipLists = [];
+  private filterQuestionnaire = new FilterQuestionnaireVIEW();
+  private matChipList: QueryList<MatChip>;
+  private chipLists = [];
 
   constructor(private questionnaireService: QuestionnaireService, private recipeService: RecipeService, private router: Router, private dialog: MatDialog) {}
 
@@ -34,61 +34,44 @@ export class QuestionnaireComponent implements OnInit {
     this.getQuestions();
   }
 
-  isSelected(chipList: QueryList<MatChip>): boolean {
-    let result = false;
-    chipList.toArray().forEach((item) => {
-      if (item.selected) {
-        result = true;
-      }
-    });
-    return result;
-  }
-
-  stepperCheck(): boolean {
-    let result = false;
-    if (this.matChipList === undefined) {
-      return result;
-    }
-    this.matChipList.toArray().forEach((item) => {
-      if (item.selected) {
-        result = true;
-      }
-    });
-    return result;
-  }
-
   getChipList(index: number) {
     return this.chipLists[index];
-  }
-
-  setChipList(chipList) {
-    let isExists = false;
-    this.chipLists.forEach((item) => {
-      if (item === chipList) {
-        isExists = true;
-      }
-    });
-    if (isExists === false && chipList !== undefined) {
-      this.chipLists.push(chipList);
-    }
   }
 
   onSetAnswer(matChipList, chip: MatChip) {
     chip.toggleSelected();
     this.matChipList = matChipList;
+    this.setPariticularAnswer(chip.value);
+  }
 
-    if (this.questionArrIndex === 0) {
-      this.filterQuestionnaire.mealTypeValue = chip.value;
-    } else if (this.questionArrIndex === 1) {
-      this.filterQuestionnaire.cuisineTypeValue = chip.value;
-    } else if (this.questionArrIndex === 2) {
-      this.filterQuestionnaire.preparationTimeValue = chip.value;
-    } else if (this.questionArrIndex === 3) {
-      this.filterQuestionnaire.levelOfCookingSkillValue = chip.value;
+  onPreviousQuestion(stepper: MatStepper) {
+    this.questionArrIndex--;
+    this.setChipList(this.matChipList);
+    this.matChipList = this.getChipList(this.questionArrIndex);
+    stepper.previous();
+  }
+
+  onNextQuestion(stepper: MatStepper) {
+    if (this.isSelected()) {
+      this.setChipList(this.matChipList);
+      this.questionArrIndex++;
+      this.matChipList = this.getChipList(this.questionArrIndex);
+      stepper.next();
+    } else {
+      this.dialog.open(QuestionnaireDialogComponent);
     }
   }
 
-  getQuestionnaire() {
+  onSubmitQuestionnaire() {
+    if (this.isSelected()) {
+      this.recipeService.setFilter(this.filterQuestionnaire);
+      this.router.navigate(['/recipe']);
+    } else {
+      this.dialog.open(QuestionnaireDialogComponent);
+    }
+  }
+
+  private getQuestionnaire() {
     this.questionnaireService.getQuestionnaire().subscribe(
       (response: any) => {
         this.questionnaire = response;
@@ -101,7 +84,7 @@ export class QuestionnaireComponent implements OnInit {
     );
   }
 
-  getQuestions() {
+  private getQuestions() {
     this.questionnaireService.getQuestions().subscribe(
       (response: any) => {
         this.questions = response;
@@ -117,30 +100,40 @@ export class QuestionnaireComponent implements OnInit {
     );
   }
 
-  onPreviousQuestion(stepper: MatStepper) {
-    this.questionArrIndex--;
-    this.setChipList(this.matChipList);
-    this.matChipList = this.getChipList(this.questionArrIndex);
-    stepper.previous();
-  }
-
-  onNextQuestion(stepper: MatStepper) {
-    if (this.stepperCheck()) {
-      this.setChipList(this.matChipList);
-      this.questionArrIndex++;
-      this.matChipList = this.getChipList(this.questionArrIndex);
-      stepper.next();
-    } else {
-      this.dialog.open(QuestionnaireDialogComponent);
+  private setPariticularAnswer(answerValue: string) {
+    if (this.questionArrIndex === 0) {
+      this.filterQuestionnaire.mealTypeValue = answerValue;
+    } else if (this.questionArrIndex === 1) {
+      this.filterQuestionnaire.cuisineTypeValue = answerValue;
+    } else if (this.questionArrIndex === 2) {
+      this.filterQuestionnaire.preparationTimeValue = answerValue;
+    } else if (this.questionArrIndex === 3) {
+      this.filterQuestionnaire.levelOfCookingSkillValue = answerValue;
     }
   }
 
-  onSubmitQuestionnaire() {
-    if (this.stepperCheck()) {
-      this.recipeService.setFilter(this.filterQuestionnaire);
-      this.router.navigate(['/recipe']);
-    } else {
-      this.dialog.open(QuestionnaireDialogComponent);
+  private setChipList(chipList) {
+    let isExists = false;
+    this.chipLists.forEach((item) => {
+      if (item === chipList) {
+        isExists = true;
+      }
+    });
+    if (isExists === false && chipList !== undefined) {
+      this.chipLists.push(chipList);
     }
+  }
+
+  private isSelected(): boolean {
+    let result = false;
+    if (this.matChipList === undefined) {
+      return result;
+    }
+    this.matChipList.toArray().forEach((item) => {
+      if (item.selected) {
+        result = true;
+      }
+    });
+    return result;
   }
 }

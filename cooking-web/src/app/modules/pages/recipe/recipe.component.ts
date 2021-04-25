@@ -8,33 +8,36 @@ import { RecipeVIEW } from './../../../core/models/recipe-view';
   styleUrls: ['./recipe.component.scss']
 })
 export class RecipeComponent implements OnInit {
-
   recipe: RecipeVIEW;
-  recipe_steps: any;
+  recipeSteps: any;
   difficultyLevel: number;
   rate: number;
 
   constructor(private recipeService: RecipeService) {   }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.getRecipe();
   }
 
-  getRecipe() {
+  private getRecipe() {
     this.recipeService.getRecipe().subscribe((response: any) => {
       this.recipe = response;
       if (response) {
-        var x: number = +this.recipe.rate;
-        this.rate = x;
-
-        var y: number = +this.recipe.difficultyLevelValue;
-        this.difficultyLevel = y;
-
-        this.recipe_steps = this.recipe.description.split('@')
-       }
+        this.parseResponse();
+      }
     }, err => console.log('HTTP Error', err.error),
       () => console.log('HTTP Recipe details request completed.')
     );
+  }
+
+  private parseResponse() {
+    let recipeRate: number =+ this.recipe.rate;
+    this.rate = recipeRate;
+
+    let recipeDifficulty: number =+ this.recipe.difficultyLevelValue;
+    this.difficultyLevel = recipeDifficulty;
+
+    this.recipeSteps = this.recipe.description.split('@')
   }
 
 }

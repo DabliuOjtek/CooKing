@@ -1,12 +1,14 @@
 <div class="under_header" data-cy="recommendation-title">
   <div>Recommendation</div>
-  <div class="yellow_bar"><button disabled="disabled"></button></div>
+  <div class="yellow_bar">
+    <button disabled="disabled"></button>
+  </div>
 </div>
 
 <div *ngIf="generateComponents" class="grid-container">
-  <div *ngFor="let k = index; let i; of: [].constructor(generateComponents)" class="'tile'+(k+1)" (click)="onTileClick(k)">
-    <img class="cusine_img" src="{{ shortRecipes[k].image }}" />
-    <div class="cusine_title">{{ shortRecipes[k].name }}</div>
+  <div *ngFor="let i; of: [].constructor(generateComponents); let k = index;" class="'tile'+(k+1)" (click)="onTileClick(k)">
+    <img class="cusine_img" [src]="shortRecipes[k].image" />
+    <div class="cusine_title">{{shortRecipes[k].name}}</div>
     <div class="ready_time">
       <ng-container *ngFor="let i of [].constructor(recipesData[k])"><img src="https://cookingstorage.blob.core.windows.net/icons/star.png" /></ng-container>
     </div>

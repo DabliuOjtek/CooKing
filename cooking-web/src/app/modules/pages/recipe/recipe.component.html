@@ -3,42 +3,42 @@
 
     <div class="grid-container">
       <div class="cusine_Name">
-        <div class ="cusine_title">{{recipe.name}}</div>
-        <div class="rating_short"><ng-container *ngFor="let i of [].constructor(rate)"><img src = "https://cookingstorage.blob.core.windows.net/icons/star.png"/></ng-container></div>
+        <div class="cusine_title">{{recipe.name}}</div>
+        <div class="rating_short"><ng-container *ngFor="let i of [].constructor(rate)"><img src="https://cookingstorage.blob.core.windows.net/icons/star.png"/></ng-container></div>
       </div>
 
       <div class="cusine">
-        <div class= "bold_font">Cusine</div>
-        <div class = "gray_font">{{recipe.cuisineTypeValue}}</div>
+        <div class="bold_font">Cusine</div>
+        <div class="gray_font">{{recipe.cuisineTypeValue}}</div>
       </div>
 
       <div class="meal">
         <div class="bold_font">Meal</div>
-        <div class ="gray_font">{{recipe.mealTypeValue}}</div>
+        <div class="gray_font">{{recipe.mealTypeValue}}</div>
       </div>
 
       <div class="difficulty">
         <div class="bold_font">Difficulty</div>
         <div class="gray_font">
           <ul>
-            <ng-container *ngFor="let i of [].constructor(difficultyLevel)"><img src = "https://cookingstorage.blob.core.windows.net/icons/chef.svg"/></ng-container>
+            <ng-container *ngFor="let i of [].constructor(difficultyLevel)"><img src="https://cookingstorage.blob.core.windows.net/icons/chef.svg"/></ng-container>
           </ul>
         </div>
       </div>
 
       <div class="duration">
         <div class="bold_font">Duration</div>
-        <div class ="gray_font">{{recipe.prepareTimeValue}}</div>
+        <div class="gray_font">{{recipe.prepareTimeValue}}</div>
       </div>
 
       <div class="calories">
         <div class="bold_font">Calories</div>
-        <div class = "gray_font">{{recipe.calories}}</div>
+        <div class="gray_font">{{recipe.calories}}</div>
       </div>
 
       <div class="servings">
         <div class="bold_font">Servings</div>
-        <div class ="gray_font">{{recipe.servings}}</div>
+        <div class="gray_font">{{recipe.servings}}</div>
       </div>
 
       <div class="yellow_bar"><button disabled="disabled"></button></div>
@@ -46,21 +46,21 @@
     </div>
   </div>
   <div class="section2">
-    <div class="cusine_image"><img src = {{recipe.image}} class="meal_image2"></div>
+    <div class="cusine_image"><img [src]="recipe.image" class="meal_image2"></div>
   </div>
   <div class="section3">
     <div class="ingredients">
-      <div class = bold_font>Ingredients:</div>
+      <div class="bold_font">Ingredients:</div>
       <ul>
         <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}}  {{ingredient.unitDictEntityValue}}  {{ingredient.name}}</li>
-      </ul> 
+      </ul>
     </div>
   </div>
   <div class="section4">
   <div class="instructions">
-    <div class = bold_font>Instructions:</div>
+    <div class="bold_font">Instructions:</div>
       <ol>
-        <li *ngFor="let step of recipe_steps">{{step}}</li>
+        <li *ngFor="let step of recipeSteps">{{step}}</li>
       </ol>
     </div>
   </div>
