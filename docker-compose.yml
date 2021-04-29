@@ -15,7 +15,7 @@ services:
     build:
       context: ./cooking-web
       args:
-        ENV: $${ENV}
+        ENV: ${ENV}
     container_name: cooking-web
     ports:
       - 4200:80
