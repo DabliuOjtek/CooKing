@@ -11,7 +11,7 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   azureContainerRegistry: cooking.azurecr.io
-  azureSubscriptionEndpoint: 85ac3987-9b65-4f12-8f52-8b61bd3dc970
+  azureSubscription: 85ac3987-9b65-4f12-8f52-8b61bd3dc970
   dockerRegistryServiceConnection: '9caad9e1-e4e5-4b9a-8499-0241ecb67f61'
   imageRepository: 'dabliuojtekcooking'
   containerRegistry: 'cooking.azurecr.io'
@@ -34,13 +34,13 @@ stages:
       displayName: Container registry login
       inputs:
         containerregistrytype: Azure Container Registry
-        azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+        azureSubscription: $(azureSubscriptionEndpoint)
         azureContainerRegistry: $(azureContainerRegistry)
     - task: DockerCompose@0
       displayName: Build services
       inputs:
         action: Build services
-        azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+        azureSubscription: $(azureSubscriptionEndpoint)
         azureContainerRegistry: $(azureContainerRegistry)
         dockerComposeFile: docker-compose.yml
         projectName: $(Build.Repository.Name)
@@ -50,7 +50,7 @@ stages:
       displayName: Push services
       inputs:
         action: Push services
-        azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+        azureSubscription: $(azureSubscriptionEndpoint)
         azureContainerRegistry: $(azureContainerRegistry)
         dockerComposeFile: docker-compose.yml
         projectName: $(Build.Repository.Name)
