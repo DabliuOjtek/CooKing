@@ -4,7 +4,7 @@ services:
     build:
       context: ./cooking
       args:
-        ENV: $${ENV}
+        ENV: ${ENV}
     container_name: cooking
     environment:
       - ENV=$${ENV}
