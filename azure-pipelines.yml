@@ -10,11 +10,11 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  azureContainerRegistry: cookingweb1.azurecr.io
-  azureSubscriptionEndpoint: cookingweb1
+  azureContainerRegistry: cooking.azurecr.io
+  azureSubscriptionEndpoint: cooking
   dockerRegistryServiceConnection: '9caad9e1-e4e5-4b9a-8499-0241ecb67f61'
   imageRepository: 'dabliuojtekcooking'
-  containerRegistry: 'cookingweb1.azurecr.io'
+  containerRegistry: 'cooking.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/cooking-e2e/Dockerfile'
   tag: '$(Build.BuildId)'
 
