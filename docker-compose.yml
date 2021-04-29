@@ -4,10 +4,10 @@ services:
     build:
       context: ./cooking
       args:
-        ENV: ${ENV}
+        ENV: $${ENV}
     container_name: cooking
     environment:
-      - ENV=${ENV}
+      - ENV=$${ENV}
     ports:
       - 8080:8080
 
@@ -15,7 +15,7 @@ services:
     build:
       context: ./cooking-web
       args:
-        ENV: ${ENV}
+        ENV: $${ENV}
     container_name: cooking-web
     ports:
       - 4200:80
