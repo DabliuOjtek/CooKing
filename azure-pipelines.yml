@@ -11,7 +11,7 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   azureContainerRegistry: cooking.azurecr.io
-  azureSubscriptionEndpoint: cooking
+  azureSubscriptionEndpoint: cookingService
   dockerRegistryServiceConnection: '9caad9e1-e4e5-4b9a-8499-0241ecb67f61'
   imageRepository: 'dabliuojtekcooking'
   containerRegistry: 'cooking.azurecr.io'
