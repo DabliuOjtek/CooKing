@@ -3,6 +3,7 @@ package com.us.cooking.model;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
