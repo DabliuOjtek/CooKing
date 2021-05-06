@@ -3,7 +3,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
+- none
 
 resources:
 - repo: self
@@ -15,7 +15,6 @@ variables:
   dockerRegistryServiceConnection: '9caad9e1-e4e5-4b9a-8499-0241ecb67f61'
   imageRepository: 'dabliuojtekcooking'
   containerRegistry: 'cooking.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/cooking-e2e/Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
@@ -39,7 +38,7 @@ stages:
         dockerComposeFile: docker-compose.yml
         projectName: $(Build.Repository.Name)
         qualifyImageNames: true
-        additionalImageTags: $(Build.BuildId)
+        additionalImageTags: tag
         dockerComposeFileArgs: ENV=dev
     - task: DockerCompose@0
       displayName: Push services
@@ -50,4 +49,4 @@ stages:
         dockerComposeFile: docker-compose.yml
         projectName: $(Build.Repository.Name)
         qualifyImageNames: true
-        additionalImageTags: $(Build.BuildId)
+        additionalImageTags: tag
