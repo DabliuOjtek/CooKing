@@ -7,9 +7,10 @@ import { RecommendationComponent } from './modules/pages/recommendation/recommen
 
 const routes: Routes = [
   { path: '', component: MainComponent },
-  { path: 'recipe', component: RecommendationComponent,},
+  { path: 'recipe', component: RecommendationComponent },
   { path: 'recipe/:id', component: RecipeComponent },
-  { path: '**', component: PageNotFoundComponent },
+  { path: 'page-not-found', component: PageNotFoundComponent },
+  { path: '**', redirectTo: '/page-not-found' },
 ];
 
 @NgModule({
@@ -17,4 +18,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
-export const routingComponents = [MainComponent, RecipeComponent, RecommendationComponent, PageNotFoundComponent];
+export const routingComponents = [MainComponent, RecommendationComponent, RecipeComponent, PageNotFoundComponent];

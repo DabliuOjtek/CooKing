@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from './../../../core/services/error-handler.service';
 import { QuestionnaireDialogComponent } from './../questionnaire-dialog/questionnaire-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
@@ -27,7 +28,13 @@ export class QuestionnaireComponent implements OnInit {
   private matChipList: QueryList<MatChip>;
   private chipLists = [];
 
-  constructor(private questionnaireService: QuestionnaireService, private recipeService: RecipeService, private router: Router, private dialog: MatDialog) {}
+  constructor(
+    private questionnaireService: QuestionnaireService,
+    private recipeService: RecipeService,
+    private router: Router,
+    private dialog: MatDialog,
+    private errorHandler: ErrorHandlerService
+  ) {}
 
   ngOnInit() {
     this.getQuestionnaire();
@@ -79,7 +86,9 @@ export class QuestionnaireComponent implements OnInit {
           this.questionnaire.sort((a, b) => QuestionnaireTypes[a.type] - QuestionnaireTypes[b.type]);
         }
       },
-      (err) => console.log('HTTP Error', err.error),
+      (error) => {
+        this.errorHandler.handleError(error);
+      },
       () => console.log('HTTP Questionnaire request completed.')
     );
   }
@@ -92,7 +101,9 @@ export class QuestionnaireComponent implements OnInit {
           this.questions.sort((a, b) => QuestionnaireQuestionTypes[a.type] - QuestionnaireQuestionTypes[b.type]);
         }
       },
-      (err) => console.log('HTTP Error', err.error),
+      (error) => {
+        this.errorHandler.handleError(error);
+      },
       () => {
         console.log('HTTP Questions request completed.');
         this.lengthOfQuestions = Object.keys(this.questions).length;

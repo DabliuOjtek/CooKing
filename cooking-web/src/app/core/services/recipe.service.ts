@@ -10,25 +10,24 @@ import { RecipeVIEW } from '../models/recipe-view';
   providedIn: 'root',
 })
 export class RecipeService {
-  id: number;
-
   private baseUrl = environment.apiUrl;
   private filter: FilterQuestionnaireVIEW;
 
   constructor(private http: HttpClient) {}
 
   setFilter(filter: FilterQuestionnaireVIEW) {
-    this.filter = filter;
+    localStorage.setItem('filter', JSON.stringify(filter));
+  }
+
+  getFilter() {
+    return JSON.parse(localStorage.getItem('filter')) ?? [];
   }
 
   getShortRecipes(): Observable<ShortRecipeVIEW> {
-    return this.http.post<ShortRecipeVIEW>(
-      this.baseUrl + 'recipe',
-      this.filter
-    );
+    return this.http.post<ShortRecipeVIEW>(this.baseUrl + 'recipe', this.getFilter());
   }
 
-  getRecipe(): Observable<RecipeVIEW> {
-    return this.http.get<RecipeVIEW>(this.baseUrl + 'recipe/' + this.id);
+  getRecipe(recipeId: string): Observable<RecipeVIEW> {
+    return this.http.get<RecipeVIEW>(this.baseUrl + 'recipe/' + recipeId);
   }
 }

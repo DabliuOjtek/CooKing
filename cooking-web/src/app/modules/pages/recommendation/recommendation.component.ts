@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from './../../../core/services/error-handler.service';
 import { ShortRecipeVIEW } from './../../../core/models/short-recipe-view';
 import { RecipeService } from './../../../core/services/recipe.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,44 +9,31 @@ import { Router } from '@angular/router';
   templateUrl: './recommendation.component.html',
   styleUrls: ['./recommendation.component.scss'],
 })
-
 export class RecommendationComponent implements OnInit {
   shortRecipes: ShortRecipeVIEW[];
   recipesData: any = [];
   generateComponents: number;
 
-  private recipes: any;
-
-  constructor(private recipeService: RecipeService, private router: Router) {
-  }
+  constructor(private recipeService: RecipeService, private errorHandler: ErrorHandlerService) {}
 
   ngOnInit(): void {
     this.getShortRecipes();
   }
 
   getShortRecipes() {
-    this.recipeService.getShortRecipes().subscribe((response: any) => {
+    this.recipeService.getShortRecipes().subscribe(
+      (response: any) => {
         this.shortRecipes = response;
-        if (response) {
-          this.convertRate();
-        }
       },
-      (err) => console.log('HTTP Error', err.error),
+      (error) => {
+        this.errorHandler.handleError(error);
+      },
       () => console.log('HTTP Short recipes request completed.')
     );
   }
 
-  onTileClick(index: any) {
-    let shortRecipe = this.shortRecipes[index]
-    this.router.navigate(['/recipe',shortRecipe.recipeId]);
-    this.recipeService.id = shortRecipe.recipeId
+  ratesCounter(range: string) {
+    const size = Number(range);
+    return new Array(size);
   }
-
-  private convertRate() {
-    this.generateComponents = this.shortRecipes.length;
-    this.shortRecipes.forEach((value,index)=>{
-      this.recipesData[index] =+ value.rate;
-    });
-  }
-
 }
