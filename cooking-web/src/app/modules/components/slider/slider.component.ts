@@ -16,5 +16,4 @@ export class SliderComponent {
   onClickRight() {
     this.slidesContainer.nativeElement.scrollLeft += 200;
   }
-
 }

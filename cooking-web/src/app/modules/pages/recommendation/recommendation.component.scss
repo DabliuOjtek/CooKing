@@ -1,82 +1,78 @@
 @import '../../../../assets/styles/cooking-style.scss';
 
-.under_header {
-  padding: 3vw 10vw 5vw 10vw;
+a {
+  color: #000000;
+  text-decoration: none;
 }
 
-.under_header div {
+.recommendation-title {
   font-size: calc(1rem + 1vw);
-  font-weight: bold;
 }
 
-.yellow_bar {
-  grid-area: yellow_bar;
-}
-.yellow_bar button {
-  border: none;
-  height: 0.4rem;
-  width: calc(6rem + 5vw);
-  border-radius: 0.4rem;
-  background-color: mat-color($cooking-primary, 500);
-}
+// .yellow_bar {
+//   grid-area: yellow_bar;
+// }
+// .yellow_bar button {
+//   border: none;
+//   height: 0.4rem;
+//   width: calc(6rem + 5vw);
+//   border-radius: 0.4rem;
+//   background-color: mat-color($cooking-primary, 500);
+// }
 
-.grid-container {
-  display: grid;
-  width: auto;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fit, 17rem);
-  gap: 3vw 3vw;
+.container {
   margin: 2vw 12vw 0vw 12vw;
 }
 
-.grid-container .cusine_img {
+.grid-tiles-container {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 17rem);
+  gap: 3vw;
+}
+
+.grid-tiles-container .tile-image {
   border-radius: 1.85rem;
   width: 15rem;
   height: 15rem;
   object-fit: cover;
 }
 
-.cusine_title {
-  padding-top: 1vw;
-  margin-bottom: 0.5vw;
-  padding-left: 0.3vw;
-  font-size: 1.5rem;
-  font-weight: bold;
+.tile-details {
+  padding: 1vw 1rem 1rem 1rem;
 }
 
-.ready_time {
-  font-size: 1rem;
-  color: #4f4d46;
-  padding-left: 0.3vw;
+.tile-title {
+  line-height: 100%;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
-.ready_time img {
-  width: 1.3rem;
-  height: 1.3rem;
+
+.tile-rate-icon {
+  width: calc(1rem + 0.5vw);
+  height: calc(1rem + 0.5vw);
   margin-right: 0.3vw;
 }
-.ready_time .chef {
-  padding-left: 0.7vw;
-}
-.spacer {
-  height: 1rem;
-}
-.padder {
-  margin-left: 1vw;
+
+.tiles-container {
+  display: flex;
+  justify-self: center;
 }
 
-div[class*='tile'] {
+.tile {
   border-radius: 2rem;
   width: 15rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  height: 97%;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   margin: 5px;
   margin-bottom: 1vw;
-}
 
-div[class*='tile']:hover {
-  border-radius: 2rem;
-  box-shadow: 0 4px 8px 0 mat-color($cooking-primary, 500), 0 6px 20px 0 mat-color($cooking-primary, 500);
-  margin: 0px;
-  border-right: 5px solid mat-color($cooking-primary, 500);
-  margin-bottom: 1vw;
-  cursor: pointer;
+  &:hover {
+    border-radius: 2rem;
+    box-shadow: 0 5px 31px 0 mat-color($cooking-primary, 500);
+    margin: 0px;
+    margin-bottom: 1vw;
+    cursor: pointer;
+  }
 }

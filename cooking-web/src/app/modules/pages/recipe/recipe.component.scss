@@ -41,10 +41,6 @@
   // 'yellow_bar yellow_bar yellow_bar';
 }
 
-// .recipe-details-wrapper div {
-//   white-space: pre-wrap;
-// }
-
 .cusine-name {
   grid-area: cusine-name;
 }
@@ -104,7 +100,6 @@
 }
 
 .rating-short {
-  font-size: 0.8rem;
   margin-bottom: calc(2rem + 1vw);
 }
 
@@ -122,24 +117,6 @@
   padding: 0;
   margin: 0 0.2vw 0 0;
 }
-
-// .instructions div {
-//   padding-top: 1vw;
-// }
-
-// .difficulty img {
-//   width: 1rem;
-//   height: 1rem;
-//   margin: 0 0.2vw 0 0;
-// }
-
-// .difficulty .gray-font ul {
-//   padding: 0;
-// }
-
-// .difficulty .gray-font ul li {
-//   display: inline;
-// }
 
 // .yellow_bar {
 //   grid-area: yellow_bar;
