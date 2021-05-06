@@ -44,6 +44,13 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
     }
 
     @Override
+    protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        String message = "Missing parameter";
+        ExceptionBody body = new ExceptionBody(status.value(), status.getReasonPhrase(), message);
+        return new ResponseEntity<>(body, HttpStatus.valueOf(body.getStatus()));
+    }
+
+    @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         String message = "Bad HTTP method";
         ExceptionBody body = new ExceptionBody(status.value(), status.getReasonPhrase(), message);
@@ -59,7 +66,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        String message = "Wrong structure of JSON";
+        String message = "No request body or wrong structure of JSON";
         ExceptionBody body = new ExceptionBody(status.value(), status.getReasonPhrase(), message);
         return new ResponseEntity<>(body, HttpStatus.valueOf(body.getStatus()));
     }
