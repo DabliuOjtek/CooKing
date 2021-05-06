@@ -1,5 +1,6 @@
 package com.us.cooking.config;
 
+import com.us.cooking.config.security.UserDetailsImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
@@ -23,6 +24,7 @@ public class SpringFoxConfig {
     @Bean
     public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .ignoredParameterTypes(UserDetailsImpl.class)
                 .securityContexts(singletonList(createContext()))
                 .securitySchemes(singletonList(createSchema()));
     }

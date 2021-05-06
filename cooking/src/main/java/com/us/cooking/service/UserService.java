@@ -55,7 +55,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public UserEntity getUser(String username) {
+    public UserEntity getUserByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow();
     }
