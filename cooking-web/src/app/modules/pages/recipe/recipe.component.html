@@ -1,68 +1,72 @@
 <div class="container">
-  <div class="section1">
-
-    <div class="grid-container">
-      <div class="cusine_Name">
-        <div class="cusine_title">{{recipe.name}}</div>
-        <div class="rating_short"><ng-container *ngFor="let i of [].constructor(rate)"><img src="https://cookingstorage.blob.core.windows.net/icons/star.png"/></ng-container></div>
+  <div class="recipe-details-section">
+    <div class="recipe-details-wrapper">
+      <div class="cusine-name">
+        <div class="mat-subheading-2">{{ recipe.name }}</div>
+        <div class="rating-short">
+          <ng-container *ngFor="let i of [].constructor(rate)"><img class="rating-short-icon" src="https://cookingstorage.blob.core.windows.net/icons/star.png" /></ng-container>
+        </div>
       </div>
 
       <div class="cusine">
-        <div class="bold_font">Cusine</div>
-        <div class="gray_font">{{recipe.cuisineTypeValue}}</div>
+        <div class="mat-display-2">Cusine</div>
+        <div class="mat-display-1">{{ recipe.cuisineTypeValue }}</div>
       </div>
 
       <div class="meal">
-        <div class="bold_font">Meal</div>
-        <div class="gray_font">{{recipe.mealTypeValue}}</div>
+        <div class="mat-display-2">Meal</div>
+        <div class="mat-display-1">{{ recipe.mealTypeValue }}</div>
       </div>
 
       <div class="difficulty">
-        <div class="bold_font">Difficulty</div>
-        <div class="gray_font">
-          <ul>
-            <ng-container *ngFor="let i of [].constructor(difficultyLevel)"><img src="https://cookingstorage.blob.core.windows.net/icons/chef.svg"/></ng-container>
+        <div class="mat-display-2">Difficulty</div>
+        <div class="difficulty-icons">
+          <ul class="difficulty-icon">
+            <ng-container *ngFor="let i of [].constructor(difficultyLevel)"><img src="https://cookingstorage.blob.core.windows.net/icons/chef.svg" /></ng-container>
           </ul>
         </div>
       </div>
 
       <div class="duration">
-        <div class="bold_font">Duration</div>
-        <div class="gray_font">{{recipe.prepareTimeValue}}</div>
+        <div class="mat-display-2">Duration</div>
+        <div class="mat-display-1">{{ recipe.prepareTimeValue }}</div>
       </div>
 
       <div class="calories">
-        <div class="bold_font">Calories</div>
-        <div class="gray_font">{{recipe.calories}}</div>
+        <div class="mat-display-2">Calories</div>
+        <div class="mat-display-1">{{ recipe.calories }}</div>
       </div>
 
       <div class="servings">
-        <div class="bold_font">Servings</div>
-        <div class="gray_font">{{recipe.servings}}</div>
+        <div class="mat-display-2">Servings</div>
+        <div class="mat-display-1">{{ recipe.servings }}</div>
       </div>
 
-      <div class="yellow_bar"><button disabled="disabled"></button></div>
-
+      <!-- <div class="yellow-bar"><button disabled="disabled"></button></div> -->
     </div>
   </div>
-  <div class="section2">
-    <div class="cusine_image"><img [src]="recipe.image" class="meal_image2"></div>
+
+  <div class="recipe-image-section">
+    <div class="cusine-image">
+      <img class="cusine-image-img" [src]="recipe.image" />
+    </div>
   </div>
-  <div class="section3">
-    <div class="ingredients">
-      <div class="bold_font">Ingredients:</div>
-      <ul>
-        <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}}  {{ingredient.unitDictEntityValue}}  {{ingredient.name}}</li>
+
+  <div class="recipe-ingredients-section">
+    <div class="ingredients-list">
+      <div class="mat-display-2">Ingredients:</div>
+      <ul class="ingredient">
+        <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient.quantity }} {{ ingredient.unitDictEntityValue }} {{ ingredient.name }}</li>
       </ul>
     </div>
   </div>
-  <div class="section4">
-  <div class="instructions">
-    <div class="bold_font">Instructions:</div>
-      <ol>
-        <li *ngFor="let step of recipeSteps">{{step}}</li>
+
+  <div class="recipe-instructions-section">
+    <div class="instructions-list">
+      <div class="mat-display-2">Instructions:</div>
+      <ol class="instruction-step">
+        <li *ngFor="let step of recipeSteps">{{ step }}</li>
       </ol>
     </div>
   </div>
 </div>
-
