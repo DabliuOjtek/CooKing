@@ -1,12 +1,13 @@
 @import '../../../../assets/styles/cooking-style.scss';
 
-// .space {
-//   flex: 1 1 auto;
-// }
+.space {
+  flex: 1 1 auto;
+}
 
-// .space2 {
-//   width: 1em;
-// }
+.space2,
+.space3 {
+  width: 0.5rem;
+}
 
 .nav-title {
   margin: 0 0 0 2vw;
@@ -21,12 +22,29 @@
   border-radius: 2rem;
 }
 
-// .mat-subheading-1 {
-//   margin: 0;
-// }
-
 .nav-link {
   color: black;
   cursor: pointer;
   text-decoration: none;
 }
+
+.burger-icon {
+  width: calc(0.4em + 1vw);
+  height: calc(0.4em + 1vw);
+  display: none;
+}
+.burger-icon:hover{
+  cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+  .mat-button,
+  .mat-raised-button,
+  .space3{
+    display: none;
+  }
+  .burger-icon{
+    display: inline;
+  }
+}
+

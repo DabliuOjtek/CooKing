@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { SideNavService } from 'src/app/core/services/side-nav.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-navbar',
@@ -6,7 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor() {}
 
-  ngOnInit(): void {}
+  @ViewChildren('sidenav') public Mynav: MatSidenav;
+
+  constructor(private sideNavService: SideNavService) {
+
+  }
+
+  onChangeState(){
+    this.sideNavService.changeState(true)
+  }
+  ngOnInit(): void {
+  }
 }

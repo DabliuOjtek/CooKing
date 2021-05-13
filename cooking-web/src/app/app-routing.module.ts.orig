@@ -11,8 +11,13 @@ const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'recipe', component: RecommendationComponent },
   { path: 'recipe/:id', component: RecipeComponent },
-  { path: 'login', component: LoginPageComponent},
+<<<<<<< origin/master
+  { path: 'page-not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/page-not-found' },
+=======
+  { path: 'login', component: LoginPageComponent},
+  { path: '**', component: PageNotFoundComponent },
+>>>>>>> local
 ];
 
 @NgModule({
@@ -20,4 +25,8 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+<<<<<<< origin/master
 export const routingComponents = [MainComponent, RecommendationComponent, RecipeComponent, PageNotFoundComponent];
+=======
+export const routingComponents = [MainComponent, RecipeComponent, RecommendationComponent, PageNotFoundComponent,LoginPageComponent];
+>>>>>>> local

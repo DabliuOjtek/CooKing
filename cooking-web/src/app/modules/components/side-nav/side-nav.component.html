@@ -1,0 +1,13 @@
+<mat-sidenav-container class="sidenav-container" [hasBackdrop] = "false" >
+    <mat-sidenav class="sidenav" #sidenav  position="end" [(opened)]="opened" autosize >
+        <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/login">Log in</button>
+        <button class="sidenav-button">Sign up</button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+  
