@@ -9,16 +9,5 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
-
-body::-webkit-scrollbar {
-  width: 0.5em;
-}
-
-body::-webkit-scrollbar-track {
-  background-color: #f5f5f5;
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: mat-color($cooking-primary);
+  overflow: hidden;
 }

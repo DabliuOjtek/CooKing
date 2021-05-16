@@ -1,11 +1,6 @@
 @import '../../../../assets/styles/cooking-style.scss';
 
-a {
-  color: #000000;
-  text-decoration: none;
-}
-
-.recommendation-title {
+.favourite-title {
   margin-bottom: 0.5rem;
   font-size: calc(1.5rem + 1vw);
   line-height: calc(1.5rem + 1vw);
@@ -20,6 +15,7 @@ a {
   width: auto;
   grid-template-columns: repeat(auto-fit, 40%);
   grid-auto-rows: calc(6rem + 4vw);
+  justify-content: center;
   gap: 2vw 3vw;
 }
 
