@@ -2,7 +2,6 @@ import { ErrorHandlerService } from './../../../core/services/error-handler.serv
 import { ShortRecipeVIEW } from './../../../core/models/short-recipe-view';
 import { RecipeService } from './../../../core/services/recipe.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recommendation',

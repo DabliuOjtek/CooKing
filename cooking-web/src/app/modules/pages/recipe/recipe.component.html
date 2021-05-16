@@ -3,8 +3,17 @@
     <div class="recipe-details-wrapper">
       <div class="cusine-name">
         <div class="mat-subheading-2">{{ recipe.name }}</div>
-        <div class="rating-short">
-          <ng-container *ngFor="let i of [].constructor(rate)"><img class="rating-short-icon" src="https://cookingstorage.blob.core.windows.net/icons/star.png" /></ng-container>
+        <div class="rating-and-favourite">
+          <div class="rating">
+            <ng-container *ngFor="let i of [].constructor(rate)">
+              <img class="rating-icon" src="https://cookingstorage.blob.core.windows.net/icons/star.png" />
+            </ng-container>
+          </div>
+          <button class="favourite-icon-button" mat-mini-fab aria-label="Example icon-button with a heart icon"
+            color="white" [ngClass]="true ? 'unliked-recipe' : 'liked-recipe'">
+            <mat-icon>favorite</mat-icon>
+          </button>
+
         </div>
       </div>
 
@@ -22,7 +31,8 @@
         <div class="mat-display-2">Difficulty</div>
         <div class="difficulty-icons">
           <ul class="difficulty-icon">
-            <ng-container *ngFor="let i of [].constructor(difficultyLevel)"><img src="https://cookingstorage.blob.core.windows.net/icons/chef.svg" /></ng-container>
+            <ng-container *ngFor="let i of [].constructor(difficultyLevel)"><img
+                src="https://cookingstorage.blob.core.windows.net/icons/chef.svg" /></ng-container>
           </ul>
         </div>
       </div>
@@ -41,9 +51,8 @@
         <div class="mat-display-2">Servings</div>
         <div class="mat-display-1">{{ recipe.servings }}</div>
       </div>
-
-      <!-- <div class="yellow-bar"><button disabled="disabled"></button></div> -->
     </div>
+    <hr>
   </div>
 
   <div class="recipe-image-section">
@@ -56,7 +65,8 @@
     <div class="ingredients-list">
       <div class="mat-display-2">Ingredients:</div>
       <ul class="ingredient">
-        <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient.quantity }} {{ ingredient.unitDictEntityValue }} {{ ingredient.name }}</li>
+        <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient.quantity }} {{ ingredient.unitDictEntityValue }}
+          {{ ingredient.name }}</li>
       </ul>
     </div>
   </div>

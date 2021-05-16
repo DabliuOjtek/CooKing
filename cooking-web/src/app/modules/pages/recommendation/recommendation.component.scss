@@ -1,27 +1,13 @@
 @import '../../../../assets/styles/cooking-style.scss';
 
-a {
-  color: #000000;
-  text-decoration: none;
-}
-
 .recommendation-title {
-  font-size: calc(1rem + 1vw);
+  margin-bottom: 0.5rem;
+  font-size: calc(1.5rem + 1vw);
+  line-height: calc(1.5rem + 1vw);
 }
-
-// .yellow_bar {
-//   grid-area: yellow_bar;
-// }
-// .yellow_bar button {
-//   border: none;
-//   height: 0.4rem;
-//   width: calc(6rem + 5vw);
-//   border-radius: 0.4rem;
-//   background-color: mat-color($cooking-primary, 500);
-// }
 
 .container {
-  margin: 2vw 12vw 0vw 12vw;
+  margin: 2rem 12vw;
 }
 
 .grid-tiles-container {
@@ -60,19 +46,52 @@ a {
   justify-self: center;
 }
 
+.router-link:hover {
+  cursor: pointer;
+  color: mat-color($cooking-accent, 800);
+}
+
+.favourite-icon-button:hover {
+  transition: 0.5s;
+}
+
+.liked-recipe {
+  color: mat-color($cooking-warn);
+
+  &:hover {
+    color: black;
+  }
+}
+
+.unliked-recipe {
+  color: black;
+
+  &:hover {
+    color: mat-color($cooking-warn, 500);
+  }
+}
+
+.absolute {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.5rem;
+}
+
 .tile {
+  position: relative;
   border-radius: 2rem;
   width: 15rem;
   height: 97%;
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   margin: 5px;
   margin-bottom: 1vw;
+}
 
-  &:hover {
-    border-radius: 2rem;
-    box-shadow: 0 5px 31px 0 mat-color($cooking-primary, 500);
-    margin: 0px;
-    margin-bottom: 1vw;
-    cursor: pointer;
-  }
+hr {
+  border: 0;
+  height: 3px;
+  width: calc(2rem + 5vw);
+  background-color: mat-color($cooking-primary, 500);
+  margin: 0 0 3vw 0;
 }

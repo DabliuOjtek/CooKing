@@ -1,26 +1,24 @@
 <div class="container">
-  <div class="recommendation-title mat-subheading-2" data-cy="recommendation-title">
-    <div>Recommendation</div>
-    <!-- <div class="yellow_bar">
-      <button disabled="disabled"></button>
-    </div> -->
-  </div>
-
+  <span class="recommendation-title mat-subheading-2" data-cy="recommendation-title">Recommendation</span>
+  <hr>
   <div class="grid-tiles-container">
     <div class="tiles-container" *ngFor="let recipe of shortRecipes; let i = index">
-      <a [routerLink]="['/recipe', recipe.recipeId]">
-        <div class="tile">
-          <img class="tile-image" [src]="shortRecipes[i].image" />
-          <div class="tile-details">
-            <div class="tile-title mat-display-1">{{ shortRecipes[i].name }}</div>
-            <div class="tile-rate">
-              <ng-container *ngFor="let rate of ratesCounter(shortRecipes[i].rate)">
-                <img class="tile-rate-icon" src="https://cookingstorage.blob.core.windows.net/icons/star.png" />
-              </ng-container>
-            </div>
+      <div class="tile">
+        <img class="tile-image router-link" [routerLink]="['/recipe', recipe.recipeId]" [src]="shortRecipes[i].image" />
+        <div class="tile-details">
+          <div class="tile-title mat-display-1 router-link" [routerLink]="['/recipe', recipe.recipeId]">
+            {{ shortRecipes[i].name }}</div>
+          <div class="tile-rate">
+            <ng-container *ngFor="let rate of ratesCounter(shortRecipes[i].rate)">
+              <img class="tile-rate-icon" src="https://cookingstorage.blob.core.windows.net/icons/star.png" />
+            </ng-container>
           </div>
+          <button class="favourite-icon-button" mat-mini-fab aria-label="Example icon-button with a heart icon"
+            color="white" [ngClass]="i===1 ? 'unliked-recipe' : 'liked-recipe'">
+            <mat-icon>favorite</mat-icon>
+          </button>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </div>

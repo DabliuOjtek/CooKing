@@ -33,18 +33,17 @@
   height: calc(0.4em + 1vw);
   display: none;
 }
-.burger-icon:hover{
+.burger-icon:hover {
   cursor: pointer;
 }
 
 @media (max-width: 1000px) {
   .mat-button,
   .mat-raised-button,
-  .space3{
+  .space3 {
     display: none;
   }
-  .burger-icon{
+  .burger-icon {
     display: inline;
   }
 }
-
