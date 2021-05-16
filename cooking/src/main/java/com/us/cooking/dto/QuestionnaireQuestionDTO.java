@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 @Builder
 public class QuestionnaireQuestionDTO {
-
     private DictionaryEntity.QuestionnaireQuestionTypes type;
     private String value;
 }
