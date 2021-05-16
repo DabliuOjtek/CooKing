@@ -1,0 +1,101 @@
+@import '../../../../assets/styles/cooking-style.scss';
+
+a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.recommendation-title {
+  margin-bottom: 0.5rem;
+  font-size: calc(1.5rem + 1vw);
+  line-height: calc(1.5rem + 1vw);
+}
+
+.container {
+  margin: 2rem 12vw;
+}
+
+.grid-tiles-container {
+  display: grid;
+  width: auto;
+  grid-template-columns: repeat(auto-fit, 40%);
+  grid-auto-rows: calc(6rem + 4vw);
+  gap: 2vw 3vw;
+}
+
+.tile-image {
+  border-radius: inherit;
+  width: 30%;
+  height: inherit;
+  object-fit: cover;
+}
+
+.tile-details {
+  display: flex;
+  border-radius: inherit;
+  width: 100%;
+}
+
+.tile-title {
+  align-self: center;
+  line-height: 100%;
+  font-size: calc(1rem + 0.5vw);
+  font-weight: 700;
+  margin: 0;
+}
+
+.tile-rate {
+  padding-top: 0.5vw;
+}
+
+.tile-rate-icon {
+  width: calc(1rem + 0.5vw);
+  height: calc(1rem + 0.5vw);
+}
+
+.favourite-icon-button {
+  margin-left: auto;
+}
+
+.content {
+  padding: 1rem;
+  width: 100%;
+}
+
+.wrapper {
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.tiles-container {
+  display: inline-flex;
+  border-radius: 2rem;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  margin: 5px;
+  margin-bottom: 1vw;
+}
+
+.router-link:hover {
+  cursor: pointer;
+  color: mat-color($cooking-accent, 800);
+}
+
+.favourite-icon-button:hover {
+  color: black;
+  transition: 0.5s;
+}
+
+hr {
+  border: 0;
+  height: 3px;
+  width: calc(2rem + 5vw);
+  background-color: mat-color($cooking-primary, 500);
+  margin: 0 0 3vw 0;
+}
+
+@media (max-width: 900px) {
+  .grid-tiles-container {
+    grid-template-columns: 1fr;
+  }
+}

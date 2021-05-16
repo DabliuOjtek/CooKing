@@ -13,7 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SideNavComponent } from './modules/components/side-nav/side-nav.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,8 +24,7 @@ import { SideNavComponent } from './modules/components/side-nav/side-nav.compone
     SideNavComponent,
     routingComponents,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, CookingModule, HttpClientModule],
-    FormsModule,
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, CookingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

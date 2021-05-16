@@ -3,7 +3,8 @@
 
 $cooking-primary: mat-palette($mat-amber, A700);
 $cooking-accent: mat-palette($mat-blue);
-$cooking-theme: mat-light-theme($cooking-primary, $cooking-accent);
+$cooking-warn: mat-palette($mat-red);
+$cooking-theme: mat-light-theme($cooking-primary, $cooking-accent, $cooking-warn);
 
 $cooking-typography: mat-typography-config(
   $font-family: 'Roboto, monospace',
@@ -15,7 +16,6 @@ $cooking-typography: mat-typography-config(
   $display-2: mat-typography-level(1.5rem, 1.5rem, 400),
   $display-1: mat-typography-level(0.5rem, 0.5rem, 400),
 );
-
 
 @include angular-material-theme($cooking-theme);
 @include angular-material-typography($cooking-typography);

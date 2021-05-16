@@ -10,7 +10,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-
+import { MatIconModule } from '@angular/material/icon';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -26,6 +26,7 @@ const MaterialComponents = [
   MatStepperModule,
   MatSidenavModule,
   MatListModule,
+  MatIconModule,
 ];
 
 @NgModule({

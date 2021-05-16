@@ -1,0 +1,32 @@
+<div class="container">
+  <span class="recommendation-title mat-subheading-2" data-cy="recommendation-title">Favourite recipes</span>
+  <hr>
+  <div class="grid-tiles-container">
+
+    <div class="tiles-container" *ngFor="let recipe of favouriteRecipes; let i = index">
+
+      <div class="tile-details">
+        <img class="tile-image router-link" [routerLink]="['/recipe', recipe.recipeId]"
+          [src]="favouriteRecipes[i].image" />
+
+        <div class="content">
+
+          <div class="wrapper">
+            <div class="tile-title mat-display-1 router-link" [routerLink]="['/recipe', recipe.recipeId]">
+              {{ favouriteRecipes[i].name }}</div>
+            <button class="favourite-icon-button" mat-icon-button color="warn"
+              aria-label="Example icon button with a heart icon" (click)="onTest()">
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </div>
+
+          <div class="tile-rate">
+            <ng-container *ngFor="let rate of ratesCounter(favouriteRecipes[i].rate)">
+              <img class="tile-rate-icon" src="https://cookingstorage.blob.core.windows.net/icons/star.png" />
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
