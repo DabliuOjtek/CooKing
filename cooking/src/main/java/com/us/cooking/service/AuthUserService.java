@@ -7,6 +7,7 @@ import com.us.cooking.model.UserEntity;
 import com.us.cooking.repository.TokenBlockListRepository;
 import com.us.cooking.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,8 +27,13 @@ public class AuthUserService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         UserEntity user = userRepository.findByUsername(s)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("Couldn't found user"));
         return UserDetailsImpl.build(user);
+    }
+
+    public void logoutUser(String token) {
+        addTokenToBlockList(token);
+        SecurityContextHolder.clearContext();
     }
 
     public void addTokenToBlockList(String authToken) {

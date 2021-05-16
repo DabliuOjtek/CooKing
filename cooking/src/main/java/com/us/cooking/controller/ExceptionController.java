@@ -6,22 +6,20 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.validation.BindException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @ControllerAdvice
@@ -31,6 +29,20 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
     protected ResponseEntity<ExceptionBody> handleDefaultException(DefaultException e) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         ExceptionBody body = new ExceptionBody(status.value(), status.getReasonPhrase(), e.getErrors());
+        return new ResponseEntity<>(body, HttpStatus.valueOf(body.getStatus()));
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    protected ResponseEntity<ExceptionBody> handleAuthenticationException(AuthenticationException e) {
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
+        ExceptionBody body = new ExceptionBody(status.value(), status.getReasonPhrase(), e.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.valueOf(body.getStatus()));
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    protected ResponseEntity<ExceptionBody> handleUserNotFound(UsernameNotFoundException e) {
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
+        ExceptionBody body = new ExceptionBody(status.value(), status.getReasonPhrase(), e.getMessage());
         return new ResponseEntity<>(body, HttpStatus.valueOf(body.getStatus()));
     }
 

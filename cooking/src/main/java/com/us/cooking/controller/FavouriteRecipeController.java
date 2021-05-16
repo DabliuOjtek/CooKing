@@ -22,13 +22,13 @@ public class FavouriteRecipeController {
         return favouriteRecipeService.getFavouriteRecipes(userDetails);
     }
 
-    @PutMapping("/favourite")
-    public void addFavourite(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody FavRecipeIdDTO favRecipeIdDTO) {
-        favouriteRecipeService.addRecipeToFavourite(userDetails, favRecipeIdDTO);
+    @PostMapping("/favourite")
+    public void addFavourite(@RequestBody FavRecipeIdDTO favRecipeIdDTO, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        favouriteRecipeService.addRecipeToFavourite(favRecipeIdDTO, userDetails);
     }
 
-    @DeleteMapping("/favourite")
-    public void deleteFavourite(@AuthenticationPrincipal UserDetailsImpl userDetails, @NotNull @RequestParam Integer id) {
-        favouriteRecipeService.deleteRecipeFromFavourite(userDetails, id);
+    @DeleteMapping("/favourite/{id}")
+    public void deleteFavourite(@NotNull @PathVariable Integer id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        favouriteRecipeService.deleteRecipeFromFavourite(id, userDetails);
     }
 }

@@ -3,6 +3,7 @@ package com.us.cooking.config;
 import com.us.cooking.config.security.UserDetailsImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RequestHeader;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
@@ -24,7 +25,7 @@ public class SpringFoxConfig {
     @Bean
     public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .ignoredParameterTypes(UserDetailsImpl.class)
+                .ignoredParameterTypes(UserDetailsImpl.class, RequestHeader.class)
                 .securityContexts(singletonList(createContext()))
                 .securitySchemes(singletonList(createSchema()));
     }

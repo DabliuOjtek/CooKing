@@ -31,7 +31,7 @@ public class FavouriteRecipeService {
     }
 
     @Transactional
-    public void addRecipeToFavourite(UserDetailsImpl userDetails, FavRecipeIdDTO favRecipeIdDTO) {
+    public void addRecipeToFavourite(FavRecipeIdDTO favRecipeIdDTO, UserDetailsImpl userDetails) {
         UserEntity user = userService.getUserByUsername(userDetails.getUsername());
         RecipeEntity recipe = recipeRepository.findById(favRecipeIdDTO.getRecipeId())
                 .orElseThrow(() -> new DefaultException("Couldn't found recipe"));
@@ -39,7 +39,7 @@ public class FavouriteRecipeService {
     }
 
     @Transactional
-    public void deleteRecipeFromFavourite(UserDetailsImpl userDetails, Integer id) {
+    public void deleteRecipeFromFavourite(Integer id, UserDetailsImpl userDetails) {
         UserEntity user = userService.getUserByUsername(userDetails.getUsername());
         RecipeEntity recipe = recipeRepository.findById(id)
                 .orElseThrow(() -> new DefaultException("Couldn't found recipe"));

@@ -25,8 +25,4 @@ public class QuestionnaireController {
         return dictionaryService.getAllQuestionsForQuestionnaire();
     }
 
-//    @PostMapping("/saveDictionary")
-//    public void saveDictionary() {
-//        dictionaryService.saveDict();
-//    }
 }
