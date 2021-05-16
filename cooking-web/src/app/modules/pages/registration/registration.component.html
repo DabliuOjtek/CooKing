@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="floating-container">
+    <h2>Register</h2>
+    <form name="form" [formGroup]="form" (ngSubmit)="form.valid && onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" formControlName="username"
+          [ngClass]="{'is-invalid':form.get('username').touched && form.get('username').invalid}" />
+        <div *ngIf="form.get('username').touched && form.get('username').invalid" class="invalid-feedback">
+          <div *ngIf="form.get('username').errors.required">Username is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" formControlName="password" [(ngModel)]="account.password"
+          [ngClass]="{'is-invalid':form.get('password').touched && form.get('password').invalid}" />
+        <app-password-strength-bar [passwordToCheck]="account.password" [barLabel]="barLabel">
+        </app-password-strength-bar>
+        <div *ngIf="form.get('password').touched && form.get('password').invalid" class="invalid-feedback">
+          <div *ngIf="form.get('password').errors.required">Password is required</div>
+          <div *ngIf="form.get('password').errors.minlength">Password must be a letaset 6 charector</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!form.valid">Register</button>
+      </div>
+    </form>
+    {{account.password}}
+  </div>
+</div>

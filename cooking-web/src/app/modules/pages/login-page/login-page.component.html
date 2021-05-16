@@ -1,17 +1,30 @@
-<div class="background-wrap">
-    <div class="background"></div>
-  </div>
- 
-  <form id="accesspanel" action="">
-    <div class="inset">
-      <p>
-        <input type="text" name="username" [(ngModel)]="username" id="email" placeholder="username">
-      </p>
-      <p>
-        <input type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
-      </p>
+<div class="container">
+  <h2>Login</h2>
+  <form name="form" [formGroup]="form" (ngSubmit)="form.valid && onSubmit()">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" formControlName="username"
+        [ngClass]="{'is-invalid':form.get('username').touched && form.get('username').invalid}" />
+      <div *ngIf="form.get('username').touched && form.get('username').invalid" class="invalid-feedback">
+        <div *ngIf="form.get('username').errors.required">Username is required</div>
+      </div>
     </div>
-    <p class="p-container">
-      <input type="submit" name="Login" id="go" value="Login" (click)="doLogin()">
-    </p>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" formControlName="password"
+        [ngClass]="{'is-invalid':form.get('password').touched && form.get('password').invalid}" />
+      <div *ngIf="form.get('password').touched && form.get('password').invalid" class="invalid-feedback">
+        <div *ngIf="form.get('password').errors.required">Password is required</div>
+        <div *ngIf="form.get('password').errors.minlength">Password must be a letaset 6 charector</div>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" [disabled]="!form.valid" (click)="doLogin()">Login</button>
+    </div>
+    <div *ngIf="showErrorMessage">
+      <h1>Invalid username and password Please try again</h1>
+    </div>
   </form>
+
+</div>

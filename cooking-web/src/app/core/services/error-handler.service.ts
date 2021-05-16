@@ -8,16 +8,25 @@ import { Router } from '@angular/router';
 export class ErrorHandlerService {
   constructor(private router: Router) {}
 
-  public handleError(error: HttpErrorResponse) {
-    this.handleErrors(error);
+  public handleError(error: HttpErrorResponse, isLoginPage?: boolean) {
+    if (error.status == 500 && isLoginPage == true) {
+      return this.handleErrorsForLogin(error);
+    } else if (error.status == 404) {
+      this.handleError404(error);
+    }
   }
 
-  private handleErrors(error: HttpErrorResponse) {
+  private handleError404(error: HttpErrorResponse) {
     this.createErrorMessage(error);
     this.router.navigate(['/page-not-found']);
   }
 
   private createErrorMessage(error: HttpErrorResponse) {
     console.log(error.message);
+  }
+
+  private handleErrorsForLogin(error: HttpErrorResponse): boolean {
+    this.createErrorMessage(error);
+    return true;
   }
 }

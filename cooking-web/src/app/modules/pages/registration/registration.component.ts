@@ -4,11 +4,16 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss'],
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.scss'],
 })
-export class LoginPageComponent implements OnInit {
+export class RegistrationComponent implements OnInit {
+  public account = {
+    password: null,
+  };
+  public barLabel: string = 'Password strength:';
+
   loginMessage: String;
   showErrorMessage: Boolean;
 
@@ -32,25 +37,5 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit() {
     // alert(JSON.stringify(this.form.value))
-  }
-
-  get username() {
-    return this.form.get('username');
-  }
-
-  doLogin() {
-    this.showErrorMessage = false;
-    this.authService.loginUserRequest(this.form.value).subscribe(
-      (response) => {
-        if (response) {
-          if (response.token) {
-            localStorage.setItem('token', response.token);
-          }
-        }
-      },
-      (error) => {
-        this.showErrorMessage = this.errorHandler.handleError(error, true);
-      }
-    );
   }
 }

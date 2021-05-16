@@ -10,8 +10,10 @@ import { NavbarComponent } from './modules/components/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookingModule } from './modules/cooking.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SideNavComponent } from './modules/components/side-nav/side-nav.component';
+import { RegistrationComponent } from './modules/pages/registration/registration.component';
+import { PasswordStrengthBarComponent } from './modules/components/password-strength-bar/password-strength-bar.component';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,20 @@ import { SideNavComponent } from './modules/components/side-nav/side-nav.compone
     SliderItemDirective,
     QuestionnaireDialogComponent,
     SideNavComponent,
+    RegistrationComponent,
+    PasswordStrengthBarComponent,
     routingComponents,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, CookingModule, HttpClientModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    CookingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+
   providers: [],
   bootstrap: [AppComponent],
 })
