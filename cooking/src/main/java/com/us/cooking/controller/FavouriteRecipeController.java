@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,12 +23,12 @@ public class FavouriteRecipeController {
     }
 
     @PostMapping("/favourite")
-    public void addFavourite(@RequestBody FavRecipeIdDTO favRecipeIdDTO, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public void addFavourite(@Valid @RequestBody FavRecipeIdDTO favRecipeIdDTO, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         favouriteRecipeService.addRecipeToFavourite(favRecipeIdDTO, userDetails);
     }
 
     @DeleteMapping("/favourite/{id}")
-    public void deleteFavourite(@NotNull @PathVariable Integer id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public void deleteFavourite(@PathVariable Integer id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         favouriteRecipeService.deleteRecipeFromFavourite(id, userDetails);
     }
 }
