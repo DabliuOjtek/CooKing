@@ -1,30 +1,40 @@
 <div class="container">
   <div class="floating-container">
-    <h2>Register</h2>
-    <form name="form" [formGroup]="form" (ngSubmit)="form.valid && onSubmit()">
+    <div class="mat-subheading-2">Register</div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" formControlName="username"
-          [ngClass]="{'is-invalid':form.get('username').touched && form.get('username').invalid}" />
-        <div *ngIf="form.get('username').touched && form.get('username').invalid" class="invalid-feedback">
-          <div *ngIf="form.get('username').errors.required">Username is required</div>
+        <div class="label">Username</div>
+        <input type="text" class="input-style" formControlName="username" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">Username is required</div>
+          <div *ngIf="f.username.errors.username">Username must be at least 6 characters</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" formControlName="password" [(ngModel)]="account.password"
-          [ngClass]="{'is-invalid':form.get('password').touched && form.get('password').invalid}" />
-        <app-password-strength-bar [passwordToCheck]="account.password" [barLabel]="barLabel">
-        </app-password-strength-bar>
-        <div *ngIf="form.get('password').touched && form.get('password').invalid" class="invalid-feedback">
-          <div *ngIf="form.get('password').errors.required">Password is required</div>
-          <div *ngIf="form.get('password').errors.minlength">Password must be a letaset 6 charector</div>
+        <div class="label">Password</div>
+        <input type="password" formControlName="password" class="form-control" [(ngModel)]="account.password"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+      </div>
+      <app-password-strength-bar [passwordToCheck]="account.password" [barLabel]="barLabel">
+      </app-password-strength-bar>
+      <div class="form-group">
+        <div class="label">Confirm Password</div>
+        <input type="password" formControlName="confirmPassword" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+          <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary" [disabled]="!form.valid">Register</button>
+        <button class="btn btn-primary">Register</button>
       </div>
+      <div *ngIf="showErrorMessage">Server Error</div>
     </form>
-    {{account.password}}
   </div>
 </div>
