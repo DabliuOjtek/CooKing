@@ -7,15 +7,13 @@ import { RecipeComponent } from './modules/pages/recipe/recipe.component';
 import { RecommendationComponent } from './modules/pages/recommendation/recommendation.component';
 import { LoginPageComponent } from './modules/pages/login-page/login-page.component';
 import { RegistrationComponent } from './modules/pages/registration/registration.component';
-import { FavouriteRecipeComponent } from './modules/pages/favourite-recipe/favourite-recipe.component';
-
 
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'recipe', component: RecommendationComponent },
   { path: 'recipe/:id', component: RecipeComponent },
   { path: 'login', component: LoginPageComponent },
-  { path: 'favourite-recipe', component: FavouriteRecipeComponent }
+  { path: 'favourite-recipe', component: FavouriteRecipeComponent },
   { path: 'register', component: RegistrationComponent },
   { path: '**', redirectTo: '/page-not-found' },
 ];

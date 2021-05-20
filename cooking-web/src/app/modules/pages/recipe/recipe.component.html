@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="recipe-details-section">
+  <div class="recipe-details-section" data-cy="recipe-details">
     <div class="recipe-details-wrapper">
-      <div class="cusine-name">
+      <div class="cusine-name" data-cy="cusine-name">
         <div class="mat-subheading-2">{{ recipe.name }}</div>
         <div class="rating-and-favourite">
           <div class="rating">
@@ -56,12 +56,12 @@
   </div>
 
   <div class="recipe-image-section">
-    <div class="cusine-image">
+    <div class="cusine-image" data-cy="cusine-image">
       <img class="cusine-image-img" [src]="recipe.image" />
     </div>
   </div>
 
-  <div class="recipe-ingredients-section">
+  <div class="recipe-ingredients-section" data-cy="ingredients-section">
     <div class="ingredients-list">
       <div class="mat-display-2">Ingredients:</div>
       <ul class="ingredient">
@@ -71,7 +71,7 @@
     </div>
   </div>
 
-  <div class="recipe-instructions-section">
+  <div class="recipe-instructions-section" data-cy="instructions-section">
     <div class="instructions-list">
       <div class="mat-display-2">Instructions:</div>
       <ol class="instruction-step">
