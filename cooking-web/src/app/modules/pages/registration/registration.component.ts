@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
+import { MustMatch } from 'src/app/core/_helpers/must-match.validator';
 
 @Component({
   selector: 'app-registration',
@@ -14,28 +20,55 @@ export class RegistrationComponent implements OnInit {
   };
   public barLabel: string = 'Password strength:';
 
-  loginMessage: String;
-  showErrorMessage: Boolean;
-
-  form = new FormGroup({
-    username: new FormControl('', [
-      Validators.required,
-      Validators.minLength(1),
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-  });
+  registerForm: FormGroup;
+  submitted = false;
+  showErrorMessage = false;
+  showSuccesMesage = false;
 
   constructor(
     private authService: AuthService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private formBuilder: FormBuilder
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.registerForm = this.formBuilder.group(
+      {
+        username: ['', [Validators.required, Validators.minLength(6)]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+      },
+      {
+        validator: MustMatch('password', 'confirmPassword'),
+      }
+    );
+  }
+
+  get f() {
+    return this.registerForm.controls;
+  }
 
   onSubmit() {
-    // alert(JSON.stringify(this.form.value))
+    this.submitted = true;
+
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    this.doRegister();
+  }
+  doRegister() {
+    this.showErrorMessage = false;
+    this.showSuccesMesage = false;
+    this.authService.registerUserRequest(this.registerForm.value).subscribe(
+      (response) => {
+        if (response) {
+          this.showSuccesMesage = true;
+        }
+      },
+      (error) => {
+        this.showErrorMessage = this.errorHandler.handleError(error, true);
+      }
+    );
   }
 }

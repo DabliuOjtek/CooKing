@@ -13,4 +13,8 @@ export class AuthService {
   loginUserRequest(formData) {
     return this.http.post<{ token: string }>(this.baseUrl + 'login', formData);
   }
+
+  registerUserRequest(formData) {
+    return this.http.post(this.baseUrl + 'signup', formData);
+  }
 }

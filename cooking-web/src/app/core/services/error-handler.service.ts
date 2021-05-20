@@ -9,7 +9,7 @@ export class ErrorHandlerService {
   constructor(private router: Router) {}
 
   public handleError(error: HttpErrorResponse, isLoginPage?: boolean) {
-    if (error.status == 500 && isLoginPage == true) {
+    if (error.status == 401 && isLoginPage == true) {
       return this.handleErrorsForLogin(error);
     } else if (error.status == 404) {
       this.handleError404(error);
