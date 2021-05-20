@@ -1,5 +1,6 @@
 package com.us.cooking.service;
 
+import com.us.cooking.config.security.UserDetailsImpl;
 import com.us.cooking.dto.FilterQuestionnaireDTO;
 import com.us.cooking.dto.ShortRecipeDTO;
 import com.us.cooking.exception.DefaultException;
@@ -26,6 +27,7 @@ public class ShortRecipeService {
 
     private final DictionaryRepository dictionaryRepository;
     private final RecipeRepository recipeRepository;
+    private final FavouriteRecipeService favouriteRecipeService;
 
     private Integer cuisineTypeId; //TODO poczytac o tych polach i ich umiesczeiu
     private Integer levelOfCookingSkillId;
@@ -33,7 +35,7 @@ public class ShortRecipeService {
     private Integer preparationTimeId;
     private FilterQuestionnaireDTO filter;
 
-    public List<ShortRecipeDTO> getRandomizedShortRecipes(FilterQuestionnaireDTO filter) {
+    public List<ShortRecipeDTO> getRandomizedShortRecipes(FilterQuestionnaireDTO filter, UserDetailsImpl userDetails) {
         this.setFilter(filter);
         List<String> errors = this.setAndCheckAllQuestionnaireValues();
 
@@ -41,6 +43,10 @@ public class ShortRecipeService {
             throw new DefaultException(errors);
 
         List<ShortRecipeDTO> shortRecipes = this.getShortRecipes();
+
+        if (userDetails != null)
+            setParticularRecipeFavourite(shortRecipes, userDetails);
+
         if (shortRecipes.isEmpty())
             throw new DefaultException("Cannot find any recipes from given filter");
 
@@ -112,5 +118,25 @@ public class ShortRecipeService {
         return dictionaryRepository.findByTypeAndValue(preparationTime, filter.getPreparationTimeValue())
                 .orElseThrow(() -> new NoSuchElementException("Invalid preparation time"))
                 .getDictionaryId();
+    }
+
+    private void setParticularRecipeFavourite(List<ShortRecipeDTO> shortRecipes, UserDetailsImpl userDetails) {
+        for (ShortRecipeDTO shortRecipe: shortRecipes) {
+            boolean isFav = isRecipeFavourite(shortRecipe.getRecipeId(), userDetails);
+            if (isFav) {
+                shortRecipe.setFavourite(true);
+            }
+        }
+    }
+
+    private boolean isRecipeFavourite(Integer shortRecipeId, UserDetailsImpl userDetails) {
+        List<ShortRecipeDTO> favouriteRecipes = favouriteRecipeService.getFavouriteRecipes(userDetails);
+        for (ShortRecipeDTO shortRecipeFav: favouriteRecipes) {
+            Integer shorRecipeFavId = shortRecipeFav.getRecipeId();
+            if (shorRecipeFavId.equals(shortRecipeId)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
