@@ -24,11 +24,6 @@ export class FavouriteRecipeComponent implements OnInit {
     this.getFavourite();
   }
 
-
-  refresh() {
-
-  }
-
   getFavourite() {
     this.favouriteRecipeService.getFavourites().subscribe(
       (response: any) => {
@@ -42,7 +37,7 @@ export class FavouriteRecipeComponent implements OnInit {
   }
 
   deleteFavourite(recipeId: string): void {
-    this.favouriteRecipeService.deleteFavourites(recipeId);
+    this.favouriteRecipeService.deleteFavourites(recipeId).subscribe(() => this.getFavourite());
   }
 
   ratesCounter(range: string) {

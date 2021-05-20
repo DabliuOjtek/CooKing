@@ -1,3 +1,4 @@
+import { FavouriteRecipeService } from './../../../core/services/favourite-recipe.service';
 import { ErrorHandlerService } from './../../../core/services/error-handler.service';
 import { ShortRecipeVIEW } from './../../../core/models/short-recipe-view';
 import { RecipeService } from './../../../core/services/recipe.service';
@@ -13,7 +14,11 @@ export class RecommendationComponent implements OnInit {
   recipesData: any = [];
   generateComponents: number;
 
-  constructor(private recipeService: RecipeService, private errorHandler: ErrorHandlerService) {}
+  constructor(
+    private recipeService: RecipeService,
+    private errorHandler: ErrorHandlerService,
+    private favouriteRecipeService: FavouriteRecipeService
+  ) {}
 
   ngOnInit(): void {
     this.getShortRecipes();
@@ -30,6 +35,14 @@ export class RecommendationComponent implements OnInit {
       () => console.log('HTTP Short recipes request completed.')
     );
   }
+
+  deleteFavourite(recipeId: string): void {
+    this.favouriteRecipeService.deleteFavourites(recipeId).subscribe();
+  }
+
+  // addFavourite(recipeId: string): void {
+  //   this.favouriteRecipeService.addFavourites(recipeId).subscribe();
+  // }
 
   ratesCounter(range: string) {
     const size = Number(range);
