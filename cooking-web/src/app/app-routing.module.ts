@@ -7,14 +7,16 @@ import { RecipeComponent } from './modules/pages/recipe/recipe.component';
 import { RecommendationComponent } from './modules/pages/recommendation/recommendation.component';
 import { LoginPageComponent } from './modules/pages/login-page/login-page.component';
 import { RegistrationComponent } from './modules/pages/registration/registration.component';
+import {AuthGuard} from "./gurads/auth.guard";
+import {IfLoginGuard} from "./gurads/if-login.guard";
 
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'recipe', component: RecommendationComponent },
   { path: 'recipe/:id', component: RecipeComponent },
-  { path: 'login', component: LoginPageComponent },
-  { path: 'favourite-recipe', component: FavouriteRecipeComponent },
-  { path: 'register', component: RegistrationComponent },
+  { path: 'login', component: LoginPageComponent, canActivate: [AuthGuard] },
+  { path: 'favourite-recipe', component: FavouriteRecipeComponent, canActivate: [IfLoginGuard] },
+  { path: 'register', component: RegistrationComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/page-not-found' },
 ];
 
