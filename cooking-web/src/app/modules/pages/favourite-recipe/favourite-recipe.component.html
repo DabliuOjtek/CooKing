@@ -10,8 +10,8 @@
           <div class="wrapper">
             <div class="tile-title mat-display-1 router-link" [routerLink]="['/recipe', recipe.recipeId]">
               {{ favouriteRecipes[i].name }}</div>
-            <button class="favourite-icon-button" mat-icon-button color="warn"
-              aria-label="Example icon button with a heart icon" (click)="onTest()">
+            <button class="favourite-icon-button" mat-icon-button color="warn" aria-label="Remove from favourites"
+              (click)="deleteFavourite(i)">
               <mat-icon>favorite</mat-icon>
             </button>
           </div>

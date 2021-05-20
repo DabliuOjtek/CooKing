@@ -16,11 +16,11 @@ export class RecipeService {
   constructor(private http: HttpClient) {}
 
   setFilter(filter: FilterQuestionnaireVIEW) {
-    localStorage.setItem('filter', JSON.stringify(filter));
+    sessionStorage.setItem('filter', JSON.stringify(filter));
   }
 
   getFilter() {
-    return JSON.parse(localStorage.getItem('filter')) ?? [];
+    return JSON.parse(sessionStorage.getItem('filter')) ?? [];
   }
 
   getShortRecipes(): Observable<ShortRecipeVIEW> {

@@ -12,7 +12,7 @@ export class SideNavService {
   constructor() {}
 
   changeState(state: boolean) {
-    if (this.serviceOpened != state) {
+    if (this.serviceOpened !== state) {
       this.serviceOpened = state;
     } else {
       this.serviceOpened = false;
