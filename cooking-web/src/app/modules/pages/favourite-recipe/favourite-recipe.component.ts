@@ -24,6 +24,11 @@ export class FavouriteRecipeComponent implements OnInit {
     this.getFavourite();
   }
 
+
+  refresh() {
+
+  }
+
   getFavourite() {
     this.favouriteRecipeService.getFavourites().subscribe(
       (response: any) => {

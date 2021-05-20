@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'favourite-recipe', component: FavouriteRecipeComponent },
   { path: 'register', component: RegistrationComponent },
+  { path: 'page-not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/page-not-found' },
 ];
 

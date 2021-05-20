@@ -11,7 +11,7 @@
             <div class="tile-title mat-display-1 router-link" [routerLink]="['/recipe', recipe.recipeId]">
               {{ favouriteRecipes[i].name }}</div>
             <button class="favourite-icon-button" mat-icon-button color="warn" aria-label="Remove from favourites"
-              (click)="deleteFavourite(i)">
+              (click)="deleteFavourite(recipe.recipeId)">
               <mat-icon>favorite</mat-icon>
             </button>
           </div>

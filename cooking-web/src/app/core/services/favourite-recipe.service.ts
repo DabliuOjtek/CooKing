@@ -13,7 +13,7 @@ export class FavouriteRecipeService {
   constructor(private http: HttpClient) {}
 
   tokenKey =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dGVzdCIsIlJPTEVTIjpbIlVTRVIiXSwiZXhwIjoxNjIxNTA1NDA5fQ.5mjfciO6O2VxC9-KRe4hyonuMRvRuhYAyLw_CA62LTs';
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dGVzdCIsIlJPTEVTIjpbIlVTRVIiXSwiZXhwIjoxNjIxNTA3OTM2fQ.7Wql_EfKYqel0pt1hJSEOdxW-47io6_4AFENWCAFMpU';
 
   header = new HttpHeaders().set('Authorization', 'Bearer ' + this.tokenKey);
 
@@ -26,6 +26,6 @@ export class FavouriteRecipeService {
   }
 
   deleteFavourites(favouriteRecipeId: string) {
-    return this.http.delete(this.baseUrl + 'favourite/' + favouriteRecipeId, { headers: this.header });
+    return this.http.delete(this.baseUrl + 'favourite/' + favouriteRecipeId, { headers: this.header }).subscribe(() => {});
   }
 }
