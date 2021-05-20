@@ -24,10 +24,11 @@ public class FavouriteRecipeService {
 
     public List<ShortRecipeDTO> getFavouriteRecipes(UserDetailsImpl userDetails) {
         UserEntity user = userService.getUserByUsername(userDetails.getUsername());
-
-        return user.getRecipes().stream()
+        List<ShortRecipeDTO> shortRecipes = user.getRecipes().stream()
                 .map(RecipeMapper::mapToShortRecipeDTO)
                 .collect(Collectors.toList());
+        setParticularRecipeFavourite(shortRecipes);
+        return shortRecipes;
     }
 
     @Transactional
@@ -44,5 +45,11 @@ public class FavouriteRecipeService {
         RecipeEntity recipe = recipeRepository.findById(id)
                 .orElseThrow(() -> new DefaultException("Couldn't found recipe"));
         user.getRecipes().remove(recipe);
+    }
+
+    private void setParticularRecipeFavourite(List<ShortRecipeDTO> shortRecipes) {
+        for (ShortRecipeDTO shortRecipe: shortRecipes) {
+            shortRecipe.setFavourite(true);
+        }
     }
 }

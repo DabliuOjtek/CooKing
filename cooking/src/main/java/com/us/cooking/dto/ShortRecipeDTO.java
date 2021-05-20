@@ -10,5 +10,5 @@ public class ShortRecipeDTO {
     private String name;
     private String image;
     private String rate;
-    private boolean isFavourite;
+    private boolean favourite;
 }

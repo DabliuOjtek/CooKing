@@ -24,6 +24,16 @@ export class RecommendationComponent implements OnInit {
     this.getShortRecipes();
   }
 
+  onChangeFavourites(recipe: ShortRecipeVIEW, index: number) {
+    let changedFav = !recipe.favourite;
+    let recipeId = recipe.recipeId.toString();
+    if (changedFav == false)
+      this.deleteFavourite(recipeId);
+    else
+      this.addFavourite(recipeId);
+    recipe.favourite = changedFav;
+  }
+
   getShortRecipes() {
     this.recipeService.getShortRecipes().subscribe(
       (response: any) => {
@@ -40,9 +50,9 @@ export class RecommendationComponent implements OnInit {
     this.favouriteRecipeService.deleteFavourites(recipeId).subscribe();
   }
 
-  // addFavourite(recipeId: string): void {
-  //   this.favouriteRecipeService.addFavourites(recipeId).subscribe();
-  // }
+  addFavourite(recipeId: string): void {
+    this.favouriteRecipeService.addFavourites(recipeId).subscribe();
+  }
 
   ratesCounter(range: string) {
     const size = Number(range);

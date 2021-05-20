@@ -13,7 +13,7 @@ export class FavouriteRecipeService {
   constructor(private http: HttpClient) {}
 
   tokenKey =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dGVzdCIsIlJPTEVTIjpbIlVTRVIiXSwiZXhwIjoxNjIxNTEwNzg3fQ.PyNHA4em7Jyom1l0EQIwYDdVdgf5INAp0ZLL7arVmsA';
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dGVzdCIsIlJPTEVTIjpbIlVTRVIiXSwiZXhwIjoxNjIxNTE2MzU0fQ.78FSH_y8dPW712jLq_rbZ8AK3VQ9QEpPRWa9kwjtLlc';
 
   header = new HttpHeaders().set('Authorization', 'Bearer ' + this.tokenKey);
 
@@ -21,8 +21,8 @@ export class FavouriteRecipeService {
     return this.http.get<ShortRecipeVIEW>(this.baseUrl + 'favourite', { headers: this.header });
   }
 
-  addFavourites(favouriteRecipeId: number) {
-    return this.http.post(this.baseUrl + 'favourite', favouriteRecipeId, { headers: this.header });
+  addFavourites(favouriteRecipeId: string) {
+    return this.http.post(this.baseUrl + 'favourite/', + favouriteRecipeId, { headers: this.header });
   }
 
   deleteFavourites(favouriteRecipeId: string): Observable<any> {

@@ -3,4 +3,5 @@ export class ShortRecipeVIEW {
   name: string;
   image: string;
   rate: string;
+  favourite: boolean;
 }
