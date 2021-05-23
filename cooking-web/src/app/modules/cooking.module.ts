@@ -11,6 +11,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+
 const MaterialComponents = [
   MatButtonModule,
   MatTabsModule,
@@ -26,6 +28,7 @@ const MaterialComponents = [
   MatSidenavModule,
   MatListModule,
   MatIconModule,
+  MatInputModule,
 ];
 
 @NgModule({

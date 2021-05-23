@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/core/security/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,10 +11,9 @@ import { ShortRecipeVIEW } from '../models/short-recipe-view';
 export class FavouriteRecipeService {
   private baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  tokenKey =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dGVzdCIsIlJPTEVTIjpbIlVTRVIiXSwiZXhwIjoxNjIxNTE2MzU0fQ.78FSH_y8dPW712jLq_rbZ8AK3VQ9QEpPRWa9kwjtLlc';
+  private tokenKey = this.authService.getToken();
 
   header = new HttpHeaders().set('Authorization', 'Bearer ' + this.tokenKey);
 
@@ -22,7 +22,7 @@ export class FavouriteRecipeService {
   }
 
   addFavourites(favouriteRecipeId: string) {
-    return this.http.post(this.baseUrl + 'favourite/', + favouriteRecipeId, { headers: this.header });
+    return this.http.post(this.baseUrl + 'favourite/', +favouriteRecipeId, { headers: this.header });
   }
 
   deleteFavourites(favouriteRecipeId: string): Observable<any> {

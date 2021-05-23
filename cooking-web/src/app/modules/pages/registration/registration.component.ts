@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth.service';
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { AuthService } from 'src/app/core/security/auth.service';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { MustMatch } from 'src/app/core/_helpers/must-match.validator';
 

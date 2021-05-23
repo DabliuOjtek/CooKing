@@ -1,2 +1,3 @@
 ### Config ###
 *.env
+/cooking/src/main/java/com/us/cooking/config/security/WebSecurityConfig.java.orig

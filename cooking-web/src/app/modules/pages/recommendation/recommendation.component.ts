@@ -25,12 +25,10 @@ export class RecommendationComponent implements OnInit {
   }
 
   onChangeFavourites(recipe: ShortRecipeVIEW, index: number) {
-    let changedFav = !recipe.favourite;
-    let recipeId = recipe.recipeId.toString();
-    if (changedFav == false)
-      this.deleteFavourite(recipeId);
-    else
-      this.addFavourite(recipeId);
+    const changedFav = !recipe.favourite;
+    const recipeId = recipe.recipeId.toString();
+    if (changedFav === false) this.deleteFavourite(recipeId);
+    else this.addFavourite(recipeId);
     recipe.favourite = changedFav;
   }
 

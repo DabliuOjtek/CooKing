@@ -1,11 +1,6 @@
+import { AuthService } from 'src/app/core/security/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth.service';
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 
 @Component({
@@ -14,38 +9,16 @@ import { ErrorHandlerService } from 'src/app/core/services/error-handler.service
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
-  loginForm: FormGroup;
-  submitted = false;
-  showErrorMessage = false;
+  constructor(private authService: AuthService) {}
 
-  constructor(
-    private authService: AuthService,
-    private errorHandler: ErrorHandlerService,
-    private formBuilder: FormBuilder
-  ) {}
+  username = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
 
-  ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(6)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
-  }
-
-  get f() {
-    return this.loginForm.controls;
-  }
+  ngOnInit() {}
 
   onSubmit() {
-    this.submitted = true;
-
-    if (this.loginForm.invalid) {
-      return;
-    } else {
-      this.doLogin();
-    }
-  }
-  doLogin() {
-    this.showErrorMessage = false;
-    this.authService.login(this.loginForm.value).subscribe();
+    const usernameValue = this.username.value;
+    const passwordValue = this.password.value;
+    this.authService.login({ username: usernameValue, password: passwordValue }).subscribe();
   }
 }
