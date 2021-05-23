@@ -15,5 +15,6 @@ export class RecipeVIEW {
   difficultyLevelValue: string;
   createdAt: Date;
   modifiedAt: Date;
+  favourite: boolean;
   ingredients: RecipeIngredientVIEW[];
 }

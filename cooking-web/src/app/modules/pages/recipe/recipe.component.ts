@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { RecipeService } from './../../../core/services/recipe.service';
 import { RecipeVIEW } from './../../../core/models/recipe-view';
 import { ActivatedRoute } from '@angular/router';
+import { FavouriteRecipeVIEW } from 'src/app/core/models/favourite-recipe';
+import { FavouriteRecipeService } from 'src/app/core/services/favourite-recipe.service';
 
 @Component({
   selector: 'app-recipe',
@@ -10,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./recipe.component.scss'],
 })
 export class RecipeComponent implements OnInit {
+  favouriteRecipe: FavouriteRecipeVIEW = new FavouriteRecipeVIEW;
   recipe: RecipeVIEW;
   recipeSteps: any;
   difficultyLevel: number;
@@ -18,11 +21,21 @@ export class RecipeComponent implements OnInit {
   constructor(
     private recipeService: RecipeService,
     private activatedRoute: ActivatedRoute,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private favouriteRecipeService: FavouriteRecipeService
   ) {}
 
   ngOnInit(): void {
     this.getRecipe();
+  }
+
+  onChangeFavourites(recipe: RecipeVIEW) {
+    const changedFav = !recipe.favourite;
+    const recipeId = recipe.recipeId.toString();
+    this.favouriteRecipe.recipeId = recipe.recipeId;
+    if (changedFav === false) this.deleteFavourite(recipeId);
+    else this.addFavourite(this.favouriteRecipe);
+    recipe.favourite = changedFav;
   }
 
   private getRecipe() {
@@ -49,5 +62,13 @@ export class RecipeComponent implements OnInit {
     this.difficultyLevel = recipeDifficulty;
 
     this.recipeSteps = this.recipe.description.split('@');
+  }
+
+  deleteFavourite(recipeId: string): void {
+    this.favouriteRecipeService.deleteFavourites(recipeId).subscribe();
+  }
+
+  addFavourite(recipe: FavouriteRecipeVIEW): void {
+    this.favouriteRecipeService.addFavourites(recipe).subscribe();
   }
 }

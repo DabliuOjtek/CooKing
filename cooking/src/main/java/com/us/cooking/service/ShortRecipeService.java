@@ -133,9 +133,8 @@ public class ShortRecipeService {
         List<ShortRecipeDTO> favouriteRecipes = favouriteRecipeService.getFavouriteRecipes(userDetails);
         for (ShortRecipeDTO shortRecipeFav: favouriteRecipes) {
             Integer shorRecipeFavId = shortRecipeFav.getRecipeId();
-            if (shorRecipeFavId.equals(shortRecipeId)) {
+            if (shorRecipeFavId.equals(shortRecipeId))
                 return true;
-            }
         }
         return false;
     }

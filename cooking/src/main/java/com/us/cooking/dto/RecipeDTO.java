@@ -23,5 +23,6 @@ public class RecipeDTO {
     private String difficultyLevelValue;
     private LocalDate createdAt;
     private LocalDate modifiedAt;
+    private boolean favourite;
     private List<RecipeIngredientDTO> ingredients;
 }

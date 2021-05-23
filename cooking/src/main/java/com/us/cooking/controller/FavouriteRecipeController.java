@@ -22,7 +22,7 @@ public class FavouriteRecipeController {
         return favouriteRecipeService.getFavouriteRecipes(userDetails);
     }
 
-    @PostMapping("/favourite")
+    @PostMapping(value = "/favourite")
     public void addFavourite(@Valid @RequestBody FavRecipeIdDTO favRecipeIdDTO, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         favouriteRecipeService.addRecipeToFavourite(favRecipeIdDTO, userDetails);
     }

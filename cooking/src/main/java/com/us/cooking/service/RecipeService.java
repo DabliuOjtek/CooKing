@@ -1,6 +1,8 @@
 package com.us.cooking.service;
 
+import com.us.cooking.config.security.UserDetailsImpl;
 import com.us.cooking.dto.RecipeDTO;
+import com.us.cooking.dto.ShortRecipeDTO;
 import com.us.cooking.exception.DefaultException;
 import com.us.cooking.mapper.RecipeMapper;
 import com.us.cooking.model.RecipeEntity;
@@ -9,6 +11,7 @@ import com.us.cooking.repository.RecipeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -17,8 +20,9 @@ public class RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final DictionaryRepository dictionaryRepository;
+    private final FavouriteRecipeService favouriteRecipeService;
 
-    public RecipeDTO getRecipe(Integer id) {
+    public RecipeDTO getRecipe(Integer id, UserDetailsImpl userDetails) {
         RecipeEntity recipeEntity;
         try {
             recipeEntity = getRecipeEntity(id);
@@ -42,6 +46,9 @@ public class RecipeService {
         } catch (NoSuchElementException e) {
             throw new DefaultException("Something went wrong with getting recipe from database");
         }
+
+        if (userDetails != null)
+            setRecipeFavourite(recipeDTO, userDetails);
 
         return recipeDTO;
     }
@@ -73,5 +80,21 @@ public class RecipeService {
         return dictionaryRepository.findById(recipeEntity.getDifficultyLevelId())
                 .orElseThrow(NoSuchElementException::new)
                 .getValue();
+    }
+
+    private void setRecipeFavourite(RecipeDTO recipeDTO, UserDetailsImpl userDetails) {
+        boolean isFav = isRecipeFavourite(recipeDTO.getRecipeId(), userDetails);
+        if (isFav)
+            recipeDTO.setFavourite(true);
+    }
+
+    private boolean isRecipeFavourite(Integer recipeId, UserDetailsImpl userDetails) {
+        List<ShortRecipeDTO> favouriteRecipes = favouriteRecipeService.getFavouriteRecipes(userDetails);
+        for (ShortRecipeDTO shortRecipeFav: favouriteRecipes) {
+            Integer shorRecipeFavId = shortRecipeFav.getRecipeId();
+            if (shorRecipeFavId.equals(recipeId))
+                return true;
+        }
+        return false;
     }
 }

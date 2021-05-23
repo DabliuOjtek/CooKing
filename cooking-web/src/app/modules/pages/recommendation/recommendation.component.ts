@@ -1,6 +1,7 @@
 import { FavouriteRecipeService } from './../../../core/services/favourite-recipe.service';
 import { ErrorHandlerService } from './../../../core/services/error-handler.service';
 import { ShortRecipeVIEW } from './../../../core/models/short-recipe-view';
+import { FavouriteRecipeVIEW } from './../../../core/models/favourite-recipe';
 import { RecipeService } from './../../../core/services/recipe.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recommendation.component.scss'],
 })
 export class RecommendationComponent implements OnInit {
+  favouriteRecipe: FavouriteRecipeVIEW = new FavouriteRecipeVIEW;
   shortRecipes: ShortRecipeVIEW[];
   recipesData: any = [];
   generateComponents: number;
@@ -25,11 +27,12 @@ export class RecommendationComponent implements OnInit {
     this.getShortRecipes();
   }
 
-  onChangeFavourites(recipe: ShortRecipeVIEW, index: number) {
+  onChangeFavourites(recipe: ShortRecipeVIEW) {
     const changedFav = !recipe.favourite;
     const recipeId = recipe.recipeId.toString();
+    this.favouriteRecipe.recipeId = recipe.recipeId;
     if (changedFav === false) this.deleteFavourite(recipeId);
-    else this.addFavourite(recipeId);
+    else this.addFavourite(this.favouriteRecipe);
     recipe.favourite = changedFav;
   }
 
@@ -50,8 +53,8 @@ export class RecommendationComponent implements OnInit {
     this.favouriteRecipeService.deleteFavourites(recipeId).subscribe();
   }
 
-  addFavourite(recipeId: string): void {
-    this.favouriteRecipeService.addFavourites(recipeId).subscribe();
+  addFavourite(recipe: FavouriteRecipeVIEW): void {
+    this.favouriteRecipeService.addFavourites(recipe).subscribe();
   }
 
   ratesCounter(range: string) {

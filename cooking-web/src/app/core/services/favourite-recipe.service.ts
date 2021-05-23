@@ -1,9 +1,9 @@
-import { AuthService } from 'src/app/core/security/auth.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ShortRecipeVIEW } from '../models/short-recipe-view';
+import { FavouriteRecipeVIEW } from '../models/favourite-recipe';
 
 @Injectable({
   providedIn: 'root',
@@ -11,21 +11,17 @@ import { ShortRecipeVIEW } from '../models/short-recipe-view';
 export class FavouriteRecipeService {
   private baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
-
-  private tokenKey = this.authService.getToken();
-
-  header = new HttpHeaders().set('Authorization', 'Bearer ' + this.tokenKey);
+  constructor(private http: HttpClient) {}
 
   getFavourites(): Observable<ShortRecipeVIEW> {
-    return this.http.get<ShortRecipeVIEW>(this.baseUrl + 'favourite', { headers: this.header });
+    return this.http.get<ShortRecipeVIEW>(this.baseUrl + 'favourite');
   }
 
-  addFavourites(favouriteRecipeId: string) {
-    return this.http.post(this.baseUrl + 'favourite/', +favouriteRecipeId, { headers: this.header });
+  addFavourites(favouriteRecipe: FavouriteRecipeVIEW) {
+    return this.http.post(this.baseUrl + 'favourite', favouriteRecipe);
   }
 
   deleteFavourites(favouriteRecipeId: string): Observable<any> {
-    return this.http.delete(this.baseUrl + 'favourite/' + favouriteRecipeId, { headers: this.header });
+    return this.http.delete(this.baseUrl + 'favourite/' + favouriteRecipeId);
   }
 }

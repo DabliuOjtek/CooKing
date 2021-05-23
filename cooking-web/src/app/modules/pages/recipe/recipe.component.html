@@ -10,7 +10,7 @@
             </ng-container>
           </div>
           <button class="favourite-icon-button" mat-mini-fab aria-label="Remove from favourites" color="white"
-            [ngClass]="true ? 'unliked-recipe' : 'liked-recipe'">
+          [ngClass]="recipe.favourite==false ? 'unliked-recipe' : 'liked-recipe'" (click)="onChangeFavourites(recipe)">
             <mat-icon>favorite</mat-icon>
           </button>
 
