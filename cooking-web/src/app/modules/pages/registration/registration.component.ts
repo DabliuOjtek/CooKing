@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/security/auth.service';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
-import { MustMatch } from 'src/app/core/_helpers/must-match.validator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -10,51 +10,54 @@ import { MustMatch } from 'src/app/core/_helpers/must-match.validator';
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent implements OnInit {
-  public account = {
-    password: null,
-  };
-  public barLabel: string = 'Password strength:';
+  isSignUpValid: boolean;
+  passwordsMatch: boolean;
+  passwordValidator = null;
+  barLabel = 'Password strength:';
 
-  registerForm: FormGroup;
-  submitted = false;
-  showErrorMessage = false;
-  showSuccesMesage = false;
+  username = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  confirmPassword = new FormControl('', [Validators.required]);
 
-  constructor(
-    private authService: AuthService,
-    private errorHandler: ErrorHandlerService,
-    private formBuilder: FormBuilder
-  ) {}
+  constructor(private authService: AuthService, private router: Router, private errorHandler: ErrorHandlerService) {}
 
-  ngOnInit() {
-    this.registerForm = this.formBuilder.group(
-      {
-        username: ['', [Validators.required, Validators.minLength(6)]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', Validators.required],
+  ngOnInit() {}
+
+  onSubmit() {
+    this.isSignUpValid = true;
+    const usernameValue = this.username.value;
+    const passwordValue = this.password.value;
+    const confirmPassword = this.confirmPassword.value;
+
+    this.passwordsMatch = this.checkIfPasswordsMatch(passwordValue, confirmPassword);
+
+    if (this.passwordsMatch) {
+      this.registerUser(usernameValue, passwordValue);
+    } else {
+      this.isSignUpValid = false;
+    }
+  }
+
+  private registerUser(username: string, password: string) {
+    this.authService.signup({ username: username, password: password }).subscribe(
+      (response) => {
+        this.navigateToLoginPage();
       },
-      {
-        validator: MustMatch('password', 'confirmPassword'),
+      (error) => {
+        this.errorHandler.handleError(error);
       }
     );
   }
 
-  get f() {
-    return this.registerForm.controls;
+  private navigateToLoginPage(): void {
+    this.router.navigate(['/login']);
   }
 
-  onSubmit() {
-    this.submitted = true;
-
-    if (this.registerForm.invalid) {
-      return;
+  private checkIfPasswordsMatch(password: string, confirmPassword: string): boolean {
+    if (password === confirmPassword) {
+      return true;
+    } else {
+      return false;
     }
-
-    this.doRegister();
-  }
-  doRegister() {
-    this.showErrorMessage = false;
-    this.showSuccesMesage = false;
-    this.authService.signup(this.registerForm.value).subscribe();
   }
 }

@@ -10,7 +10,6 @@
   margin: 6rem 10%;
 }
 
-
 .form-field {
   box-sizing: border-box;
   margin-top: 1rem;
@@ -43,4 +42,19 @@
 .login-button {
   margin-top: 2rem;
   width: 100%;
+}
+
+.signup-nav {
+  margin-top: 1rem;
+  text-align: center;
+
+  span {
+    margin-right: 0.5rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: mat-color($cooking-accent);
+    font-weight: 700;
+  }
 }

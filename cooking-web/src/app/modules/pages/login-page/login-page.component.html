@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="floating-container">
+  <div class="container-wrapper">
     <span class="login-title mat-subheading-2">Welcome back!</span>
     <span class="login-info mat-display-2">Please log in to your account</span>
 
@@ -26,9 +26,19 @@
         </mat-error>
       </mat-form-field>
 
+      <ng-container *ngIf="isLoginValid === false">
+        <mat-error class="invalid-message">Invalid username or password, Please try again</mat-error>
+      </ng-container>
+
       <mat-card-actions>
         <button type="submit" class="login-button" mat-raised-button color="primary">Login</button>
       </mat-card-actions>
     </form>
+
+    <div class="signup-nav">
+      <span>Don't have an account?</span>
+      <a routerLink="/signup">Sign up</a>
+    </div>
+
   </div>
 </div>

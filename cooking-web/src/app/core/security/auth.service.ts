@@ -15,59 +15,28 @@ export class AuthService {
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) {}
 
-  login(credentials): Observable<boolean> {
-    return this.http.post<TokenView>(this.baseUrl + 'login', credentials).pipe(
-      tap((token) => localStorage.setItem(this.LS_TOKEN, token.token)),
-      mapTo(true),
-      catchError((error) => {
-        console.log(error);
-        this.errorHandler.handleError(error, true);
-        return of(false);
-      })
-    );
+  login(credentials): Observable<any> {
+    return this.http
+      .post<TokenView>(this.baseUrl + 'login', credentials)
+      .pipe(tap((token) => localStorage.setItem(this.LS_TOKEN, token.token)));
   }
 
-  logout(): Observable<boolean> {
-    return this.http.post(this.baseUrl + 'logout', null).pipe(
-      tap(() => localStorage.removeItem(this.LS_TOKEN)),
-      mapTo(true),
-      catchError((error) => {
-        this.errorHandler.handleError(error, true);
-        return of(false);
-      })
-    );
+  logout(): Observable<any> {
+    return this.http.post(this.baseUrl + 'logout', null).pipe(tap(() => localStorage.removeItem(this.LS_TOKEN)));
   }
 
-  signup(credentials): Observable<boolean> {
-    return this.http.post(this.baseUrl + 'singup', credentials).pipe(
-      mapTo(true),
-      catchError((error) => {
-        this.errorHandler.handleError(error, true);
-        return of(false);
-      })
-    );
+  signup(credentials): Observable<any> {
+    return this.http.post(this.baseUrl + 'signup', credentials);
   }
 
-  changePassword(changePasswordData): Observable<boolean> {
-    return this.http.put(this.baseUrl + 'changePassword', changePasswordData).pipe(
-      tap(() => localStorage.removeItem(this.LS_TOKEN)),
-      mapTo(true),
-      catchError((error) => {
-        this.errorHandler.handleError(error, true);
-        return of(false);
-      })
-    );
+  changePassword(changePasswordData): Observable<any> {
+    return this.http
+      .put(this.baseUrl + 'changePassword', changePasswordData)
+      .pipe(tap(() => localStorage.removeItem(this.LS_TOKEN)));
   }
 
-  deleteUser(): Observable<boolean> {
-    return this.http.delete(this.baseUrl + 'deleteUser').pipe(
-      tap(() => localStorage.removeItem(this.LS_TOKEN)),
-      mapTo(true),
-      catchError((error) => {
-        this.errorHandler.handleError(error, true);
-        return of(false);
-      })
-    );
+  deleteUser(): Observable<any> {
+    return this.http.delete(this.baseUrl + 'deleteUser').pipe(tap(() => localStorage.removeItem(this.LS_TOKEN)));
   }
 
   isLogged(): boolean {

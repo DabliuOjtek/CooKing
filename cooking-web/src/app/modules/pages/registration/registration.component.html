@@ -1,7 +1,61 @@
 <div class="container">
+  <div class="container-wrapper">
+    <span class="signup-title mat-subheading-2">Create account</span>
+
+    <form class="signup-form" (ngSubmit)="onSubmit()">
+      <mat-form-field class="form-field">
+        <mat-label>Username</mat-label>
+        <input type="username" matInput placeholder="Username" [formControl]="username">
+        <mat-error *ngIf="username.hasError('minlength') && !username.hasError('required')">
+          Username must be at least 6 character
+        </mat-error>
+        <mat-error *ngIf=" username.hasError('required')">
+          Username is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput placeholder="Password" [formControl]="password" [(ngModel)]="passwordValidator">
+        <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
+          Password must be at least 6 character
+        </mat-error>
+        <mat-error *ngIf=" password.hasError('required')">
+          Password is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Confirm Password</mat-label>
+        <input type="password" matInput placeholder="Password" [formControl]="confirmPassword">
+        <mat-error *ngIf=" confirmPassword.hasError('required')">
+          Confirm Password is required
+        </mat-error>
+      </mat-form-field>
+
+      <app-password-strength-bar [passwordToCheck]="passwordValidator" [barLabel]="barLabel">
+      </app-password-strength-bar>
+
+      <ng-container *ngIf="isSignUpValid === false">
+        <mat-error class="invalid-message">Passwords must match</mat-error>
+      </ng-container>
+
+      <mat-card-actions>
+        <button type="submit" class="signup-button" mat-raised-button color="primary">Create account</button>
+      </mat-card-actions>
+    </form>
+    <div class="signup-nav">
+      <span>Do you already have an account?</span>
+      <a routerLink="/signup">Log in</a>
+    </div>
+  </div>
+</div>
+
+<!--
+<div class="container">
   <div class="floating-container">
-    <div class="mat-subheading-2">Register</div>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="mat-subheading-2">signup</div>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <div class="label">Username</div>
         <input type="text" class="input-style" formControlName="username" class="form-control"
@@ -32,9 +86,9 @@
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary">Register</button>
+        <button class="btn btn-primary">signup</button>
       </div>
       <div *ngIf="showErrorMessage">Server Error</div>
     </form>
   </div>
-</div>
+</div> -->
