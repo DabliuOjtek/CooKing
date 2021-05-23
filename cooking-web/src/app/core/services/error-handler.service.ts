@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class ErrorHandlerService {
+  errorMessage = '';
+
   constructor(private router: Router) {}
 
   public handleError(error: HttpErrorResponse, isLoginPage?: boolean) {
@@ -13,12 +15,21 @@ export class ErrorHandlerService {
       return this.handleErrorsForLogin(error);
     } else if (error.status === 404) {
       this.handleError404(error);
+    } else if (error.status == 400) {
+      return this.handleError400(error);
     }
   }
 
   private handleError404(error: HttpErrorResponse) {
     this.createErrorMessage(error);
     this.router.navigate(['/page-not-found']);
+  }
+
+  private handleError400(error: HttpErrorResponse) {
+    error.error.errors.forEach((element) => {
+      this.errorMessage += element + '&&';
+    });
+    return this.errorMessage;
   }
 
   private createErrorMessage(error: HttpErrorResponse) {

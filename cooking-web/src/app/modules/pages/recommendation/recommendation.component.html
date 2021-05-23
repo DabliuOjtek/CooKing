@@ -1,12 +1,17 @@
 <div class="container">
   <span class="recommendation-title mat-subheading-2" data-cy="recommendation-title">Recommendation</span>
   <hr>
+  <div *ngIf="errorMessage">
+    <p *ngFor="let error of errorMessage" class="error-message">{{error}}</p>
+  </div>
   <div class="grid-tiles-container" data-cy="tiles-container">
     <div class="tiles-container" *ngFor="let recipe of shortRecipes; let i = index">
       <div class="tile">
-        <img class="tile-image router-link" [routerLink]="['/recipe', recipe.recipeId]" [src]="shortRecipes[i].image" data-cy="tile-image"/>
+        <img class="tile-image router-link" [routerLink]="['/recipe', recipe.recipeId]" [src]="shortRecipes[i].image"
+          data-cy="tile-image" />
         <div class="tile-details">
-          <div class="tile-title mat-display-1 router-link" [routerLink]="['/recipe', recipe.recipeId]" data-cy="tile-title">
+          <div class="tile-title mat-display-1 router-link" [routerLink]="['/recipe', recipe.recipeId]"
+            data-cy="tile-title">
             {{ shortRecipes[i].name }}</div>
           <div class="tile-rate" data-cy="tile-rate">
             <ng-container *ngFor="let rate of ratesCounter(shortRecipes[i].rate)">
