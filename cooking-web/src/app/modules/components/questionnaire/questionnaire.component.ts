@@ -83,7 +83,9 @@ export class QuestionnaireComponent implements OnInit {
       (response: any) => {
         this.questionnaire = response;
         if (response) {
-          this.questionnaire.sort((a, b) => QuestionnaireTypes[a.type] - QuestionnaireTypes[b.type]);
+          this.questionnaire.sort(
+            (a, b) => QuestionnaireTypes[a.type] - QuestionnaireTypes[b.type]
+          );
         }
       },
       (error) => {
@@ -98,10 +100,15 @@ export class QuestionnaireComponent implements OnInit {
       (response: any) => {
         this.questions = response;
         if (response) {
-          this.questions.sort((a, b) => QuestionnaireQuestionTypes[a.type] - QuestionnaireQuestionTypes[b.type]);
+          this.questions.sort(
+            (a, b) =>
+              QuestionnaireQuestionTypes[a.type] -
+              QuestionnaireQuestionTypes[b.type]
+          );
         }
       },
       (error) => {
+        console.log('test');
         this.errorHandler.handleError(error);
       },
       () => {

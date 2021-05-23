@@ -13,6 +13,7 @@ export class RecommendationComponent implements OnInit {
   shortRecipes: ShortRecipeVIEW[];
   recipesData: any = [];
   generateComponents: number;
+  errorMessage: any;
 
   constructor(
     private recipeService: RecipeService,
@@ -38,7 +39,8 @@ export class RecommendationComponent implements OnInit {
         this.shortRecipes = response;
       },
       (error) => {
-        this.errorHandler.handleError(error);
+        this.errorMessage = this.errorHandler.handleError(error);
+        this.errorMessage = this.errorMessage.split('&&');
       },
       () => console.log('HTTP Short recipes request completed.')
     );

@@ -1,5 +1,6 @@
 @import '../../../../assets/styles/cooking-style.scss';
 
+
 mat-sidenav-container {
   height: 100%;
   width: 100%;
@@ -11,6 +12,7 @@ mat-sidenav-container {
 mat-sidenav {
   background-color: white;
   width: 15rem;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.1) !important;
 }
 
 mat-sidenav-content {
@@ -31,6 +33,7 @@ mat-sidenav-content::-webkit-scrollbar-thumb {
 
 .mat-drawer {
   padding: 0px;
+  display: table !important;
 }
 
 .sidenav {
@@ -55,3 +58,5 @@ mat-sidenav-content::-webkit-scrollbar-thumb {
   background-color: mat-color($cooking-primary);
 
 }
+
+.spacer {}

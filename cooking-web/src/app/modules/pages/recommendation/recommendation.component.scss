@@ -95,3 +95,9 @@ hr {
   background-color: mat-color($cooking-primary, 500);
   margin: 0 0 3vw 0;
 }
+
+.error-message {
+  font-size: calc(0.8rem + 1vw);
+  color: #c0bcbc;
+  text-align: center;
+}
