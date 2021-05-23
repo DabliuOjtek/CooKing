@@ -5,6 +5,7 @@ import { RecipeVIEW } from './../../../core/models/recipe-view';
 import { ActivatedRoute } from '@angular/router';
 import { FavouriteRecipeVIEW } from 'src/app/core/models/favourite-recipe';
 import { FavouriteRecipeService } from 'src/app/core/services/favourite-recipe.service';
+import { AuthService } from 'src/app/core/security/auth.service';
 
 @Component({
   selector: 'app-recipe',
@@ -17,15 +18,18 @@ export class RecipeComponent implements OnInit {
   recipeSteps: any;
   difficultyLevel: number;
   rate: number;
+  logged: boolean;
 
   constructor(
     private recipeService: RecipeService,
     private activatedRoute: ActivatedRoute,
     private errorHandler: ErrorHandlerService,
-    private favouriteRecipeService: FavouriteRecipeService
+    private favouriteRecipeService: FavouriteRecipeService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.isLogged();
     this.getRecipe();
   }
 
@@ -70,5 +74,9 @@ export class RecipeComponent implements OnInit {
 
   addFavourite(recipe: FavouriteRecipeVIEW): void {
     this.favouriteRecipeService.addFavourites(recipe).subscribe();
+  }
+
+  isLogged() {
+    this.logged = this.authService.isLogged();
   }
 }

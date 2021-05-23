@@ -4,6 +4,7 @@ import { ShortRecipeVIEW } from './../../../core/models/short-recipe-view';
 import { FavouriteRecipeVIEW } from './../../../core/models/favourite-recipe';
 import { RecipeService } from './../../../core/services/recipe.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/security/auth.service';
 
 @Component({
   selector: 'app-recommendation',
@@ -16,14 +17,17 @@ export class RecommendationComponent implements OnInit {
   recipesData: any = [];
   generateComponents: number;
   errorMessage: any;
+  logged: boolean;
 
   constructor(
     private recipeService: RecipeService,
     private errorHandler: ErrorHandlerService,
-    private favouriteRecipeService: FavouriteRecipeService
+    private favouriteRecipeService: FavouriteRecipeService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.isLogged();
     this.getShortRecipes();
   }
 
@@ -60,5 +64,9 @@ export class RecommendationComponent implements OnInit {
   ratesCounter(range: string) {
     const size = Number(range);
     return new Array(size);
+  }
+
+  isLogged() {
+    this.logged = this.authService.isLogged();
   }
 }
