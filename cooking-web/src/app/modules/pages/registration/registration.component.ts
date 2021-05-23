@@ -60,15 +60,6 @@ export class RegistrationComponent implements OnInit {
   doRegister() {
     this.showErrorMessage = false;
     this.showSuccesMesage = false;
-    this.authService.registerUserRequest(this.registerForm.value).subscribe(
-      (response) => {
-        if (response) {
-          this.showSuccesMesage = true;
-        }
-      },
-      (error) => {
-        this.showErrorMessage = this.errorHandler.handleError(error, true);
-      }
-    );
+    this.authService.signup(this.registerForm.value).subscribe();
   }
 }

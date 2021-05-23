@@ -46,17 +46,6 @@ export class LoginPageComponent implements OnInit {
   }
   doLogin() {
     this.showErrorMessage = false;
-    this.authService.loginUserRequest(this.loginForm.value).subscribe(
-      (response) => {
-        if (response) {
-          if (response.token) {
-            localStorage.setItem('token', response.token);
-          }
-        }
-      },
-      (error) => {
-        this.showErrorMessage = this.errorHandler.handleError(error, true);
-      }
-    );
+    this.authService.login(this.loginForm.value).subscribe();
   }
 }
