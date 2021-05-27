@@ -46,49 +46,7 @@
     </form>
     <div class="signup-nav">
       <span>Do you already have an account?</span>
-      <a routerLink="/signup">Log in</a>
+      <a routerLink="/login">Log in</a>
     </div>
   </div>
 </div>
-
-<!--
-<div class="container">
-  <div class="floating-container">
-    <div class="mat-subheading-2">signup</div>
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <div class="label">Username</div>
-        <input type="text" class="input-style" formControlName="username" class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-          <div *ngIf="f.username.errors.required">Username is required</div>
-          <div *ngIf="f.username.errors.username">Username must be at least 6 characters</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">Password</div>
-        <input type="password" formControlName="password" class="form-control" [(ngModel)]="account.password"
-          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors.required">Password is required</div>
-          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-        </div>
-      </div>
-      <app-password-strength-bar [passwordToCheck]="account.password" [barLabel]="barLabel">
-      </app-password-strength-bar>
-      <div class="form-group">
-        <div class="label">Confirm Password</div>
-        <input type="password" formControlName="confirmPassword" class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-          <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-          <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary">signup</button>
-      </div>
-      <div *ngIf="showErrorMessage">Server Error</div>
-    </form>
-  </div>
-</div> -->
