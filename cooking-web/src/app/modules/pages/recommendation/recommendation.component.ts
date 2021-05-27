@@ -12,12 +12,13 @@ import { AuthService } from 'src/app/core/security/auth.service';
   styleUrls: ['./recommendation.component.scss'],
 })
 export class RecommendationComponent implements OnInit {
-  favouriteRecipe: FavouriteRecipeVIEW = new FavouriteRecipeVIEW;
+  favouriteRecipe: FavouriteRecipeVIEW = new FavouriteRecipeVIEW();
   shortRecipes: ShortRecipeVIEW[];
   recipesData: any = [];
   generateComponents: number;
   errorMessage: any;
   logged: boolean;
+  notFoundRecipesError: String = 'Cannot find any recipes from given filter';
 
   constructor(
     private recipeService: RecipeService,

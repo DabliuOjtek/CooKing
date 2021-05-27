@@ -9,15 +9,29 @@ import { LoginPageComponent } from './modules/pages/login-page/login-page.compon
 import { RegistrationComponent } from './modules/pages/registration/registration.component';
 import { AuthGuard } from './gurads/auth.guard';
 import { IfLoginGuard } from './gurads/if-login.guard';
+import { PasswordChangeComponent } from './modules/pages/password-change/password-change.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'recipe', component: RecommendationComponent },
   { path: 'recipe/:id', component: RecipeComponent },
   { path: 'login', component: LoginPageComponent, canActivate: [AuthGuard] },
-  { path: 'favourite-recipe', component: FavouriteRecipeComponent, canActivate: [IfLoginGuard] },
-  { path: 'signup', component: RegistrationComponent, canActivate: [AuthGuard] },
+  {
+    path: 'favourite-recipe',
+    component: FavouriteRecipeComponent,
+    canActivate: [IfLoginGuard],
+  },
+  {
+    path: 'signup',
+    component: RegistrationComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'page-not-found', component: PageNotFoundComponent },
+  {
+    path: 'password-change',
+    component: PasswordChangeComponent,
+    canActivate: [IfLoginGuard],
+  },
   { path: '**', redirectTo: '/page-not-found' },
 ];
 
