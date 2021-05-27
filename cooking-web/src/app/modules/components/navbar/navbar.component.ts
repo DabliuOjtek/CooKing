@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SideNavService} from 'src/app/core/services/side-nav.service';
 import {AuthService} from "../../../core/security/auth.service";
-import {NavService} from "../../../core/services/nav.service";
+import {AuthLayoutService} from "../../../core/services/auth-layout.service";
 
 @Component({
   selector: 'app-navbar',
@@ -12,16 +12,19 @@ export class NavbarComponent implements OnInit {
 
   isLogged: boolean;
 
-  constructor(private sideNavService: SideNavService, private navService: NavService, private authService: AuthService) { }
+  constructor(
+    private sideNavService: SideNavService,
+    private authLayout: AuthLayoutService,
+    private authService: AuthService) {
+  }
 
   showSideNav() {
     this.sideNavService.showHide(true);
   }
 
   ngOnInit(): void {
-    this.navService.navIsLogged.subscribe(isLogged => this.isLogged = isLogged);
+    this.authLayout.isLogged.subscribe(isLogged => this.isLogged = isLogged);
     this.isLogged = this.authService.isLogged();
-    this.sideNavService.setLogged(this.isLogged);
   }
 
   logoutUser(): void {

@@ -1,11 +1,12 @@
-import { ErrorHandlerService } from './../../../core/services/error-handler.service';
-import { Component, OnInit } from '@angular/core';
-import { RecipeService } from './../../../core/services/recipe.service';
-import { RecipeVIEW } from './../../../core/models/recipe-view';
-import { ActivatedRoute } from '@angular/router';
-import { FavouriteRecipeVIEW } from 'src/app/core/models/favourite-recipe';
-import { FavouriteRecipeService } from 'src/app/core/services/favourite-recipe.service';
-import { AuthService } from 'src/app/core/security/auth.service';
+import {ErrorHandlerService} from './../../../core/services/error-handler.service';
+import {Component, OnInit} from '@angular/core';
+import {RecipeService} from './../../../core/services/recipe.service';
+import {RecipeVIEW} from './../../../core/models/recipe-view';
+import {ActivatedRoute} from '@angular/router';
+import {FavouriteRecipeVIEW} from 'src/app/core/models/favourite-recipe';
+import {FavouriteRecipeService} from 'src/app/core/services/favourite-recipe.service';
+import {AuthService} from 'src/app/core/security/auth.service';
+import {AuthLayoutService} from "../../../core/services/auth-layout.service";
 
 @Component({
   selector: 'app-recipe',
@@ -18,18 +19,21 @@ export class RecipeComponent implements OnInit {
   recipeSteps: any;
   difficultyLevel: number;
   rate: number;
-  logged: boolean;
+  isLogged: boolean;
 
   constructor(
     private recipeService: RecipeService,
     private activatedRoute: ActivatedRoute,
     private errorHandler: ErrorHandlerService,
     private favouriteRecipeService: FavouriteRecipeService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private authLayout: AuthLayoutService
+  ) {
+  }
 
   ngOnInit(): void {
-    this.isLogged();
+    this.authLayout.isLogged.subscribe(isLogged => this.isLogged = isLogged);
+    this.isLogged = this.authService.isLogged();
     this.getRecipe();
   }
 
@@ -74,9 +78,5 @@ export class RecipeComponent implements OnInit {
 
   addFavourite(recipe: FavouriteRecipeVIEW): void {
     this.favouriteRecipeService.addFavourites(recipe).subscribe();
-  }
-
-  isLogged() {
-    this.logged = this.authService.isLogged();
   }
 }

@@ -1,10 +1,11 @@
-import { FavouriteRecipeService } from './../../../core/services/favourite-recipe.service';
-import { ErrorHandlerService } from './../../../core/services/error-handler.service';
-import { ShortRecipeVIEW } from './../../../core/models/short-recipe-view';
-import { FavouriteRecipeVIEW } from './../../../core/models/favourite-recipe';
-import { RecipeService } from './../../../core/services/recipe.service';
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/security/auth.service';
+import {FavouriteRecipeService} from './../../../core/services/favourite-recipe.service';
+import {ErrorHandlerService} from './../../../core/services/error-handler.service';
+import {ShortRecipeVIEW} from './../../../core/models/short-recipe-view';
+import {FavouriteRecipeVIEW} from './../../../core/models/favourite-recipe';
+import {RecipeService} from './../../../core/services/recipe.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from 'src/app/core/security/auth.service';
+import {AuthLayoutService} from "../../../core/services/auth-layout.service";
 
 @Component({
   selector: 'app-recommendation',
@@ -15,20 +16,22 @@ export class RecommendationComponent implements OnInit {
   favouriteRecipe: FavouriteRecipeVIEW = new FavouriteRecipeVIEW();
   shortRecipes: ShortRecipeVIEW[];
   recipesData: any = [];
-  generateComponents: number;
   errorMessage: any;
-  logged: boolean;
+  isLogged: boolean;
   notFoundRecipesError: String = 'Cannot find any recipes from given filter';
 
   constructor(
     private recipeService: RecipeService,
     private errorHandler: ErrorHandlerService,
     private favouriteRecipeService: FavouriteRecipeService,
+    private authLayout: AuthLayoutService,
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.isLogged();
+    this.authLayout.isLogged.subscribe(isLogged => this.isLogged = isLogged);
+    this.isLogged = this.authService.isLogged();
     this.getShortRecipes();
   }
 
@@ -65,9 +68,5 @@ export class RecommendationComponent implements OnInit {
   ratesCounter(range: string) {
     const size = Number(range);
     return new Array(size);
-  }
-
-  isLogged() {
-    this.logged = this.authService.isLogged();
   }
 }

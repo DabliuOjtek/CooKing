@@ -9,7 +9,7 @@
               <img class="rating-icon" src="https://cookingstorage.blob.core.windows.net/icons/star.png" />
             </ng-container>
           </div>
-          <div *ngIf="logged">
+          <div *ngIf="isLogged">
             <button class="favourite-icon-button" mat-mini-fab aria-label="Remove from favourites" color="white"
               [ngClass]="recipe.favourite==false ? 'unliked-recipe' : 'liked-recipe'"
               (click)="onChangeFavourites(recipe)">
