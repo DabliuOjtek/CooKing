@@ -12,7 +12,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { DeleteUserDialogComponent } from './components/delete-user-dialog/delete-user-dialog.component';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -35,6 +34,5 @@ const MaterialComponents = [
 @NgModule({
   imports: [MaterialComponents],
   exports: [MaterialComponents],
-  declarations: [DeleteUserDialogComponent],
 })
 export class CookingModule {}
