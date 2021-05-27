@@ -3,7 +3,7 @@
   <hr>
   <div class="grid-tiles-container">
     <div class="tiles-container" *ngFor="let recipe of favouriteRecipes; let i = index">
-      <div class="tile-details">
+      <div class="tile-details" data-cy="tile-details">
         <img class="tile-image router-link" [routerLink]="['/recipe', recipe.recipeId]"
           [src]="favouriteRecipes[i].image" />
         <div class="content">
@@ -11,7 +11,7 @@
             <div class="tile-title mat-display-1 router-link" [routerLink]="['/recipe', recipe.recipeId]">
               {{ favouriteRecipes[i].name }}</div>
             <button class="favourite-icon-button" mat-icon-button color="warn" aria-label="Remove from favourites"
-              (click)="deleteFavourite(recipe.recipeId)">
+              (click)="deleteFavourite(recipe.recipeId)" data-cy="favourite-icon">
               <mat-icon>favorite</mat-icon>
             </button>
           </div>

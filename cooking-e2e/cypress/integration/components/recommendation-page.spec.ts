@@ -62,7 +62,6 @@ context("Recommedation page", () => {
         cy.get("[data-cy=tile-title]").should("be.visible");
         cy.get("[data-cy=tile-rate]").should("be.visible");
         cy.get("[data-cy=tile-image]").should("be.visible");
-        cy.get("[data-cy=fav-icon]").should("be.visible");
       });
   });
 });

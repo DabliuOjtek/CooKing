@@ -5,7 +5,7 @@
       <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/register">Sign up</button>
     </div>
     <ng-template #isLoginBlock>
-      <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/favourite-recipe">Favourites</button>
+      <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/favourite-recipe" data-cy="favourite">Favourites</button>
       <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/register">Change password</button>
       <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/register">Delete account</button>
       <button *ngIf="srcWidth <= 1000" class="sidenav-button" (click)="sidenav.toggle(); logoutUser()">Logout</button>

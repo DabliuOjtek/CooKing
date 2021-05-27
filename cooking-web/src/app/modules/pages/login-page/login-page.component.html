@@ -6,7 +6,7 @@
     <form class="login-form" (ngSubmit)="onSubmit()">
       <mat-form-field class="form-field">
         <mat-label>Username</mat-label>
-        <input type="username" matInput placeholder="Username" [formControl]="username">
+        <input type="username" matInput placeholder="Username" [formControl]="username" data-cy="username">
         <mat-error *ngIf="username.hasError('minlength') && !username.hasError('required')">
           Username must be at least 6 character
         </mat-error>
@@ -17,7 +17,7 @@
 
       <mat-form-field class="form-field">
         <mat-label>Password</mat-label>
-        <input type="password" matInput placeholder="Password" [formControl]="password">
+        <input type="password" matInput placeholder="Password" [formControl]="password" data-cy="password">
         <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
           Password must be at least 6 character
         </mat-error>
@@ -31,7 +31,7 @@
       </ng-container>
 
       <mat-card-actions>
-        <button type="submit" class="login-button" mat-raised-button color="primary">Login</button>
+        <button type="submit" class="login-button" mat-raised-button color="primary" data-cy="submit">Login</button>
       </mat-card-actions>
     </form>
 
