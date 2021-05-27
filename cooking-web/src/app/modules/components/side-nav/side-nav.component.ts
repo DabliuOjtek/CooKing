@@ -1,8 +1,10 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
-import {SideNavService} from 'src/app/core/services/side-nav.service';
-import {AuthService} from "../../../core/security/auth.service";
-import {AuthLayoutService} from "../../../core/services/auth-layout.service";
+import { Router } from '@angular/router';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { SideNavService } from 'src/app/core/services/side-nav.service';
+import { AuthService } from '../../../core/security/auth.service';
+import { AuthLayoutService } from '../../../core/services/auth-layout.service';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-side-nav',
@@ -14,25 +16,41 @@ export class SideNavComponent implements OnInit {
   isLogged: boolean;
   srcWidth: any;
 
-  constructor(private sideNavService: SideNavService, private authLayout: AuthLayoutService, private authService: AuthService, private dialog: MatDialog) {
-  }
+  constructor(
+    private sideNavService: SideNavService,
+    private authLayout: AuthLayoutService,
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.sideNavService.sideNavState.subscribe(state => this.opened = state);
-    this.authLayout.isLogged.subscribe(isLogged => this.isLogged = isLogged)
+    this.sideNavService.sideNavState.subscribe((state) => (this.opened = state));
+    this.authLayout.isLogged.subscribe((isLogged) => (this.isLogged = isLogged));
     this.isLogged = this.authService.isLogged();
   }
 
-  logoutUser() {
+  onLogoutUser() {
     this.authService.logout().subscribe();
   }
 
-  deleteUser() {
-    // this.dialog.open(DeleteUserDialogComponent);
+  onDeleteUser() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Are you sure?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      if (dialogResult) {
+        this.authService.deleteUser().subscribe();
+        this.router.navigate(['/signup']);
+      }
+    });
   }
 
   @HostListener('window:resize', ['$event'])
-  getScreenWidth(event?) {
+  getScreenSize(event?: any) {
     this.srcWidth = window.innerWidth;
   }
 }

@@ -1,4 +1,4 @@
-import { DeleteUserDialogComponent } from './modules/components/delete-user-dialog/delete-user-dialog.component';
+import { ConfirmDialogComponent } from './modules/components/confirm-dialog/confirm-dialog.component';
 import { SliderItemDirective } from './modules/components/slider/slider-item.directive';
 import { QuestionnaireDialogComponent } from './modules/components/questionnaire-dialog/questionnaire-dialog.component';
 import { QuestionnaireComponent } from './modules/components/questionnaire/questionnaire.component';
@@ -30,7 +30,7 @@ import { PasswordChangeComponent } from './modules/pages/password-change/passwor
     RegistrationComponent,
     PasswordStrengthBarComponent,
     PasswordChangeComponent,
-    DeleteUserDialogComponent,
+    ConfirmDialogComponent,
     routingComponents,
   ],
   imports: [
