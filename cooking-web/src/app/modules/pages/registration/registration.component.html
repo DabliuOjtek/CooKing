@@ -5,32 +5,32 @@
     <form class="signup-form" (ngSubmit)="onSubmit()">
       <mat-form-field class="form-field">
         <mat-label>Username</mat-label>
-        <input type="username" matInput placeholder="Username" [formControl]="username">
+        <input type="username" matInput placeholder="Username" [formControl]="username" />
         <mat-error *ngIf="username.hasError('minlength') && !username.hasError('required')">
           Username must be at least 6 character
         </mat-error>
-        <mat-error *ngIf=" username.hasError('required')">
-          Username is required
-        </mat-error>
+        <mat-error *ngIf="username.hasError('required')"> Username is required </mat-error>
       </mat-form-field>
 
       <mat-form-field class="form-field">
         <mat-label>Password</mat-label>
-        <input type="password" matInput placeholder="Password" [formControl]="password" [(ngModel)]="passwordValidator">
+        <input
+          type="password"
+          matInput
+          placeholder="Password"
+          [formControl]="password"
+          [(ngModel)]="passwordValidator"
+        />
         <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
           Password must be at least 6 character
         </mat-error>
-        <mat-error *ngIf=" password.hasError('required')">
-          Password is required
-        </mat-error>
+        <mat-error *ngIf="password.hasError('required')"> Password is required </mat-error>
       </mat-form-field>
 
       <mat-form-field class="form-field">
         <mat-label>Confirm Password</mat-label>
-        <input type="password" matInput placeholder="Password" [formControl]="confirmPassword">
-        <mat-error *ngIf=" confirmPassword.hasError('required')">
-          Confirm Password is required
-        </mat-error>
+        <input type="password" matInput placeholder="Password" [formControl]="confirmPassword" />
+        <mat-error *ngIf="confirmPassword.hasError('required')"> Confirm Password is required </mat-error>
       </mat-form-field>
 
       <app-password-strength-bar [passwordToCheck]="passwordValidator" [barLabel]="barLabel">

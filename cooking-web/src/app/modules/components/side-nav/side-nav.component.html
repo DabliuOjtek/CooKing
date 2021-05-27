@@ -1,15 +1,17 @@
 <mat-sidenav-container class="sidenav-container" [hasBackdrop]="false">
   <mat-sidenav class="sidenav" #sidenav position="end" [(opened)]="opened">
-    <div *ngIf="!isLogged; else isLoginBlock">
+    <ng-container *ngIf="!isLogged">
       <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/login">Log in</button>
       <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/register">Sign up</button>
-    </div>
-    <ng-template #isLoginBlock>
-      <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/favourite-recipe" data-cy="favourite">Favourites</button>
+    </ng-container>
+    <ng-container *ngIf="isLogged">
+      <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/favourite-recipe">Favourites</button>
       <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/register">Change password</button>
-      <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/register">Delete account</button>
+      <button class="sidenav-button" (click)="sidenav.toggle(); deleteUser()" routerLink="/register">
+        Delete account
+      </button>
       <button *ngIf="srcWidth <= 1000" class="sidenav-button" (click)="sidenav.toggle(); logoutUser()">Logout</button>
-    </ng-template>
+    </ng-container>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>

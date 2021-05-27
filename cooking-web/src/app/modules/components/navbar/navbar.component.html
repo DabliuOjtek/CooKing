@@ -2,20 +2,28 @@
   <div class="nav-title mat-subheading-1" data-cy="nav-title">
     <a class="nav-link" routerLink="">CooKing</a>
   </div>
-  <div *ngIf="!isLogged; else isLoginBlock" >
+  <ng-container *ngIf="!isLogged">
     <img (click)="showSideNav()" class='burger-icon'
-         src="https://cookingstorage.blob.core.windows.net/icons/menu-hamburger.svg"/>
+      src="https://cookingstorage.blob.core.windows.net/icons/menu-hamburger.svg" />
     <div class="buttons">
       <a mat-button routerLink="/login" data-cy="log-in">Log in</a>
       <a mat-raised-button color="primary" routerLink="/signup">Sign up</a>
     </div>
+<<<<<<< Updated upstream
   </div>
   <ng-template #isLoginBlock>
     <div class="cos">
       <a mat-raised-button class="logout-button" color="primary" (click)="logoutUser()" data-cy="logout">Logout</a>
       <img (click)="showSideNav()" class="burger-icon-logged" data-cy="burger-icon"
            src="https://cookingstorage.blob.core.windows.net/icons/menu-hamburger.svg">
+=======
+  </ng-container>
+  <ng-container *ngIf="isLogged">
+    <div class="logout-container">
+      <a mat-raised-button class="logout-button" color="primary" (click)="logoutUser()">Logout</a>
+      <img (click)="showSideNav()" class="burger-icon-logged"
+        src="https://cookingstorage.blob.core.windows.net/icons/menu-hamburger.svg" />
+>>>>>>> Stashed changes
     </div>
-  </ng-template>
-
+  </ng-container>
 </mat-toolbar>

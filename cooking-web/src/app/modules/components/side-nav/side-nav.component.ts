@@ -1,6 +1,6 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
-import {SideNavService} from 'src/app/core/services/side-nav.service';
-import {AuthService} from "../../../core/security/auth.service";
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { SideNavService } from 'src/app/core/services/side-nav.service';
+import { AuthService } from '../../../core/security/auth.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -12,16 +12,20 @@ export class SideNavComponent implements OnInit {
   isLogged = false;
   srcWidth: any;
 
-  constructor(private sideNavService: SideNavService, private authService: AuthService) {
-  }
+  constructor(private sideNavService: SideNavService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.sideNavService.sideNavState.subscribe(state => this.opened = state);
-    this.sideNavService.sideNavIsLogged.subscribe(isLogged => this.isLogged = isLogged);
+    this.sideNavService.sideNavState.subscribe((state) => (this.opened = state));
+    this.sideNavService.sideNavIsLogged.subscribe((isLogged) => (this.isLogged = isLogged));
   }
 
   logoutUser() {
     this.authService.logout().subscribe();
+  }
+
+  deleteUser() {
+    this.authService.deleteUser();
+    this.dialog.open(QuestionnaireDialogComponent);
   }
 
   @HostListener('window:resize', ['$event'])

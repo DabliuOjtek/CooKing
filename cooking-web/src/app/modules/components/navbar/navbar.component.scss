@@ -3,16 +3,25 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-content: center;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin: 0 2vw 0 0;
 }
 
 .nav-title {
   margin: 0 0 0 2vw;
 }
 
-.cos {
+.logout-container {
   width: 10rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin: 0 2vw 0 0;
 }
 
 .mat-toolbar {
@@ -31,9 +40,10 @@
   text-decoration: none;
 }
 
-.burger-icon, .burger-icon-logged {
-  width: calc(0.4em + 1vw);
-  height: calc(0.4em + 1vw);
+.burger-icon,
+.burger-icon-logged {
+  width: calc(0.5em + 0.5vw);
+  height: calc(0.5em + 0.5vw);
   display: none;
 
   &:hover {
@@ -49,10 +59,16 @@
   .buttons {
     display: none;
   }
+
   .burger-icon {
     display: inline;
   }
+
   .logout-button {
     display: none;
+  }
+
+  .logout-container {
+    justify-content: flex-end;
   }
 }
