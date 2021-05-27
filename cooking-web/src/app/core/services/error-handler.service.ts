@@ -17,8 +17,6 @@ export class ErrorHandlerService {
       return this.handleErrorsForLogin(error);
     } else if (error.status === 400) {
       return this.handleError400(error);
-    } else if (error.status === 400) {
-      this.handleError400(error);
     } else if (error.status === 400 && endpoint === 'signup') {
       this.handleErrorForSignUp(error);
     } else if (error.status === 404) {

@@ -1,16 +1,18 @@
 @import '../../../../assets/styles/cooking-style.scss';
 
-.space {
-  flex: 1 1 auto;
-}
-
-.space2,
-.space3 {
-  width: 0.5rem;
+.navbar {
+  display: flex;
+  justify-content: space-between;
 }
 
 .nav-title {
   margin: 0 0 0 2vw;
+}
+
+.cos {
+  width: 10rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .mat-toolbar {
@@ -20,6 +22,7 @@
 
 .mat-raised-button {
   border-radius: 2rem;
+  height: 2rem;
 }
 
 .nav-link {
@@ -28,22 +31,28 @@
   text-decoration: none;
 }
 
-.burger-icon {
+.burger-icon, .burger-icon-logged {
   width: calc(0.4em + 1vw);
   height: calc(0.4em + 1vw);
   display: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
-.burger-icon:hover {
-  cursor: pointer;
+
+.burger-icon-logged {
+  display: inline;
 }
 
 @media (max-width: 1000px) {
-  .mat-button,
-  .mat-raised-button,
-  .space3 {
+  .buttons {
     display: none;
   }
   .burger-icon {
     display: inline;
+  }
+  .logout-button {
+    display: none;
   }
 }

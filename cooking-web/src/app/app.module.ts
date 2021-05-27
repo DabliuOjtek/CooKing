@@ -9,12 +9,13 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './modules/components/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookingModule } from './modules/cooking.module';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SideNavComponent } from './modules/components/side-nav/side-nav.component';
 import { RegistrationComponent } from './modules/pages/registration/registration.component';
 import { PasswordStrengthBarComponent } from './modules/components/password-strength-bar/password-strength-bar.component';
-import { TokenInterceptor } from "./core/security/token.interceptor";
+import { TokenInterceptor } from './core/security/token.interceptor';
+import { PasswordChangeComponent } from './modules/pages/password-change/password-change.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { TokenInterceptor } from "./core/security/token.interceptor";
     SideNavComponent,
     RegistrationComponent,
     PasswordStrengthBarComponent,
+    PasswordChangeComponent,
     routingComponents,
   ],
   imports: [
@@ -43,8 +45,8 @@ import { TokenInterceptor } from "./core/security/token.interceptor";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

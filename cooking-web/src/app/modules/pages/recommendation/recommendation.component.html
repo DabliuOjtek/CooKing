@@ -2,7 +2,7 @@
   <span class="recommendation-title mat-subheading-2" data-cy="recommendation-title">Recommendation</span>
   <hr>
   <div *ngIf="errorMessage">
-    <p *ngFor="let error of errorMessage" class="error-message">{{error}}</p>
+    <p class="error-message">{{notFoundRecipesError}}</p>
   </div>
   <div class="grid-tiles-container" data-cy="tiles-container">
     <div class="tiles-container" *ngFor="let recipe of shortRecipes; let i = index">
@@ -19,10 +19,11 @@
             </ng-container>
           </div>
           <div *ngIf="logged">
-          <button class="favourite-icon-button absolute" mat-mini-fab aria-label="Remove from favourites" color="white"
-            color="white" [ngClass]="recipe.favourite==false ? 'unliked-recipe' : 'liked-recipe'" data-cy="fav-icon" (click)="onChangeFavourites(recipe)">
-            <mat-icon>favorite</mat-icon>
-          </button>
+            <button class="favourite-icon-button absolute" mat-mini-fab aria-label="Remove from favourites"
+              color="white" color="white" [ngClass]="recipe.favourite==false ? 'unliked-recipe' : 'liked-recipe'"
+              data-cy="fav-icon" (click)="onChangeFavourites(recipe)">
+              <mat-icon>favorite</mat-icon>
+            </button>
           </div>
         </div>
       </div>

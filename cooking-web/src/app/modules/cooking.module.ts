@@ -34,5 +34,6 @@ const MaterialComponents = [
 @NgModule({
   imports: [MaterialComponents],
   exports: [MaterialComponents],
+  declarations: [],
 })
 export class CookingModule {}
