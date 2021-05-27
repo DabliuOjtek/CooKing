@@ -3,11 +3,8 @@
     <a class="nav-link" routerLink="">CooKing</a>
   </div>
   <ng-container *ngIf="!isLogged">
-    <img
-      (click)="showSideNav()"
-      class="burger-icon"
-      src="https://cookingstorage.blob.core.windows.net/icons/menu-hamburger.svg"
-    />
+    <img (click)="showSideNav()" class="burger-icon"
+      src="https://cookingstorage.blob.core.windows.net/icons/menu-hamburger.svg" />
     <div class="buttons">
       <a mat-button routerLink="/login" data-cy="log-in">Log in</a>
       <a mat-raised-button color="primary" routerLink="/signup">Sign up</a>
@@ -16,11 +13,8 @@
   <ng-container *ngIf="isLogged">
     <div class="logout-container">
       <a mat-raised-button class="logout-button" color="primary" (click)="logoutUser()">Logout</a>
-      <img
-        (click)="showSideNav()"
-        class="burger-icon-logged"
-        src="https://cookingstorage.blob.core.windows.net/icons/menu-hamburger.svg"
-      />
+      <img (click)="showSideNav()" class="burger-icon-logged"
+        src="https://cookingstorage.blob.core.windows.net/icons/menu-hamburger.svg" />
     </div>
   </ng-container>
 </mat-toolbar>

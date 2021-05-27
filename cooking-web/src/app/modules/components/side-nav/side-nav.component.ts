@@ -1,6 +1,8 @@
+import { DeleteUserDialogComponent } from './../delete-user-dialog/delete-user-dialog.component';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { SideNavService } from 'src/app/core/services/side-nav.service';
 import { AuthService } from '../../../core/security/auth.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-side-nav',
@@ -12,7 +14,7 @@ export class SideNavComponent implements OnInit {
   isLogged = false;
   srcWidth: any;
 
-  constructor(private sideNavService: SideNavService, private authService: AuthService) {}
+  constructor(private sideNavService: SideNavService, private authService: AuthService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.sideNavService.sideNavState.subscribe((state) => (this.opened = state));
@@ -24,8 +26,7 @@ export class SideNavComponent implements OnInit {
   }
 
   deleteUser() {
-    this.authService.deleteUser();
-    this.dialog.open(QuestionnaireDialogComponent);
+    this.dialog.open(DeleteUserDialogComponent);
   }
 
   @HostListener('window:resize', ['$event'])
