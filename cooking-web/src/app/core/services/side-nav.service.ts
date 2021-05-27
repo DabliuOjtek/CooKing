@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {NavbarComponent} from "../../modules/components/navbar/navbar.component";
 
 @Injectable({
   providedIn: 'root',
@@ -7,18 +8,25 @@ import { BehaviorSubject } from 'rxjs';
 export class SideNavService {
   serviceOpened = false;
 
-  private sideNavBehavior = new BehaviorSubject<boolean>(false);
-  currentState = this.sideNavBehavior.asObservable();
-  constructor() {}
+  private sideNavBehaviorState = new BehaviorSubject<boolean>(false);
+  private sideNavBehaviorLogged = new BehaviorSubject<boolean>(false);
+  sideNavState = this.sideNavBehaviorState.asObservable();
+  sideNavIsLogged = this.sideNavBehaviorLogged.asObservable();
 
-  changeState(state: boolean) {
+  constructor() {
+  }
+
+  showHide(state: boolean) {
     if (this.serviceOpened !== state) {
       this.serviceOpened = state;
     } else {
       this.serviceOpened = false;
       state = false;
     }
+    this.sideNavBehaviorState.next(state);
+  }
 
-    this.sideNavBehavior.next(state);
+  setLogged(isLogged: boolean) {
+    this.sideNavBehaviorLogged.next(isLogged);
   }
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { SideNavService } from 'src/app/core/services/side-nav.service';
-import { MatSidenav } from '@angular/material/sidenav';
+import {Component, OnInit} from '@angular/core';
+import {SideNavService} from 'src/app/core/services/side-nav.service';
+import {AuthService} from "../../../core/security/auth.service";
+import {NavService} from "../../../core/services/nav.service";
 
 @Component({
   selector: 'app-navbar',
@@ -9,15 +10,21 @@ import { MatSidenav } from '@angular/material/sidenav';
 })
 export class NavbarComponent implements OnInit {
 
-  @ViewChildren('sidenav') public Mynav: MatSidenav;
+  isLogged: boolean;
 
-  constructor(private sideNavService: SideNavService) {
+  constructor(private sideNavService: SideNavService, private navService: NavService, private authService: AuthService) { }
 
+  showSideNav() {
+    this.sideNavService.showHide(true);
   }
 
-  onChangeState(){
-    this.sideNavService.changeState(true)
-  }
   ngOnInit(): void {
+    this.navService.navIsLogged.subscribe(isLogged => this.isLogged = isLogged);
+    this.isLogged = this.authService.isLogged();
+    this.sideNavService.setLogged(this.isLogged);
+  }
+
+  logoutUser(): void {
+    this.authService.logout().subscribe();
   }
 }
