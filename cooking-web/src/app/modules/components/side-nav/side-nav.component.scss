@@ -31,6 +31,10 @@ mat-sidenav-content::-webkit-scrollbar-thumb {
   background-color: mat-color($cooking-primary);
 }
 
+::ng-deep .mat-drawer-backdrop.mat-drawer-shown {
+  background-color: transparent;
+}
+
 .mat-drawer {
   padding: 0px;
   display: table !important;

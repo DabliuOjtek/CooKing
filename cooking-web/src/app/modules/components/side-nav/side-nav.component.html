@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container" [hasBackdrop]="false">
+<mat-sidenav-container class="sidenav-container">
   <mat-sidenav class="sidenav" #sidenav position="end" [(opened)]="opened">
     <ng-container *ngIf="!isLogged">
       <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/login">Log in</button>
