@@ -10,10 +10,11 @@
             </ng-container>
           </div>
           <div *ngIf="logged">
-          <button class="favourite-icon-button" mat-mini-fab aria-label="Remove from favourites" color="white"
-          [ngClass]="recipe.favourite==false ? 'unliked-recipe' : 'liked-recipe'" (click)="onChangeFavourites(recipe)">
-            <mat-icon>favorite</mat-icon>
-          </button>
+            <button class="favourite-icon-button" mat-mini-fab aria-label="Remove from favourites" color="white"
+              [ngClass]="recipe.favourite==false ? 'unliked-recipe' : 'liked-recipe'"
+              (click)="onChangeFavourites(recipe)">
+              <mat-icon>favorite</mat-icon>
+            </button>
           </div>
         </div>
       </div>
@@ -31,10 +32,9 @@
       <div class="difficulty">
         <div class="mat-display-2">Difficulty</div>
         <div class="difficulty-icons">
-          <ul class="difficulty-icon">
-            <ng-container *ngFor="let i of [].constructor(difficultyLevel)"><img
-                src="https://cookingstorage.blob.core.windows.net/icons/chef.svg" /></ng-container>
-          </ul>
+          <ng-container *ngFor="let i of [].constructor(difficultyLevel)">
+            <img class="difficulty-icon" src="https://cookingstorage.blob.core.windows.net/icons/chef.svg" />
+          </ng-container>
         </div>
       </div>
 
