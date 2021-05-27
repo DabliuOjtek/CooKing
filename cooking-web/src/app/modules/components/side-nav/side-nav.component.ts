@@ -37,7 +37,7 @@ export class SideNavComponent implements OnInit {
   onDeleteUser() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: 'Are you sure?',
+        title: 'Are you sure you want to delete the account?',
       },
     });
 
