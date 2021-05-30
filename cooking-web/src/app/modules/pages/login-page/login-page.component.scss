@@ -10,6 +10,10 @@
   margin: 6rem 10%;
 }
 
+.container-wrapper {
+  min-width: 26.7rem;
+}
+
 .form-field {
   box-sizing: border-box;
   margin-top: 1rem;
@@ -56,5 +60,11 @@
     text-decoration: none;
     color: mat-color($cooking-accent);
     font-weight: 700;
+  }
+}
+
+@media (max-width: 400px) {
+  .container-wrapper {
+    min-width: 0rem;
   }
 }

@@ -15,11 +15,23 @@ export class RegistrationComponent implements OnInit {
   passwordValidator = null;
   barLabel = 'Password strength:';
 
-  username = new FormControl('', [Validators.required, Validators.minLength(6)]);
-  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  username = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6),
+    Validators.maxLength(50),
+  ]);
+  password = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6),
+    Validators.maxLength(100),
+  ]);
   confirmPassword = new FormControl('', [Validators.required]);
 
-  constructor(private authService: AuthService, private router: Router, private errorHandler: ErrorHandlerService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private errorHandler: ErrorHandlerService
+  ) {}
 
   ngOnInit() {}
 
@@ -29,7 +41,10 @@ export class RegistrationComponent implements OnInit {
     const passwordValue = this.password.value;
     const confirmPassword = this.confirmPassword.value;
 
-    this.passwordsMatch = this.checkIfPasswordsMatch(passwordValue, confirmPassword);
+    this.passwordsMatch = this.checkIfPasswordsMatch(
+      passwordValue,
+      confirmPassword
+    );
 
     if (this.passwordsMatch) {
       this.registerUser(usernameValue, passwordValue);
@@ -39,21 +54,26 @@ export class RegistrationComponent implements OnInit {
   }
 
   private registerUser(username: string, password: string) {
-    this.authService.signup({ username: username, password: password }).subscribe(
-      (response) => {
-        this.navigateToLoginPage();
-      },
-      (error) => {
-        this.errorHandler.handleError(error);
-      }
-    );
+    this.authService
+      .signup({ username: username, password: password })
+      .subscribe(
+        (response) => {
+          this.navigateToLoginPage();
+        },
+        (error) => {
+          this.errorHandler.handleError(error);
+        }
+      );
   }
 
   private navigateToLoginPage(): void {
     this.router.navigate(['/login']);
   }
 
-  private checkIfPasswordsMatch(password: string, confirmPassword: string): boolean {
+  private checkIfPasswordsMatch(
+    password: string,
+    confirmPassword: string
+  ): boolean {
     if (password === confirmPassword) {
       return true;
     } else {

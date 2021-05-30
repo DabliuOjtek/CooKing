@@ -10,6 +10,9 @@
         <mat-error *ngIf="username.hasError('minlength') && !username.hasError('required')">
           Username must be at least 6 character
         </mat-error>
+        <mat-error *ngIf="username.hasError('maxlength') && !username.hasError('required')">
+          Username must be maxium 50 character
+        </mat-error>
         <mat-error *ngIf=" username.hasError('required')">
           Username is required
         </mat-error>
@@ -20,6 +23,9 @@
         <input type="password" matInput placeholder="Password" [formControl]="password" data-cy="password">
         <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
           Password must be at least 6 character
+        </mat-error>
+        <mat-error *ngIf="password.hasError('maxlength') && !password.hasError('required')">
+          Password must be maximum 100 character
         </mat-error>
         <mat-error *ngIf=" password.hasError('required')">
           Password is required
