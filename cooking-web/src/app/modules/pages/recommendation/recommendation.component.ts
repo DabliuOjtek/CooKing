@@ -4,7 +4,6 @@ import {ShortRecipeVIEW} from './../../../core/models/short-recipe-view';
 import {FavouriteRecipeVIEW} from './../../../core/models/favourite-recipe';
 import {RecipeService} from './../../../core/services/recipe.service';
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from 'src/app/core/security/auth.service';
 import {AuthLayoutService} from "../../../core/services/auth-layout.service";
 
 @Component({
@@ -24,14 +23,12 @@ export class RecommendationComponent implements OnInit {
     private recipeService: RecipeService,
     private errorHandler: ErrorHandlerService,
     private favouriteRecipeService: FavouriteRecipeService,
-    private authLayout: AuthLayoutService,
-    private authService: AuthService
+    private authLayout: AuthLayoutService
   ) {
   }
 
   ngOnInit(): void {
     this.authLayout.isLogged.subscribe(isLogged => this.isLogged = isLogged);
-    this.isLogged = this.authService.isLogged();
     this.getShortRecipes();
   }
 

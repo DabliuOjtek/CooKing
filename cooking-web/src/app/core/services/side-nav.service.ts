@@ -5,7 +5,6 @@ import {BehaviorSubject} from 'rxjs';
   providedIn: 'root',
 })
 export class SideNavService {
-  serviceOpened = false;
 
   private sideNavBehaviorState = new BehaviorSubject<boolean>(false);
   sideNavState = this.sideNavBehaviorState.asObservable();
@@ -14,12 +13,6 @@ export class SideNavService {
   }
 
   showHide(state: boolean) {
-    if (this.serviceOpened !== state) {
-      this.serviceOpened = state;
-    } else {
-      this.serviceOpened = false;
-      state = false;
-    }
     this.sideNavBehaviorState.next(state);
   }
 }

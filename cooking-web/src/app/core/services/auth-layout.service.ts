@@ -6,7 +6,9 @@ import {BehaviorSubject} from "rxjs";
 })
 export class AuthLayoutService {
 
-  private behaviorIsLogged = new BehaviorSubject<boolean>(false);
+  private LS_TOKEN = 'JWT_TOKEN';
+
+  private behaviorIsLogged = new BehaviorSubject<boolean>(!!localStorage.getItem(this.LS_TOKEN));
   isLogged = this.behaviorIsLogged.asObservable();
 
   constructor() { }

@@ -5,7 +5,6 @@ import {RecipeVIEW} from './../../../core/models/recipe-view';
 import {ActivatedRoute} from '@angular/router';
 import {FavouriteRecipeVIEW} from 'src/app/core/models/favourite-recipe';
 import {FavouriteRecipeService} from 'src/app/core/services/favourite-recipe.service';
-import {AuthService} from 'src/app/core/security/auth.service';
 import {AuthLayoutService} from "../../../core/services/auth-layout.service";
 
 @Component({
@@ -26,14 +25,12 @@ export class RecipeComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private errorHandler: ErrorHandlerService,
     private favouriteRecipeService: FavouriteRecipeService,
-    private authService: AuthService,
     private authLayout: AuthLayoutService
   ) {
   }
 
   ngOnInit(): void {
     this.authLayout.isLogged.subscribe(isLogged => this.isLogged = isLogged);
-    this.isLogged = this.authService.isLogged();
     this.getRecipe();
   }
 

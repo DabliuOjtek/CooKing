@@ -3,6 +3,8 @@ import { ErrorHandlerService } from './../../../core/services/error-handler.serv
 import { ShortRecipeVIEW } from './../../../core/models/short-recipe-view';
 import { RecipeService } from './../../../core/services/recipe.service';
 import { Component, OnInit } from '@angular/core';
+import {AuthLayoutService} from "../../../core/services/auth-layout.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-favourite-recipe',
@@ -12,15 +14,21 @@ import { Component, OnInit } from '@angular/core';
 export class FavouriteRecipeComponent implements OnInit {
   favouriteRecipes: ShortRecipeVIEW[];
   recipesData: any = [];
-  generateComponents: number;
 
   constructor(
     private recipeService: RecipeService,
     private errorHandler: ErrorHandlerService,
-    private favouriteRecipeService: FavouriteRecipeService
+    private favouriteRecipeService: FavouriteRecipeService,
+    private authLayout: AuthLayoutService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.authLayout.isLogged.subscribe((isLogged) => {
+      if (!isLogged && this.router.url === '/favourite-recipe') {
+        this.router.navigate(['/']);
+      }
+    });
     this.getFavourite();
   }
 

@@ -11,6 +11,7 @@ import {AuthLayoutService} from "../../../core/services/auth-layout.service";
 export class NavbarComponent implements OnInit {
 
   isLogged: boolean;
+  isSideBarOpen = false;
 
   constructor(
     private sideNavService: SideNavService,
@@ -19,12 +20,13 @@ export class NavbarComponent implements OnInit {
   }
 
   showSideNav() {
-    this.sideNavService.showHide(true);
+    this.isSideBarOpen = !this.isSideBarOpen;
+    this.sideNavService.showHide(this.isSideBarOpen);
   }
 
   ngOnInit(): void {
     this.authLayout.isLogged.subscribe(isLogged => this.isLogged = isLogged);
-    this.isLogged = this.authService.isLogged();
+    this.sideNavService.sideNavState.subscribe( isSideBarOpen => this.isSideBarOpen = isSideBarOpen);
   }
 
   logoutUser(): void {

@@ -7,12 +7,15 @@ import { AuthService } from '../core/security/auth.service';
   providedIn: 'root',
 })
 export class IfLoginGuard implements CanActivate {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    if (!this.authService.isLogged()) {
+      this.router.navigate(['/']);
+    }
     return this.authService.isLogged();
   }
 }

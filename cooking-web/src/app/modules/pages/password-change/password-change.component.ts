@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/security/auth.service';
-import { FormControl, Validators } from '@angular/forms';
-import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from 'src/app/core/security/auth.service';
+import {FormControl, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthLayoutService} from "../../../core/services/auth-layout.service";
 
 @Component({
   selector: 'app-password-change',
@@ -31,10 +31,16 @@ export class PasswordChangeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private errorHandler: ErrorHandlerService
+    private authLayout: AuthLayoutService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authLayout.isLogged.subscribe((isLogged) => {
+      if (!isLogged && this.router.url === '/password-change') {
+        this.router.navigate(['/']);
+      }
+    });
+  }
 
   onSubmit() {
     this.isSignUpValid = true;
