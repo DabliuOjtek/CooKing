@@ -60,7 +60,7 @@
   transform: rotate(45deg);
 }
 
-@media(min-width: 1185px) {
+@media screen and (min-width: 1185px) {
   .button-arrow {
     display: none;
   }

@@ -61,9 +61,7 @@ export class PasswordStrengthBarComponent implements OnChanges {
     var password = changes['passwordToCheck'].currentValue;
     this.setBarColors(5, '#DDD');
     if (password) {
-      let c = this.getColor(
-        PasswordStrengthBarComponent.measureStrength(password)
-      );
+      let c = this.getColor(PasswordStrengthBarComponent.measureStrength(password));
       this.setBarColors(c.idx, c.col);
     }
   }

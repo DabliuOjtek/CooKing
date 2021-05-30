@@ -1,7 +1,9 @@
 <mat-toolbar class="navbar">
   <div class="nav-title mat-subheading-1" data-cy="nav-title">
+    <a routerLink=""><img class="logo" src="https://cookingstorage.blob.core.windows.net/icons/logo.svg"></a>
     <a class="nav-link" routerLink="">CooKing</a>
   </div>
+
   <ng-container *ngIf="!isLogged">
     <img (click)="showSideNav()" class="burger-icon"
       src="https://cookingstorage.blob.core.windows.net/icons/menu-hamburger.svg" />

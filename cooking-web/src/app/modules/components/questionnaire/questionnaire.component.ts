@@ -83,15 +83,12 @@ export class QuestionnaireComponent implements OnInit {
       (response: any) => {
         this.questionnaire = response;
         if (response) {
-          this.questionnaire.sort(
-            (a, b) => QuestionnaireTypes[a.type] - QuestionnaireTypes[b.type]
-          );
+          this.questionnaire.sort((a, b) => QuestionnaireTypes[a.type] - QuestionnaireTypes[b.type]);
         }
       },
       (error) => {
         this.errorHandler.handleError(error);
-      },
-      () => console.log('HTTP Questionnaire request completed.')
+      }
     );
   }
 
@@ -100,11 +97,7 @@ export class QuestionnaireComponent implements OnInit {
       (response: any) => {
         this.questions = response;
         if (response) {
-          this.questions.sort(
-            (a, b) =>
-              QuestionnaireQuestionTypes[a.type] -
-              QuestionnaireQuestionTypes[b.type]
-          );
+          this.questions.sort((a, b) => QuestionnaireQuestionTypes[a.type] - QuestionnaireQuestionTypes[b.type]);
         }
       },
       (error) => {
@@ -112,7 +105,6 @@ export class QuestionnaireComponent implements OnInit {
         this.errorHandler.handleError(error);
       },
       () => {
-        console.log('HTTP Questions request completed.');
         this.lengthOfQuestions = Object.keys(this.questions).length;
       }
     );

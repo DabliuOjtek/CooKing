@@ -13,6 +13,9 @@
 }
 
 .nav-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 0 0 2vw;
 }
 
@@ -35,6 +38,7 @@
 }
 
 .nav-link {
+  margin-left: 1vw;
   color: black;
   cursor: pointer;
   text-decoration: none;
@@ -55,7 +59,12 @@
   display: inline;
 }
 
-@media (max-width: 1000px) {
+.logo {
+  width: 3rem;
+  height: 3rem;
+}
+
+@media screen and (max-width: 1000px) {
   .buttons {
     display: none;
   }
@@ -71,4 +80,17 @@
   .logout-container {
     justify-content: flex-end;
   }
+}
+
+@media screen and (max-width: 480px) {
+  .logo {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .nav-link {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
+
 }

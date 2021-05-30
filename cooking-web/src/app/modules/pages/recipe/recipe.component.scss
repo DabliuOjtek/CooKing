@@ -186,6 +186,14 @@ hr {
   list-style: none;
 }
 
+.ingredient li {
+  padding-bottom: 1rem;
+}
+
+.ingredient span {
+  color: mat-color($cooking-primary);
+}
+
 .ingredient li::before {
   content: '\2022';
   color: mat-color($cooking-primary, 500);
@@ -216,10 +224,17 @@ hr {
 
 .instruction-step li {
   counter-increment: li;
-  padding-bottom: 1vw;
+  padding-bottom: 1rem;
 }
 
-@media (max-width: 1000px) {
+mark {
+  display: inline-block;
+  line-height: 0em;
+  padding-bottom: 0.5em;
+  background-color: mat-color($cooking-primary, 500);
+}
+
+@media screen and (max-width: 1000px) {
   .container {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, auto);
@@ -229,5 +244,15 @@ hr {
       'recipe-details-section'
       'recipe-ingredients-list-section'
       'recipe-instructions-section';
+  }
+}
+
+@media screen and (max-width: 480px) {
+  li {
+    font-size: 1rem;
+  }
+
+  mat-icon {
+    font-size: 1.2rem;
   }
 }

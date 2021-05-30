@@ -66,8 +66,10 @@
     <div class="ingredients-list">
       <div class="mat-display-2">Ingredients:</div>
       <ul class="ingredient">
-        <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient.quantity }} {{ ingredient.unitDictEntityValue }}
-          {{ ingredient.name }}</li>
+        <li *ngFor="let ingredient of recipe.ingredients">
+          <span><strong>{{ ingredient.quantity }}</strong></span> {{ ingredient.unitDictEntityValue }}
+          {{ ingredient.name }}
+        </li>
       </ul>
     </div>
   </div>

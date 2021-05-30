@@ -90,7 +90,7 @@ hr {
   margin: 0 0 3vw 0;
 }
 
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
   .grid-tiles-container {
     grid-template-columns: 1fr;
   }

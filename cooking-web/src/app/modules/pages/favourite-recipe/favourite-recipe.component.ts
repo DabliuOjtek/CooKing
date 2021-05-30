@@ -39,8 +39,7 @@ export class FavouriteRecipeComponent implements OnInit {
       },
       (error) => {
         this.errorHandler.handleError(error);
-      },
-      () => console.log('HTTP Favourite recipes request completed.')
+      }
     );
   }
 
