@@ -13,7 +13,7 @@ export class PasswordStrengthBarComponent implements OnChanges {
   bar2: string;
   bar3: string;
   bar4: string;
-  private colors = ['#F00', '#F90', '#FF0', '#9F0', '#0F0'];
+  private colors = ['#F00', '#F90', '#FFEA00', '#9F0', '#0F0'];
 
   private static measureStrength(pass: string) {
     let score = 0;

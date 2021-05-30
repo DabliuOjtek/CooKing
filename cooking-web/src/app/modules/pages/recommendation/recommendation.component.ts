@@ -24,7 +24,6 @@ export class RecommendationComponent implements OnInit {
     private recipeService: RecipeService,
     private errorHandler: ErrorHandlerService,
     private favouriteRecipeService: FavouriteRecipeService,
-    private authLayout: AuthLayoutService
     private authLayout: AuthLayoutService,
     private authService: AuthService
   ) {}

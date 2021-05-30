@@ -63,6 +63,16 @@
   }
 }
 
+::ng-deep .custom-snackbar {
+  background: white;
+  color: black;
+  text-align: center;
+}
+
+::ng-deep .mat-simple-snackbar {
+  justify-content: center !important;
+}
+
 @media (max-width: 400px) {
   .container-wrapper {
     min-width: 0rem;

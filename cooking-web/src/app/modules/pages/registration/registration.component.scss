@@ -57,4 +57,15 @@
     color: mat-color($cooking-accent);
     font-weight: 700;
   }
+
+}
+
+::ng-deep .custom-snackbar {
+  background: white;
+  color: black;
+  text-align: center;
+}
+
+::ng-deep .mat-simple-snackbar {
+  justify-content: center !important;
 }
