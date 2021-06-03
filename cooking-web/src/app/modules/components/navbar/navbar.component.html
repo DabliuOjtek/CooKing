@@ -5,7 +5,7 @@
   </div>
 
   <ng-container *ngIf="!isLogged">
-    <img (click)="showSideNav()" class="burger-icon"
+    <img (click)="showSideNav()" class="burger-icon" data-cy="burger-icon"
       src="https://cookingstorage.blob.core.windows.net/icons/menu-hamburger.svg" />
     <div class="buttons">
       <a mat-button routerLink="/login" data-cy="log-in">Log in</a>
@@ -15,7 +15,7 @@
   <ng-container *ngIf="isLogged">
     <div class="logout-container">
       <a mat-raised-button class="logout-button" color="primary" (click)="logoutUser()" data-cy="logout">Logout</a>
-      <img (click)="showSideNav()" class="burger-icon-logged"
+      <img (click)="showSideNav()" class="burger-icon-logged" data-cy="burger-icon"
         src="https://cookingstorage.blob.core.windows.net/icons/menu-hamburger.svg" />
     </div>
   </ng-container>

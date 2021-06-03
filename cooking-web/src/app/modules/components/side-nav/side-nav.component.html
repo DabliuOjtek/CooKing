@@ -5,7 +5,9 @@
       <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/signup">Sign up</button>
     </ng-container>
     <ng-container *ngIf="isLogged">
-      <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/favourite-recipe">Favourites</button>
+      <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/favourite-recipe" data-cy="favourite">
+        Favourites
+      </button>
       <button class="sidenav-button" (click)="sidenav.toggle()" routerLink="/password-change">Change password</button>
       <button class="sidenav-button" (click)="sidenav.toggle(); onDeleteUser()">
         Delete account
