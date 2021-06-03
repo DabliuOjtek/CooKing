@@ -17,12 +17,17 @@ public class AuthEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e)
-            throws IOException, ServletException {
+            throws IOException {
+        String message = "Problem with authentication";
+
+        if ((boolean) httpServletRequest.getAttribute("tokenExpired"))
+            message = "Token Expired";
+
         ObjectMapper objectMapper = new ObjectMapper();
         String error = objectMapper.writer().writeValueAsString(new ExceptionBody(
                 HttpStatus.UNAUTHORIZED.value(),
                 HttpStatus.UNAUTHORIZED.getReasonPhrase(),
-                "Problem with authentication"
+                message
         ));
         httpServletResponse.setContentType("application/json");
         httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

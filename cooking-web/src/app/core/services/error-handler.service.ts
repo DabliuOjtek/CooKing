@@ -15,6 +15,8 @@ export class ErrorHandlerService {
 
     if (error.status === 401 && endpoint === 'login') {
       return this.handleErrorsForLogin(error);
+    } else if (error.status === 401 &&  error.error.errors[0] === "Token Expired") {
+      return this.handleErrorsForTokenExpired(endpoint);
     } else if (error.status === 400) {
       return this.handleError400(error);
     } else if (error.status === 400 && endpoint === 'signup') {
@@ -41,6 +43,10 @@ export class ErrorHandlerService {
   private handleErrorsForLogin(error: HttpErrorResponse): string {
     this.createErrorMessage(error);
     return this.getErrorMessage(error);
+  }
+
+  private handleErrorsForTokenExpired(endpoint: string) {
+
   }
 
   private handleErrorForSignUp(error: any) {

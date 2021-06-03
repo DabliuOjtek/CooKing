@@ -1,8 +1,12 @@
 package com.us.cooking.config.security;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.us.cooking.model.ExceptionBody;
 import com.us.cooking.repository.TokenBlockListRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,9 +29,13 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain)
             throws ServletException, IOException {
+        DecodedJWT verifiedToken = null;
 
-
-        DecodedJWT verifiedToken = jwtUtils.verifyToken(httpServletRequest.getHeader("Authorization"));
+        try {
+            verifiedToken = jwtUtils.verifyToken(httpServletRequest.getHeader("Authorization"));
+        } catch (TokenExpiredException e) {
+            httpServletRequest.setAttribute("tokenExpired", true);
+        }
 
         if (verifiedToken != null && !tokenBlockListRepository.existsByToken(verifiedToken.getToken())) {
             UserDetails userDetails = jwtUtils.getUserFromToken(verifiedToken);
