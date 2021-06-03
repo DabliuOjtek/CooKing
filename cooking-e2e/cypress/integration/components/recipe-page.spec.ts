@@ -1,4 +1,4 @@
-context("Recommedation page", () => {
+context("Recipe page", () => {
   const baseUrl = Cypress.config("baseUrl");
 
   beforeEach(() => {
@@ -8,7 +8,7 @@ context("Recommedation page", () => {
 
   afterEach(() => {});
 
-  it("Questionnaire", () => {
+  it("Recipe page", () => {
     cy.visit(`${baseUrl}`);
     cy.wait(["@questionnaire", "@questions"]);
 

@@ -8,7 +8,7 @@ context('Main page', () => {
 
   afterEach(() => {});
 
-  it('Questionnaire', () => {
+  it('Main page', () => {
     const questionnaireFirstQuestionCardsData = [
       { answer: 'Breakfast' },
       { answer: 'Dinner' },

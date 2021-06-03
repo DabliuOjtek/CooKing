@@ -8,7 +8,7 @@ context("Recommedation page", () => {
 
   afterEach(() => {});
 
-  it("Questionnaire", () => {
+  it("Recommedation page", () => {
     cy.visit(`${baseUrl}`);
     cy.wait(["@questionnaire", "@questions"]);
 
