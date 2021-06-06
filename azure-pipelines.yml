@@ -50,3 +50,15 @@ stages:
         projectName: $(Build.Repository.Name)
         qualifyImageNames: true
         additionalImageTags: tag
+    - task: Npm@1
+      displayName: Run Cypress Tests
+      inputs:
+        command: 'custom'
+        workingDir: '/cooking-e2e'
+        customCommand: 'run e2e:run'
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '*.xml'
+        searchFolder: '$(System.DefaultWorkingDirectory)/cypress/reports/junit'
+        testRunTitle: 'Publish Test Results'
